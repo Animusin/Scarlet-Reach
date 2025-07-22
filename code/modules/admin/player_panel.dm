@@ -7,7 +7,7 @@
 	//javascript, the part that does most of the work~
 	dat += {"
 
-		<head>
+		<head><meta charset='UTF-8'>
 			<script type='text/javascript'>
 
 				var locked_tabs = new Array();

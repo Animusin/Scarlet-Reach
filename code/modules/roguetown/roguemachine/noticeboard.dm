@@ -44,7 +44,7 @@
 
 /obj/structure/roguemachine/noticeboard/update_icon()
 	. = ..()
-	var/total_length = length(GLOB.noticeboard_posts) + length(GLOB.premium_noticeboardposts)
+	var/total_length = length_char(GLOB.noticeboard_posts) + length_char(GLOB.premium_noticeboardposts)
 	switch(total_length)
 		if(0)
 			icon_state = "noticeboard0"
@@ -88,11 +88,11 @@
 	contents += "<center>NOTICEBOARD<BR>"
 	contents += "--------------<BR>"
 	var/selection = "Categories: "
-	for(var/i = 1, i <= length(categories), i++)
+	for(var/i = 1, i <= length_char(categories), i++)
 		var/category = categories[i]
 		if(category == current_category)
 			selection += "<b>[current_category]</b>"
-		else if(i != length(categories))
+		else if(i != length_char(categories))
 			selection += "<a href='?src=[REF(src)];changecategory=[category]'>[category]</a> | "
 		else
 			selection += "<a href='?src=[REF(src)];changecategory=[category]'>[category]</a> "
@@ -130,7 +130,7 @@
 		return
 	var/inputmessage = stripped_multiline_input(guy, "What shall I write for this posting?", "NOTICEBOARD", no_trim=TRUE)
 	if(inputmessage)
-		if(length(inputmessage) > 2000)
+		if(length_char(inputmessage) > 2000)
 			to_chat(guy, span_warning("Too long! You shall surely overburden the with this novel!"))
 			return
 	else
@@ -155,12 +155,12 @@
 	var/inputtitle = stripped_input(guy, "What shall the title of my posting be?", "NOTICEBOARD", null)
 	if(!inputtitle)
 		return
-	if(length(inputtitle) > 50)
+	if(length_char(inputtitle) > 50)
 		to_chat(guy, span_warning("Too long! You shall surely overburden the zad with this novel!"))
 		return
 	var/inputmessage = stripped_multiline_input(guy, "What shall I write for this posting?", "NOTICEBOARD", no_trim=TRUE)
 	if(inputmessage)
-		if(length(inputmessage) > 2000)
+		if(length_char(inputmessage) > 2000)
 			to_chat(guy, span_warning("Too long! You shall surely overburden the zad with this novel!"))
 			return
 	else
@@ -168,11 +168,11 @@
 	var/inputname = stripped_input(guy, "What name shall I use on the posting?", "NOTICEBOARD", null)
 	if(!inputname)
 		return
-	if(length(inputname) > 50)
+	if(length_char(inputname) > 50)
 		to_chat(guy, span_warning("Too long! You shall surely overburden the zad with this novel!"))
 		return
 	var/inputrole = stripped_input(guy, "What personal title shall I use on the posting?", "NOTICEBOARD", null)
-	if(length(inputrole) > 50)
+	if(length_char(inputrole) > 50)
 		to_chat(guy, span_warning("Too long! You shall surely overburden the zad with this novel!"))
 		return
 	add_post(inputmessage, inputtitle, inputname, inputrole, guy.real_name, FALSE)

@@ -79,10 +79,10 @@
 	if(players_amt < min_players)
 		return FALSE
 	
-	if(length(todreq) && !(GLOB.tod in todreq))
+	if(length_char(todreq) && !(GLOB.tod in todreq))
 		return FALSE
 	
-	if(length(allowed_storytellers))
+	if(length_char(allowed_storytellers))
 		if(!(SSgamemode.current_storyteller.type in allowed_storytellers))
 			return FALSE
 	
@@ -96,7 +96,7 @@
 	var/list/candidates = get_candidates()
 	
 	// Allow the event to run if there's at least 1 candidate, even if fewer than desired
-	if(length(candidates) < 1)
+	if(length_char(candidates) < 1)
 		return FALSE
 	
 	return TRUE
@@ -120,7 +120,7 @@
 	var/list/possible_candidates = cast_control.get_candidates()
 	
 	var/list/candidates = list()
-	if(cast_control == SSgamemode.current_roundstart_event && length(SSgamemode.roundstart_antag_minds))
+	if(cast_control == SSgamemode.current_roundstart_event && length_char(SSgamemode.roundstart_antag_minds))
 		log_storyteller("Running roundstart antagonist assignment, event: [src], roundstart_antag_minds: [english_list(SSgamemode.roundstart_antag_minds)]")
 		for(var/datum/mind/antag_mind in SSgamemode.roundstart_antag_minds)
 			if(!antag_mind.current)
@@ -135,7 +135,7 @@
 	for(var/mob/living/mob as anything in possible_candidates)
 		cliented_list += mob.client
 
-	while(length(possible_candidates) && length(candidates) < antag_count) //both of these pick_n_take from weighted_candidates so this should be fine
+	while(length_char(possible_candidates) && length_char(candidates) < antag_count) //both of these pick_n_take from weighted_candidates so this should be fine
 		var/mob/picked_ckey = pick_n_take(possible_candidates)
 		var/client/picked_client = picked_ckey.client
 		if(QDELETED(picked_client))
@@ -147,7 +147,7 @@
 
 	var/list/picked_mobs = list()
 	for(var/i in 1 to antag_count)
-		if(!length(candidates))
+		if(!length_char(candidates))
 			message_admins("A roleset event got fewer antags then its antag_count and may not function correctly.")
 			break
 

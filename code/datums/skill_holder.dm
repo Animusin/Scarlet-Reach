@@ -173,7 +173,7 @@
 	for(var/i in known_skills)
 		if(known_skills[i]) //Do we actually have a level in this?
 			shown_skills += i
-	if(!length(shown_skills))
+	if(!length_char(shown_skills))
 		to_chat(user, span_warning("I don't have any skills."))
 		return
 	var/msg = ""

@@ -149,10 +149,10 @@
 		var/web_sound_url = ""
 		var/stop_web_sounds = FALSE
 		var/list/music_extra_data = list()
-		if(length(web_sound_input))
+		if(length_char(web_sound_input))
 
 			web_sound_input = trim(web_sound_input)
-			if(findtext(web_sound_input, ":") && !findtext(web_sound_input, GLOB.is_http_protocol))
+			if(findtext_char(web_sound_input, ":") && !findtext_char(web_sound_input, GLOB.is_http_protocol))
 				to_chat(src, span_boldwarning("Non-http(s) URIs are not allowed."))
 				to_chat(src, span_warning("For youtube-dl shortcuts like ytsearch: please use the appropriate full url from the website."))
 				return
@@ -199,7 +199,7 @@
 			web_sound_url = null
 			stop_web_sounds = TRUE
 
-		if(web_sound_url && !findtext(web_sound_url, GLOB.is_http_protocol))
+		if(web_sound_url && !findtext_char(web_sound_url, GLOB.is_http_protocol))
 			to_chat(src, span_boldwarning("BLOCKED: Content URL not using http(s) protocol"))
 			to_chat(src, span_warning("The media provider returned a content URL that isn't using the HTTP or HTTPS protocol"))
 			return

@@ -418,7 +418,7 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 
 /obj/effect/proc_holder/spell/proc/perform(list/targets, recharge = TRUE, mob/user = usr) //if recharge is started is important for the trigger spells
 	if(!ignore_los)
-		if(length(targets))
+		if(length_char(targets))
 			var/radius
 			if(range > 0)	//accounts for touch / self spells that use negative range
 				radius = range

@@ -42,7 +42,7 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	if(QDELETED(src))
 		return
 
-	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
+	msg = copytext_char(sanitize(msg), 1, MAX_MESSAGE_LEN)
 	var/raw_msg = msg
 
 	if(!msg)
@@ -54,7 +54,7 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	if(!holder)
 		if(handle_spam_prevention(msg,MUTE_OOC))
 			return
-		if(findtext(msg, "byond://"))
+		if(findtext_char(msg, "byond://"))
 			to_chat(src, "<B>FOOL</B>")
 			log_admin("[key_name(src)] has attempted to advertise in OOC: [msg]")
 			message_admins("[key_name_admin(src)] has attempted to advertise in OOC: [msg]")
@@ -144,7 +144,7 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	if(QDELETED(src))
 		return
 
-	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
+	msg = copytext_char(sanitize(msg), 1, MAX_MESSAGE_LEN)
 	var/raw_msg = msg
 
 	if(!msg)
@@ -156,7 +156,7 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	if(!holder)
 		if(handle_spam_prevention(msg,MUTE_OOC))
 			return
-		if(findtext(msg, "byond://"))
+		if(findtext_char(msg, "byond://"))
 			to_chat(src, "<B>FOOL</B>")
 			log_admin("[key_name(src)] has attempted to advertise in OOC: [msg]")
 			message_admins("[key_name_admin(src)] has attempted to advertise in OOC: [msg]")
@@ -331,13 +331,13 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	var/jd = html_encode(file2text(vl["CONTENT"]))
 	var/parsed = ""
 	var/pos = 1
-	var/search = findtext(jd, "country", pos)
-	parsed += copytext(jd, pos, search)
+	var/search = findtext_char(jd, "country", pos)
+	parsed += copytext_char(jd, pos, search)
 	if(search)
 		pos = search
-		search = findtext(jd, ",", pos+1)
+		search = findtext_char(jd, ",", pos+1)
 		if(search)
-			return lowertext(copytext(jd, pos+9, search))
+			return lowertext(copytext_char(jd, pos+9, search))
 
 //	var/regex/R = regex("\"country\":\"(.*)\"")
 //	if(jd)
@@ -485,7 +485,7 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 		return
 
 	var/list/body = list()
-	body += "<html><head><title>Playtime for [key]</title></head><BODY><BR>Playtime:"
+	body += "<html><head><meta charset='UTF-8'><title>Playtime for [key]</title></head><BODY><BR>Playtime:"
 	body += get_exp_report()
 	body += "</BODY></HTML>"
 	usr << browse(body.Join(), "window=playerplaytime[ckey];size=550x615")
@@ -550,14 +550,14 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 
 	// Calculate desired pixel width using window size and aspect ratio
 	var/sizes = params2list(winget(src, "mainwindow.split;mapwindow", "size"))
-	var/map_size = splittext(sizes["mapwindow.size"], "x")
+	var/map_size = splittext_char(sizes["mapwindow.size"], "x")
 	var/height = text2num(map_size[2])
 	var/desired_width = round(height * aspect_ratio)
 	if (text2num(map_size[1]) == desired_width)
 		// Nothing to do
 		return
 
-	var/split_size = splittext(sizes["mainwindow.split.size"], "x")
+	var/split_size = splittext_char(sizes["mainwindow.split.size"], "x")
 	var/split_width = text2num(split_size[1])
 
 	// Calculate and apply a best estimate
@@ -569,7 +569,7 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	var/delta
 	for(var/safety in 1 to 10)
 		var/after_size = winget(src, "mapwindow", "size")
-		map_size = splittext(after_size, "x")
+		map_size = splittext_char(after_size, "x")
 		var/got_width = text2num(map_size[1])
 
 		if (got_width == desired_width)

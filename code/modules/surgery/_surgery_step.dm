@@ -394,10 +394,10 @@
 	var/modifier = 1
 	var/skill_level = user.get_skill_level(skill_used) || 0
 	var/skill_difference = skill_level - skill_median
-	if((skill_difference > 0) && length(skill_bonuses))
+	if((skill_difference > 0) && length_char(skill_bonuses))
 		skill_difference = clamp(abs(skill_difference), 0, skill_bonuses.len)
 		modifier += skill_bonuses[skill_difference]
-	else if((skill_difference < 0) && length(skill_maluses))
+	else if((skill_difference < 0) && length_char(skill_maluses))
 		skill_difference = clamp(abs(skill_difference), 0, skill_maluses.len)
 		modifier += skill_maluses[skill_difference]
 	return max(modifier, 0)

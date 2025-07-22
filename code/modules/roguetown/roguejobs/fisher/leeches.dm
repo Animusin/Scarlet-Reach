@@ -266,9 +266,9 @@
 	blood_sucking = max(round(evilness_rating/MAX_LEECH_EVILNESS * 2 * initial(blood_sucking), 0.1), 1)
 	if(evilness_rating < 10)
 		color = pickweight(all_colors)
-	if(length(adjectives))
+	if(length_char(adjectives))
 		name = "[english_list(adjectives)] [name]"
-	if(length(descs))
+	if(length_char(descs))
 		desc = "[desc] [jointext(descs, " ")]"
 	return TRUE
 

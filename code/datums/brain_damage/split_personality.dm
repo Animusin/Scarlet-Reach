@@ -205,12 +205,12 @@
 	if(HAS_TRAIT(owner, TRAIT_DEAF) || owner == hearing_args[HEARING_SPEAKER])
 		return
 	var/message = hearing_args[HEARING_MESSAGE]
-	if(findtext(message, codeword))
-		hearing_args[HEARING_MESSAGE] = replacetext(message, codeword, span_warning("[codeword]"))
+	if(findtext_char(message, codeword))
+		hearing_args[HEARING_MESSAGE] = replacetext_char(message, codeword, span_warning("[codeword]"))
 		addtimer(CALLBACK(src, TYPE_PROC_REF(/datum/brain_trauma/severe/split_personality, switch_personalities)), 10)
 
 /datum/brain_trauma/severe/split_personality/brainwashing/handle_speech(datum/source, list/speech_args)
-	if(findtext(speech_args[SPEECH_MESSAGE], codeword))
+	if(findtext_char(speech_args[SPEECH_MESSAGE], codeword))
 		speech_args[SPEECH_MESSAGE] = "" //oh hey did you want to tell people about the secret word to bring you back?
 
 /mob/living/split_personality/traitor

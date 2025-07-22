@@ -8,7 +8,7 @@
 
 /// Checks if we have any embedded objects whatsoever
 /obj/item/bodypart/proc/has_embedded_objects()
-	return length(embedded_objects)
+	return length_char(embedded_objects)
 
 /// Checks if we have an embedded object of a specific type
 /obj/item/bodypart/proc/has_embedded_object(path, specific = FALSE)
@@ -45,7 +45,7 @@
 
 /// Heals wounds on this bodypart by the specified amount
 /obj/item/bodypart/proc/heal_wounds(heal_amount)
-	if(!length(wounds))
+	if(!length_char(wounds))
 		return FALSE
 	var/healed_any = FALSE
 	for(var/datum/wound/wound as anything in wounds)

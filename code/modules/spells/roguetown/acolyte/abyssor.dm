@@ -301,12 +301,12 @@
 			continue
 		turfs += T
 
-	if(!length(turfs))
+	if(!length_char(turfs))
 		for(var/turf/T in orange(target_turf, outer_tele_radius))
 			if(!(T in orange(target_turf, inner_tele_radius)))
 				turfs += T
 
-	if(!length(turfs))
+	if(!length_char(turfs))
 		return FALSE
 
 	var/turf/spawn_turf = pick(turfs)

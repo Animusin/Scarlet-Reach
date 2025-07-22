@@ -106,7 +106,7 @@
 		for(var/trait in applied_traits)
 			ADD_TRAIT(owner.current, trait, "[type]")
 	LAZYINITLIST(owner.learned_recipes)
-	if(length(objectives))
+	if(length_char(objectives))
 		SEND_SOUND(owner.current, 'sound/villain/dreamer_warning.ogg')
 		to_chat(owner.current, span_danger("[antag_memory]"))
 		owner.announce_objectives()

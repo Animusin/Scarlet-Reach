@@ -28,7 +28,7 @@
 	return ckeyEx(Key)
 
 /proc/_copytext(T, Start = 1, End = 0)
-	return copytext(T, Start, End)
+	return copytext_char(T, Start, End)
 
 /proc/_cos(X)
 	return cos(X)
@@ -55,7 +55,7 @@
 	return ispath(path, type)
 
 /proc/_length(E)
-	return length(E)
+	return length_char(E)
 
 /proc/_link(thing, url)
 	thing << link(url)
@@ -130,7 +130,7 @@
 	return REGEX_QUOTE_REPLACEMENT(text)
 
 /proc/_replacetext(Haystack, Needle, Replacement, Start = 1,End = 0)
-	return replacetext(Haystack, Needle, Replacement, Start, End)
+	return replacetext_char(Haystack, Needle, Replacement, Start, End)
 
 /proc/_replacetextEx(Haystack, Needle, Replacement, Start = 1,End = 0)
 	return replacetextEx(Haystack, Needle, Replacement, Start, End)

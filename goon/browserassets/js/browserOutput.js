@@ -1049,7 +1049,7 @@ $(function() {
 			url: 'browserOutput_white.css',
 			success: function(styleData) {
 				var blob = new Blob([
-					'<head><title>Scarlet Chat Log</title><style>',
+					'<head><meta charset='UTF-8'><title>Scarlet Chat Log</title><style>',
 					styleData,
 					'</style></head><body>',
 					$messages.html(),

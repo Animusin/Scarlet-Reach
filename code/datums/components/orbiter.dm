@@ -107,7 +107,7 @@
 		var/mob/M = orbiter
 		M.updating_glide_size = TRUE
 		M.glide_size = 8
-	if(!refreshing && !length(orbiters) && !QDELING(src))
+	if(!refreshing && !length_char(orbiters) && !QDELING(src))
 		qdel(src)
 
 // This proc can receive signals by either the thing being directly orbited or anything holding it

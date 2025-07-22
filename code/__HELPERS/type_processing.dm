@@ -23,8 +23,8 @@
 			/mob = "M"
 		)
 		for (var/tn in TYPES_SHORTCUTS)
-			if (copytext(typename,1, length("[tn]/")+1)=="[tn]/" /*findtextEx(typename,"[tn]/",1,2)*/ )
-				typename = TYPES_SHORTCUTS[tn]+copytext(typename,length("[tn]/"))
+			if (copytext_char(typename,1, length_char("[tn]/")+1)=="[tn]/" /*findtextEx_char(typename,"[tn]/",1,2)*/ )
+				typename = TYPES_SHORTCUTS[tn]+copytext_char(typename,length_char("[tn]/"))
 				break
 		.[typename] = type
 
@@ -46,6 +46,6 @@
 	var/list/matches = new
 	for(var/key in L)
 		var/value = L[key]
-		if(findtext("[key]", filter) || findtext("[value]", filter))
+		if(findtext_char("[key]", filter) || findtext_char("[value]", filter))
 			matches[key] = value
 	return matches

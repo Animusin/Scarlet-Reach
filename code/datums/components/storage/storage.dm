@@ -204,7 +204,7 @@
 	var/list/things = I.loc.contents.Copy()
 	if(collection_mode == COLLECT_SAME)
 		things = typecache_filter_list(things, typecacheof(I.type))
-	var/len = length(things)
+	var/len = length_char(things)
 	if(!len)
 		to_chat(M, span_warning("I failed to pick up anything with [parent]!"))
 		return
@@ -285,7 +285,7 @@
 //	var/turf/T = get_turf(A)
 	var/list/things = contents()
 	playsound(A, "rustle", 50, FALSE, -5)
-//	var/datum/progressbar/progress = new(M, length(things), T)
+//	var/datum/progressbar/progress = new(M, length_char(things), T)
 //	while (do_after(M, dump_time, TRUE, T, FALSE, CALLBACK(src, PROC_REF(mass_remove_from_storage), T, things, progress)))
 //		stoplag(1)
 //	qdel(progress)
@@ -323,9 +323,9 @@
 			testing("debugbag6 [I]")
 			return FALSE
 		if(TICK_CHECK)
-			progress.update(progress.goal - length(things))
+			progress.update(progress.goal - length_char(things))
 			return TRUE
-	progress.update(progress.goal - length(things))
+	progress.update(progress.goal - length_char(things))
 	return FALSE
 
 /datum/component/storage/proc/do_quick_empty(atom/_target)
@@ -677,7 +677,7 @@
 		if(!stop_messages)
 			to_chat(M, span_warning("[host] is full, make some space!"))
 		return FALSE //Storage item is full
-	if(length(can_hold))
+	if(length_char(can_hold))
 		if(!is_type_in_typecache(I, can_hold))
 			if(!stop_messages)
 				to_chat(M, span_warning("[host] cannot hold [I]!"))

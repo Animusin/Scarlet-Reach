@@ -214,7 +214,7 @@
 			var/mob/living/carbon/human/H = target
 			var/no_embeds = TRUE
 			var/list/embeds = H.get_embedded_objects()
-			if(length(embeds))
+			if(length_char(embeds))
 				for(var/object in embeds)
 					if(!istype(object, /obj/item/natural/worms/leech))	//Leeches and surgical cheeles are made an exception.
 						no_embeds = FALSE

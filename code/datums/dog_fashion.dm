@@ -14,8 +14,8 @@
 	var/obj_color
 
 /datum/dog_fashion/New(mob/M)
-	name = replacetext(name, "REAL_NAME", M.real_name)
-	desc = replacetext(desc, "NAME", name)
+	name = replacetext_char(name, "REAL_NAME", M.real_name)
+	desc = replacetext_char(desc, "NAME", name)
 
 /datum/dog_fashion/proc/apply(mob/living/simple_animal/pet/dog/D)
 	if(name)

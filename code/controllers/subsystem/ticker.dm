@@ -103,7 +103,7 @@ SUBSYSTEM_DEF(ticker)
 
 	for(var/S in provisional_title_music)
 		var/lower = lowertext(S)
-		var/list/L = splittext(lower,"+")
+		var/list/L = splittext_char(lower,"+")
 		switch(L.len)
 			if(3) //rare+MAP+sound.ogg or MAP+rare.sound.ogg -- Rare Map-specific sounds
 				if(use_rare_music)
@@ -124,7 +124,7 @@ SUBSYSTEM_DEF(ticker)
 //		music -= old_login_music
 
 	for(var/S in music)
-		var/list/L = splittext(S,".")
+		var/list/L = splittext_char(S,".")
 		if(L.len >= 2)
 			var/ext = lowertext(L[L.len]) //pick the real extension, no 'honk.ogg.exe' nonsense here
 			if(byond_sound_formats[ext])

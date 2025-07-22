@@ -72,7 +72,7 @@ GLOBAL_VAR_INIT(steward_tax_cooldown, -50000) // Antispam
 		return FALSE
 	var/newtax = input(src, "Set a new tax percentage (1-99)", src, SStreasury.tax_value*100) as null|num
 	if(newtax)
-		if(findtext(num2text(newtax), "."))
+		if(findtext_char(num2text(newtax), "."))
 			return
 		newtax = CLAMP(newtax, 1, 99)
 		if(stat)

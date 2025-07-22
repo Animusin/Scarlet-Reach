@@ -97,7 +97,7 @@
 		<div>
 		"}
 
-	if(length(tools))
+	if(length_char(tools))
 		html += {"
 		<br>
 		<div>
@@ -114,7 +114,7 @@
 		<div>
 		"}
 
-	if(length(chem_catalysts))
+	if(length_char(chem_catalysts))
 		html += {"
 		<br>
 		<div>

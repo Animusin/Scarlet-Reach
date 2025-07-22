@@ -586,13 +586,13 @@
 		L.put_in_active_hand(P)
 		L.put_in_inactive_hand(src)
 		P.icon_state = "paperwrite"
-		P.info = page_texts[length(page_texts)]
-		page_texts -= page_texts[length(page_texts)]
+		P.info = page_texts[length_char(page_texts)]
+		page_texts -= page_texts[length_char(page_texts)]
 		--number_of_pages
 		if(number_of_pages == 1)
 			var/obj/item/paper/P_two = new /obj/item/paper(get_turf(src.loc))
 			P_two.icon_state = "paperwrite"
-			P_two.info = page_texts[length(page_texts)]
+			P_two.info = page_texts[length_char(page_texts)]
 			qdel_source = TRUE
 			. = ..()
 			src.loc = get_turf(src.loc)

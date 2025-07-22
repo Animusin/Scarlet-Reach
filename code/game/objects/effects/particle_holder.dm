@@ -101,7 +101,7 @@
 	var/list/particles_list = particles_by_type[particle_path]
 	var/index = rand(1, max_particle_index)
 	var/particles/chosen
-	if(length(particles_list) < index)
+	if(length_char(particles_list) < index)
 		chosen = new particle_path()
 		particles_list += chosen
 	else

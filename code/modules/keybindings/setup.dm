@@ -48,8 +48,8 @@
 /client/proc/erase_all_macros()
 	var/erase_output = ""
 	var/list/macro_set = params2list(winget(src, "default.*", "command")) // The third arg doesnt matter here as we're just removing them all
-	for(var/k in 1 to length(macro_set))
-		var/list/split_name = splittext(macro_set[k], ".")
+	for(var/k in 1 to length_char(macro_set))
+		var/list/split_name = splittext_char(macro_set[k], ".")
 		var/macro_name = "[split_name[1]].[split_name[2]]" // [3] is "command"
 		erase_output = "[erase_output];[macro_name].parent=null"
 	winset(src, null, erase_output)
@@ -58,7 +58,7 @@
 	ASSERT(name)
 	ASSERT(islist(macroset))
 	winclone(src, "default", name)
-	for(var/i in 1 to length(macroset))
+	for(var/i in 1 to length_char(macroset))
 		var/key = macroset[i]
 		var/command = macroset[key]
 		winset(src, "[name]-[REF(key)]", "parent=[name];name=[key];command=[command]")
@@ -96,15 +96,15 @@
 	if(prefs_override.hotkeys)
 		for(var/keybind in clientside)
 			var/command = clientside[keybind]
-			var/alt = findtext(keybind, "Alt")
+			var/alt = findtext_char(keybind, "Alt")
 			if(alt)
-				keybind = copytext(keybind, 1, alt) + copytext(keybind, alt + 3, 0)
-			var/ctrl = findtext(keybind, "Ctrl")
+				keybind = copytext_char(keybind, 1, alt) + copytext_char(keybind, alt + 3, 0)
+			var/ctrl = findtext_char(keybind, "Ctrl")
 			if(ctrl)
-				keybind = copytext(keybind, 1, ctrl) + copytext(keybind, ctrl + 4, 0)
-			var/shift = findtext(keybind, "Shift")
+				keybind = copytext_char(keybind, 1, ctrl) + copytext_char(keybind, ctrl + 4, 0)
+			var/shift = findtext_char(keybind, "Shift")
 			if(shift)
-				keybind = copytext(keybind, 1, shift) + copytext(keybind, shift + 5, 0)
+				keybind = copytext_char(keybind, 1, shift) + copytext_char(keybind, shift + 5, 0)
 			var/actual = "[alt? "Alt+" : ""][ctrl? "Ctrl+" : ""][shift? "Shift+" : ""][keybind]"
 			var/list/overriding = keybind_modifier_permutation(keybind, alt, ctrl, shift, TRUE)
 			overriding -= actual
@@ -118,15 +118,15 @@
 		// What we want is to force Ctrl on for all keybinds without Ctrl or Alt set, to preserve old behavior
 		for(var/keybind in clientside)
 			var/command = clientside[keybind]
-			var/alt = findtext(keybind, "Alt")
+			var/alt = findtext_char(keybind, "Alt")
 			if(alt)
-				keybind = copytext(keybind, 1, alt) + copytext(keybind, alt + 3, 0)
-			var/ctrl = findtext(keybind, "Ctrl")
+				keybind = copytext_char(keybind, 1, alt) + copytext_char(keybind, alt + 3, 0)
+			var/ctrl = findtext_char(keybind, "Ctrl")
 			if(ctrl)
-				keybind = copytext(keybind, 1, ctrl) + copytext(keybind, ctrl + 4, 0)
-			var/shift = findtext(keybind, "Shift")
+				keybind = copytext_char(keybind, 1, ctrl) + copytext_char(keybind, ctrl + 4, 0)
+			var/shift = findtext_char(keybind, "Shift")
 			if(shift)
-				keybind = copytext(keybind, 1, shift) + copytext(keybind, shift + 5, 0)
+				keybind = copytext_char(keybind, 1, shift) + copytext_char(keybind, shift + 5, 0)
 			var/actual
 			if(!alt && !ctrl)
 				actual = "Ctrl+[keybind]"

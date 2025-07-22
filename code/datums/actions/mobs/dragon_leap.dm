@@ -41,7 +41,7 @@
 			continue
 		open_turfs += possible_turf
 
-	if(!length(open_turfs))//They are in the perfect no jumping spot. We lose.
+	if(!length_char(open_turfs))//They are in the perfect no jumping spot. We lose.
 		owner.visible_message(span_alert("[owner] roars in frustration."))
 		return
 

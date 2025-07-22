@@ -30,7 +30,7 @@ SUBSYSTEM_DEF(icon_smooth)
 	var/list/queue = smooth_queue
 	smooth_queue = list()
 	for(var/V in queue)
-		var/atom/smoothing_atom = queue[length(queue)]
+		var/atom/smoothing_atom = queue[length_char(queue)]
 		queue.len--
 		if(QDELETED(smoothing_atom) || !(smoothing_atom.smooth & SMOOTH_QUEUED) || !smoothing_atom.z)
 			continue

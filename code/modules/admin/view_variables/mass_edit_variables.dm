@@ -121,7 +121,7 @@
 				else
 					unique = FALSE
 					for(var/V in varsvars)
-						new_value = replacetext(new_value,"\[[V]]","[O.vars[V]]")
+						new_value = replacetext_char(new_value,"\[[V]]","[O.vars[V]]")
 
 			to_chat(src, "Finding items...")
 			var/list/items = get_all_of_type(O.type, method)
@@ -133,7 +133,7 @@
 				if(unique)
 					new_value = pre_processing
 					for(var/V in varsvars)
-						new_value = replacetext(new_value,"\[[V]]","[D.vars[V]]")
+						new_value = replacetext_char(new_value,"\[[V]]","[D.vars[V]]")
 
 				if (D.vv_edit_var(variable, new_value) != FALSE)
 					accepted++

@@ -51,7 +51,7 @@ GLOBAL_LIST_INIT(deadite_animal_migration_points, list())
 		if(T)
 			migration_turfs += T
 
-	if(!length(migration_turfs))
+	if(!length_char(migration_turfs))
 		return
 	
 	var/turf/start_turf = migration_turfs[2]

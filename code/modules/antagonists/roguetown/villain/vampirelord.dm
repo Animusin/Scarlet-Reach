@@ -136,7 +136,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	var/list/visoptions = list()
 
 	for(var/T in 1 to 5)
-		if(length(classoptions))
+		if(length_char(classoptions))
 			visoptions += pick_n_take(classoptions)
 
 	var/selected = input(src, "Which class was I?", "VAMPIRE SPAWN") as anything in visoptions
@@ -758,7 +758,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		switch(choice)
 			if("Create Death Knight")
 				if(alert(user, "Create a Death Knight? Cost:5000","","Yes","No") == "Yes")
-					if(length(SSmapping.retainer.death_knights) >= 3)
+					if(length_char(SSmapping.retainer.death_knights) >= 3)
 						to_chat(user, "You cannot summon any more death knights.")
 						return
 					if(!lord.mypool.check_withdraw(-5000))
@@ -794,7 +794,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 						SSParticleWeather?.run_weather(/datum/particle_weather/blood_rain_storm)
 						addomen(OMEN_SUNSTEAL)
 						for(var/mob/living/carbon/human/astrater in GLOB.human_list)
-							if(!istype(astrater.patron, /datum/patron/divine/astrata) || !length(astrater.mind?.antag_datums))
+							if(!istype(astrater.patron, /datum/patron/divine/astrata) || !length_char(astrater.mind?.antag_datums))
 								continue
 							to_chat(astrater, span_userdanger("You feel the pain of [astrater.patron.name]!"))
 							astrater.emote_scream()
@@ -917,7 +917,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	triumph_count = 5
 
 /datum/objective/vampirelord/spread/check_completion()
-	if(length(SSmapping.retainer.vampires) >= 10)
+	if(length_char(SSmapping.retainer.vampires) >= 10)
 		return TRUE
 
 /datum/objective/vampirelord/stock
@@ -1260,7 +1260,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 /obj/effect/proc_holder/spell/targeted/transfix/cast(list/targets, mob/user = usr)
 	var/msg = input("Soothe them. Dominate them. Speak and they will succumb.", "Transfix") as text|null
-	if(length(msg) < 10)
+	if(length_char(msg) < 10)
 		to_chat(user, span_userdanger("This is not enough!"))
 		return FALSE
 	var/bloodskill = user.get_skill_level(/datum/skill/magic/blood)
@@ -1345,7 +1345,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 /obj/effect/proc_holder/spell/targeted/transfix/master/cast(list/targets, mob/user = usr)
 	var/msg = input("Soothe them. Dominate them. Speak and they will succumb.", "Transfix") as text|null
-	if(length(msg) < 10)
+	if(length_char(msg) < 10)
 		to_chat(user, span_userdanger("This is not enough!"))
 		return FALSE
 	user.say(msg)

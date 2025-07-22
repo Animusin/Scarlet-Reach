@@ -20,11 +20,11 @@
 		fragment += pick(GLOB.dream_strings)
 
 	if(prob(50))
-		fragment = replacetext(fragment, "%ADJECTIVE%", pick(GLOB.adjectives))
+		fragment = replacetext_char(fragment, "%ADJECTIVE%", pick(GLOB.adjectives))
 	else
-		fragment = replacetext(fragment, "%ADJECTIVE% ", "")
-	if(findtext(fragment, "%A% "))
-		fragment = "\a [replacetext(fragment, "%A% ", "")]"
+		fragment = replacetext_char(fragment, "%ADJECTIVE% ", "")
+	if(findtext_char(fragment, "%A% "))
+		fragment = "\a [replacetext_char(fragment, "%A% ", "")]"
 	dream_fragments += fragment
 
 	//Verb
@@ -46,11 +46,11 @@
 	fragment = ""
 	fragment += pick(GLOB.dream_strings)
 	if(prob(50))
-		fragment = replacetext(fragment, "%ADJECTIVE%", pick(GLOB.adjectives))
+		fragment = replacetext_char(fragment, "%ADJECTIVE%", pick(GLOB.adjectives))
 	else
-		fragment = replacetext(fragment, "%ADJECTIVE% ", "")
-	if(findtext(fragment, "%A% "))
-		fragment = "\a [replacetext(fragment, "%A% ", "")]"
+		fragment = replacetext_char(fragment, "%ADJECTIVE% ", "")
+	if(findtext_char(fragment, "%A% "))
+		fragment = "\a [replacetext_char(fragment, "%A% ", "")]"
 	dream_fragments += fragment
 
 	dreaming = TRUE

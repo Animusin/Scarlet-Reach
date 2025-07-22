@@ -589,8 +589,8 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 			var/new_key = ckeyEx(input("Enter your desired display name.", "Fake Key", key) as text|null)
 			if(!new_key)
 				return
-			if(length(new_key) >= 26)
-				new_key = copytext(new_key, 1, 26)
+			if(length_char(new_key) >= 26)
+				new_key = copytext_char(new_key, 1, 26)
 			holder.fakekey = new_key
 			createStealthKey()
 			if(isobserver(mob))
@@ -697,9 +697,9 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	set desc = ""
 
 	var/list/spell_list = list()
-	var/type_length = length("/obj/effect/proc_holder/spell") + 2
+	var/type_length = length_char("/obj/effect/proc_holder/spell") + 2
 	for(var/A in GLOB.spells)
-		spell_list[copytext("[A]", type_length)] = A
+		spell_list[copytext_char("[A]", type_length)] = A
 	var/obj/effect/proc_holder/spell/S = input("Choose the spell to give to that guy", "ABRAKADABRA") as null|anything in sortList(spell_list)
 	if(!S)
 		return

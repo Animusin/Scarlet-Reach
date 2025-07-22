@@ -7,13 +7,13 @@
 /// Returns every embedded object we have, simple or not
 /mob/living/proc/get_embedded_objects()
 	var/list/all_embedded_objects = list()
-	if(length(simple_embedded_objects))
+	if(length_char(simple_embedded_objects))
 		all_embedded_objects += simple_embedded_objects
 	return all_embedded_objects
 
 /// Checks if we have any embedded objects whatsoever
 /mob/living/proc/has_embedded_objects()
-	return length(get_embedded_objects())
+	return length_char(get_embedded_objects())
 
 /// Checks if we have an embedded object of a specific type
 /mob/living/proc/has_embedded_object(path, specific = FALSE)
@@ -33,7 +33,7 @@
 /// Returns every wound we have, simple or not
 /mob/living/proc/get_wounds()
 	var/list/all_wounds = list()
-	if(length(simple_wounds))
+	if(length_char(simple_wounds))
 		listclearnulls(simple_wounds)
 		all_wounds += simple_wounds
 	return all_wounds
@@ -66,7 +66,7 @@
 			continue
 		if(heal_amount <= 0)
 			continue
-		if(length(specific_types))
+		if(length_char(specific_types))
 			var/found = FALSE
 			for(var/woundtype in specific_types)
 				if(istype(wound, woundtype))

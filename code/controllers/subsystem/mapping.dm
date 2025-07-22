@@ -97,11 +97,11 @@ SUBSYSTEM_DEF(mapping)
 	return ..()
 
 /datum/controller/subsystem/mapping/proc/calculate_default_z_level_gravities()
-	for(var/z_level in 1 to length(z_list))
+	for(var/z_level in 1 to length_char(z_list))
 		calculate_z_level_gravity(z_level)
 
 /datum/controller/subsystem/mapping/proc/generate_z_level_linkages()
-	for(var/z_level in 1 to length(z_list))
+	for(var/z_level in 1 to length_char(z_list))
 		generate_linkages_for_z_level(z_level)
 
 /datum/controller/subsystem/mapping/proc/generate_linkages_for_z_level(z_level)
@@ -168,7 +168,7 @@ SUBSYSTEM_DEF(mapping)
 		parsed_maps[pm] = total_z  // save the start Z of this file
 		total_z += bounds[MAP_MAXZ] - bounds[MAP_MINZ] + 1
 
-	if (!length(traits))  // null or empty - default
+	if (!length_char(traits))  // null or empty - default
 		for (var/i in 1 to total_z)
 			traits += list(default_traits)
 	else if (total_z != traits.len)  // mismatch
@@ -462,7 +462,7 @@ SUBSYSTEM_DEF(mapping)
 	return FALSE
 
 /proc/has_world_trait(datum/world_trait/trait_type)
-	if(!length(SSmapping.active_world_traits))
+	if(!length_char(SSmapping.active_world_traits))
 		return FALSE
 	for(var/datum/world_trait/trait in SSmapping.active_world_traits)
 		if(!istype(trait, trait_type))
@@ -471,7 +471,7 @@ SUBSYSTEM_DEF(mapping)
 	return FALSE
 
 /proc/add_tracked_world_trait_atom(atom/incoming, datum/world_trait/trait_type)
-	if(!length(SSmapping.active_world_traits))
+	if(!length_char(SSmapping.active_world_traits))
 		return FALSE
 	for(var/datum/world_trait/trait in SSmapping.active_world_traits)
 		if(!istype(trait, trait_type))
@@ -479,7 +479,7 @@ SUBSYSTEM_DEF(mapping)
 		trait.add_tracked(incoming)
 
 /proc/remove_tracked_world_trait_atom(atom/removing, datum/world_trait/trait_type)
-	if(!length(SSmapping.active_world_traits))
+	if(!length_char(SSmapping.active_world_traits))
 		return FALSE
 	for(var/datum/world_trait/trait in SSmapping.active_world_traits)
 		if(!istype(trait, trait_type))

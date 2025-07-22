@@ -2,7 +2,7 @@
 	if(!key)
 		return
 	var/the_pq = 0
-	var/json_file = file("data/player_saves/[copytext(key,1,2)]/[key]/pq_num.json")
+	var/json_file = file("data/player_saves/[copytext_char(key,1,2)]/[key]/pq_num.json")
 	if(!fexists(json_file))
 		WRITE_FILE(json_file, "{}")
 	var/list/json = json_decode(file2text(json_file))
@@ -40,7 +40,7 @@
 
 /proc/adjust_playerquality(amt, key, admin, reason)
 	var/curpq = 0
-	var/json_file = file("data/player_saves/[copytext(key,1,2)]/[key]/pq_num.json")
+	var/json_file = file("data/player_saves/[copytext_char(key,1,2)]/[key]/pq_num.json")
 	if(!fexists(json_file))
 		WRITE_FILE(json_file, "{}")
 	var/list/json = json_decode(file2text(json_file))
@@ -71,7 +71,7 @@
 				thing = "NOTE: [reason]"
 		thing += " ([GLOB.rogue_round_id])"
 		thing += "\n"
-		text2file(thing,"data/player_saves/[copytext(key,1,2)]/[key]/playerquality.txt")
+		text2file(thing,"data/player_saves/[copytext_char(key,1,2)]/[key]/playerquality.txt")
 
 		var/msg
 		if(!amt)
@@ -124,7 +124,7 @@
 	check_pq_menu(theykey)
 
 /proc/check_pq_menu(ckey)
-	if(!fexists("data/player_saves/[copytext(ckey,1,2)]/[ckey]/preferences.sav"))
+	if(!fexists("data/player_saves/[copytext_char(ckey,1,2)]/[ckey]/preferences.sav"))
 		to_chat(usr, span_boldwarning("User does not exist."))
 		return
 	var/popup_window_data = "<center>[ckey]</center>"
@@ -136,7 +136,7 @@
 	popup_window_data += "Commends: <a href='?_src_=holder;[HrefToken()];readcommends=[ckey]'>[get_commends(ckey)]</a></div></td>"
 	popup_window_data += "<td width=34%><center>Round Contributor Points: [get_roundpoints(ckey)]</center></td>"
 	popup_window_data += "<td width=33%><div style='text-align:right'>Rounds Survived: [get_roundsplayed(ckey)]</div></td></tr></table>"
-	var/list/listy = world.file2list("data/player_saves/[copytext(ckey,1,2)]/[ckey]/playerquality.txt")
+	var/list/listy = world.file2list("data/player_saves/[copytext_char(ckey,1,2)]/[ckey]/playerquality.txt")
 	if(!listy.len)
 		popup_window_data += span_info("No data on record. Create some.")
 	else
@@ -182,7 +182,7 @@
 		if(!selection)
 			return
 		theykey = selection
-	if(!fexists("data/player_saves/[copytext(theykey,1,2)]/[theykey]/preferences.sav"))
+	if(!fexists("data/player_saves/[copytext_char(theykey,1,2)]/[theykey]/preferences.sav"))
 		to_chat(src, span_boldwarning("User does not exist."))
 		return
 	var/amt2change = input("How much to modify the PQ by? (20 to -20, or 0 to just add a note)") as null|num
@@ -201,7 +201,7 @@
 	if(!giver || !key)
 		return
 	var/curcomm = 0
-	var/json_file = file("data/player_saves/[copytext(key,1,2)]/[key]/commends.json")
+	var/json_file = file("data/player_saves/[copytext_char(key,1,2)]/[key]/commends.json")
 	if(!fexists(json_file))
 		WRITE_FILE(json_file, "{}")
 	var/list/json = json_decode(file2text(json_file))
@@ -221,7 +221,7 @@
 	if(!key)
 		return
 	var/curcomm = 0
-	var/json_file = file("data/player_saves/[copytext(key,1,2)]/[key]/commends.json")
+	var/json_file = file("data/player_saves/[copytext_char(key,1,2)]/[key]/commends.json")
 	if(!fexists(json_file))
 		WRITE_FILE(json_file, "{}")
 	var/list/json = json_decode(file2text(json_file))
@@ -236,7 +236,7 @@
 	if(!key)
 		return
 	var/curcomm = 0
-	var/json_file = file("data/player_saves/[copytext(key,1,2)]/[key]/rcp.json")
+	var/json_file = file("data/player_saves/[copytext_char(key,1,2)]/[key]/rcp.json")
 	if(!fexists(json_file))
 		WRITE_FILE(json_file, "{}")
 	var/list/json = json_decode(file2text(json_file))
@@ -255,7 +255,7 @@
 	if(!key)
 		return
 	var/curcomm = 0
-	var/json_file = file("data/player_saves/[copytext(key,1,2)]/[key]/rcp.json")
+	var/json_file = file("data/player_saves/[copytext_char(key,1,2)]/[key]/rcp.json")
 	if(!fexists(json_file))
 		WRITE_FILE(json_file, "{}")
 	var/list/json = json_decode(file2text(json_file))

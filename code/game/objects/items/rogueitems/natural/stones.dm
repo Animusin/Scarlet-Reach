@@ -293,7 +293,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	if(extra_intent_list.len)
 		for(var/i in 1 to min(4, extra_intent_list.len))
 			// No more than 4 bro, and if we are empty on intents just stop here
-			if(!length(extra_intent_list))
+			if(!length_char(extra_intent_list))
 				break
 			var/cock = pick(extra_intent_list) // We pick one
 			given_intent_list += cock // Add it to the list

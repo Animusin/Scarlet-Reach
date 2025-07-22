@@ -22,7 +22,7 @@ SUBSYSTEM_DEF(throwing)
 	//cache for sanic speed (lists are references anyways)
 	var/list/currentrun = src.currentrun
 
-	while(length(currentrun))
+	while(length_char(currentrun))
 		var/atom/movable/AM = currentrun[currentrun.len]
 		var/datum/thrownthing/TT = currentrun[AM]
 		currentrun.len--

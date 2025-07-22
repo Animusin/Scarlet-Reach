@@ -547,7 +547,7 @@
 		atomcounts[AN] += 1
 		if(!atomrefs[AN]) // Only the FIRST item that matches the same name
 			atomrefs[AN] = A // If this one item can't get picked up, sucks to be you
-	if(length(atomrefs))
+	if(length_char(atomrefs))
 		for(var/AC in atomrefs)
 			var/AD = "[AC] ([atomcounts[AC]])"
 			atomy[AD] = atomrefs[AC]

@@ -36,7 +36,7 @@ GLOBAL_LIST_EMPTY(typelistkeys)
 		for (var/saving in savings)
 			if (GLOB.typelists[type]["[saving]-saved"])
 				savings[saving] += GLOB.typelists[type]["[saving]-saved"]
-				saveditems[saving] += (GLOB.typelists[type]["[saving]-saved"] * length(GLOB.typelists[type][saving]))
+				saveditems[saving] += (GLOB.typelists[type]["[saving]-saved"] * length_char(GLOB.typelists[type][saving]))
 
 	for (var/saving in savings)
 		to_chat(world, "Savings for [saving]: [savings[saving]] lists, [saveditems[saving]] items")

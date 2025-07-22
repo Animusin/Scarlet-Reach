@@ -80,7 +80,7 @@
 
 /datum/achievement_data/ui_base_html(html)
 	var/datum/asset/spritesheet/simple/assets = get_asset_datum(/datum/asset/spritesheet/simple/achievements)
-	. = replacetext(html, "<!--customheadhtml-->", assets.css_tag())
+	. = replacetext_char(html, "<!--customheadhtml-->", assets.css_tag())
 
 /datum/achievement_data/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, datum/tgui/master_ui = null, datum/ui_state/state = GLOB.always_state)
 	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)

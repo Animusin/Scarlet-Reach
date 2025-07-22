@@ -86,7 +86,7 @@
 		 	if(carbon_mob.mind || carbon_mob.last_mind) //Avoid eating people with minds
 		 		continue
 		found |= mob
-	if(!length(found))
+	if(!length_char(found))
 		return null
 	return pick(found)
 

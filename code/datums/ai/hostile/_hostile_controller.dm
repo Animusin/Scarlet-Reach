@@ -146,11 +146,11 @@
 
 	var/spoken_text = speech_args[SPEECH_MESSAGE] // probably should check for full words
 	var/command
-	if(findtext(spoken_text, "stop") || findtext(spoken_text, "stay"))
+	if(findtext_char(spoken_text, "stop") || findtext_char(spoken_text, "stay"))
 		command = COMMAND_STOP
-	else if(findtext(spoken_text, "follow") || findtext(spoken_text, "come"))
+	else if(findtext_char(spoken_text, "follow") || findtext_char(spoken_text, "come"))
 		command = COMMAND_FOLLOW
-	else if(findtext(spoken_text, "attack") || findtext(spoken_text, "sic"))
+	else if(findtext_char(spoken_text, "attack") || findtext_char(spoken_text, "sic"))
 		command = COMMAND_ATTACK
 	else
 		return

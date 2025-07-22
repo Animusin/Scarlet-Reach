@@ -6,7 +6,7 @@
 
 /mob/verb/ChooseDMI(dmi as file)
 	var/dmifile = file(dmi)
-	if(isfile(dmifile) && (copytext("[dmifile]",-4) == ".dmi"))
+	if(isfile(dmifile) && (copytext_char("[dmifile]",-4) == ".dmi"))
 		SliceNDice(dmifile)
 	else
 		world << "\red Bad DMI file '[dmifile]'"
@@ -34,7 +34,7 @@
 
 	var/icon/outputIcon = new /icon()
 
-	var/filename = "[copytext("[dmifile]", 1, -4)]-smooth.dmi"
+	var/filename = "[copytext_char("[dmifile]", 1, -4)]-smooth.dmi"
 	fdel(filename) //force refresh
 
 	for(var/state in states)

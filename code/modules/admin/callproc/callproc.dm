@@ -31,8 +31,8 @@
 		return
 
 	//strip away everything but the proc name
-	var/list/proclist = splittext(procpath, "/")
-	if (!length(proclist))
+	var/list/proclist = splittext_char(procpath, "/")
+	if (!length_char(proclist))
 		return
 
 	var/procname = proclist[proclist.len]

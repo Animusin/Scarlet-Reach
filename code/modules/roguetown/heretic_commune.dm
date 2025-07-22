@@ -125,7 +125,7 @@
 			var/nickname = H.mind?.heretic_nickname || H.real_name
 			heretic_list += nickname
 
-	if(!length(heretic_list))
+	if(!length_char(heretic_list))
 		to_chat(src, span_notice("You sense no other believers of your faith."))
 		return
 		

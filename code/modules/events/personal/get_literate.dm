@@ -35,7 +35,7 @@
 		if(!H.is_literate() && H.patron && istype(H.patron, /datum/patron/divine/noc))
 			illiterate_noc_followers += H
 
-	if(!length(illiterate_noc_followers))
+	if(!length_char(illiterate_noc_followers))
 		return
 
 	var/mob/living/carbon/human/chosen_illiterate = pick(illiterate_noc_followers)

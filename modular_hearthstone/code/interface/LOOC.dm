@@ -58,7 +58,7 @@
 		return
 
 	if(!holder)
-		if(findtext(msg, "byond://"))
+		if(findtext_char(msg, "byond://"))
 			to_chat(src, "<B>Advertising other servers is not allowed.</B>")
 			log_admin("[key_name(src)] has attempted to advertise in LOOC: [msg]")
 			return

@@ -236,7 +236,7 @@
 		viable_skills += skill_type
 	viable_skills = shuffle(viable_skills)
 	for(var/i in 1 to skill_amt)
-		if(!length(viable_skills))
+		if(!length_char(viable_skills))
 			break
 		var/skill_type = pick_n_take(viable_skills)
 		var/req_exp = get_requried_sleep_xp_for_skill(skill_type, 1)

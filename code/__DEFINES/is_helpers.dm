@@ -193,4 +193,4 @@ GLOBAL_LIST_INIT(pointed_types, typecacheof(list(
 
 #define isblobmonster(O) (istype(O, /mob/living/simple_animal/hostile/blob))
 
-#define isshuttleturf(T) (length(T.baseturfs) && (/turf/baseturf_skipover/shuttle in T.baseturfs))
+#define isshuttleturf(T) (length_char(T.baseturfs) && (/turf/baseturf_skipover/shuttle in T.baseturfs))

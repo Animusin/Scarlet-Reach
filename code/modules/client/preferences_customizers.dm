@@ -73,11 +73,11 @@
 		dat += "<a [customizer_link]>[customizer.name]</a>"
 		if(!entry.disabled)
 			var/choice_link
-			if(length(customizer.customizer_choices) > 1)
+			if(length_char(customizer.customizer_choices) > 1)
 				choice_link = "href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=change_choice'"
 			else
 				choice_link = "class='linkOff'"
-			if(length(customizer.customizer_choices) > 1)
+			if(length_char(customizer.customizer_choices) > 1)
 				dat += "<br><a [choice_link]>[choice.name]</a>"
 
 			var/list/choice_list = choice.show_pref_choices(src, entry, customizer_type)

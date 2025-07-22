@@ -121,7 +121,7 @@
 	var/mob/living/carbon/was_owner = owner
 	update_limb(dropping_limb = TRUE)
 
-	if(length(wounds))
+	if(length_char(wounds))
 		var/list/stored_wounds = list()
 		for(var/datum/wound/wound as anything in wounds)
 			wound.remove_from_bodypart()

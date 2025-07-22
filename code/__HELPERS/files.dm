@@ -41,7 +41,7 @@
 				continue
 		path += choice
 
-		if(copytext(path,-1,0) != "/")		//didn't choose a directory, no need to iterate again
+		if(copytext_char(path,-1,0) != "/")		//didn't choose a directory, no need to iterate again
 			break
 	var/extensions
 	for(var/i in valid_extensions)
@@ -84,11 +84,11 @@
 		var/list/new_filenames = flist(current_dir)
 		for(var/new_filename in new_filenames)
 			// if filename ends in / it is a directory, append to currdir
-			if(findtext(new_filename, "/", -1))
+			if(findtext_char(new_filename, "/", -1))
 				jobs += current_dir + new_filename
 			else
 				filenames += current_dir + new_filename
 	return filenames
 
 /proc/pathflatten(path)
-	return replacetext(path, "/", "_")
+	return replacetext_char(path, "/", "_")

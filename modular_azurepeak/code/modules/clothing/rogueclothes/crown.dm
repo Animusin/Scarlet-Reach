@@ -41,7 +41,7 @@
 		if(user.voicecolor_override)
 			usedcolor = user.voicecolor_override
 		user.whisper(input_text)
-		if(length(input_text) > 100)
+		if(length_char(input_text) > 100)
 			input_text = "<small>[input_text]</small>"
 		if(!garrisonline)
 			for(var/obj/structure/roguemachine/scomm/S in SSroguemachine.scomm_machines)

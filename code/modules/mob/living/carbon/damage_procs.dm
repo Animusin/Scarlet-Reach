@@ -164,7 +164,7 @@
 	for(var/obj/item/bodypart/BP as anything in bodyparts)
 		if(status && (BP.status != status))
 			continue
-		if((brute && BP.brute_dam) || (burn && BP.burn_dam) || (stamina && BP.stamina_dam) || length(BP.wounds))
+		if((brute && BP.brute_dam) || (burn && BP.burn_dam) || (stamina && BP.stamina_dam) || length_char(BP.wounds))
 			parts += BP
 	return parts
 
@@ -210,7 +210,7 @@
 		stamina *= 1.5
 
 	var/update = NONE
-	while(length(parts) && (brute > 0 || burn > 0 || stamina > 0))
+	while(length_char(parts) && (brute > 0 || burn > 0 || stamina > 0))
 		var/obj/item/bodypart/picked = pick(parts)
 
 		var/brute_was = picked.brute_dam

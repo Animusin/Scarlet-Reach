@@ -465,7 +465,7 @@
 									if("r_hand", "l_hand")
 										if (V.get_item_by_slot(SLOT_RING))
 											stealpos.Add(V.get_item_by_slot(SLOT_RING))
-								if (length(stealpos) > 0)
+								if (length_char(stealpos) > 0)
 									var/obj/item/picked = pick(stealpos)
 									V.dropItemToGround(picked)
 									put_in_active_hand(picked)

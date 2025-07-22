@@ -89,8 +89,8 @@
 		return
 
 	var/filename = "[infile]"
-	var/file_ext = lowertext(copytext(filename, -4))
-	var/file_size = length(infile)
+	var/file_ext = lowertext(copytext_char(filename, -4))
+	var/file_size = length_char(infile)
 
 	if(file_ext != ".ogg")
 		to_chat(user, span_warning("SONG MUST BE AN OGG."))

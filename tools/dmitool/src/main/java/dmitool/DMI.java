@@ -47,7 +47,7 @@ public class DMI implements Comparator<IconState> {
         if(!f.canRead()) {
             throw new FileNotFoundException("File cannot be found or is unreadable!");
         }
-        if(f.length() == 0) { // Empty .dmi is empty file
+        if(f.length_char() == 0) { // Empty .dmi is empty file
             w = 32;
             h = 32;
             images = new ArrayList<>();
@@ -91,11 +91,11 @@ public class DMI implements Comparator<IconState> {
         int i = 2;
         
         if(lines[i].startsWith("\twidth = ")) {
-            this.w = Integer.parseInt(lines[2].substring("\twidth = ".length()));
+            this.w = Integer.parseInt(lines[2].substring("\twidth = ".length_char()));
             i++;
         }
         if(lines[i].startsWith("\theight = ")) {
-            this.h = Integer.parseInt(lines[3].substring("\theight = ".length()));
+            this.h = Integer.parseInt(lines[3].substring("\theight = ".length_char()));
             i++;
         }
         
@@ -104,7 +104,7 @@ public class DMI implements Comparator<IconState> {
         while(i < lines.length - 1) {
             long imagesInState = 1;
             if(!lines[i].startsWith("state = \"") || !lines[i].endsWith("\"")) throw new DMIException(lines, i, "Error reading state string");
-            String stateName = lines[i].substring("state = \"".length(), lines[i].length()-1);
+            String stateName = lines[i].substring("state = \"".length_char(), lines[i].length_char()-1);
             i++;
             int dirs = 1;
             int frames = 1;
@@ -115,15 +115,15 @@ public class DMI implements Comparator<IconState> {
             boolean movement = false;
             while(lines[i].startsWith("\t")) {
                 if(lines[i].startsWith("\tdirs = ")) {
-                    dirs = Integer.parseInt(lines[i].substring("\tdirs = ".length()));
+                    dirs = Integer.parseInt(lines[i].substring("\tdirs = ".length_char()));
                     imagesInState *= dirs;
                     i++;
                 } else if(lines[i].startsWith("\tframes = ")) {
-                    frames = Integer.parseInt(lines[i].substring("\tframes = ".length()));
+                    frames = Integer.parseInt(lines[i].substring("\tframes = ".length_char()));
                     imagesInState *= frames;
                     i++;
                 } else if(lines[i].startsWith("\tdelay = ")) {
-                    String delayString = lines[i].substring("\tdelay = ".length());
+                    String delayString = lines[i].substring("\tdelay = ".length_char());
                     String[] delayVals = delayString.split(",");
                     delays = new float[delayVals.length];
                     for(int d=0; d<delays.length; d++) {
@@ -134,10 +134,10 @@ public class DMI implements Comparator<IconState> {
                     rewind = true;
                     i++;
                 } else if(lines[i].startsWith("\tloop = ")) {
-                    loop = Integer.parseInt(lines[i].substring("\tloop = ".length()));
+                    loop = Integer.parseInt(lines[i].substring("\tloop = ".length_char()));
                     i++;
                 } else if(lines[i].startsWith("\thotspot = ")) {
-                    hotspot = lines[i].substring("\thotspot = ".length());
+                    hotspot = lines[i].substring("\thotspot = ".length_char());
                     i++;
                 } else if(lines[i].equals("\tmovement = 1")) {
                     movement = true;

@@ -155,14 +155,14 @@
 	taste_sensitivity = 32
 
 /obj/item/organ/tongue/zombie/handle_speech(datum/source, list/speech_args)
-	var/list/message_list = splittext(speech_args[SPEECH_MESSAGE], " ")
+	var/list/message_list = splittext_char(speech_args[SPEECH_MESSAGE], " ")
 	var/maxchanges = max(round(message_list.len / 1.5), 2)
 
 	for(var/i = rand(maxchanges / 2, maxchanges), i > 0, i--)
 		var/insertpos = rand(1, message_list.len - 1)
 		var/inserttext = message_list[insertpos]
 
-		if(!(copytext(inserttext, length(inserttext) - 2) == "..."))
+		if(!(copytext_char(inserttext, length_char(inserttext) - 2) == "..."))
 			message_list[insertpos] = inserttext + "..."
 
 		if(prob(20) && message_list.len > 3)
@@ -244,8 +244,8 @@
 /obj/item/organ/tongue/snail/handle_speech(datum/source, list/speech_args)
 	var/new_message
 	var/message = speech_args[SPEECH_MESSAGE]
-	for(var/i in 1 to length(message))
-		if(findtext("ABCDEFGHIJKLMNOPWRSTUVWXYZabcdefghijklmnopqrstuvwxyz", message[i])) //Im open to suggestions
+	for(var/i in 1 to length_char(message))
+		if(findtext_char("ABCDEFGHIJKLMNOPWRSTUVWXYZabcdefghijklmnopqrstuvwxyz", message[i])) //Im open to suggestions
 			new_message += message[i] + message[i] + message[i] //aaalllsssooo ooopppeeennn tttooo sssuuuggggggeeessstttiiiooonsss
 		else
 			new_message += message[i]

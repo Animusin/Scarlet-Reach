@@ -107,7 +107,7 @@ SUBSYSTEM_DEF(blackbox)
 			"json" = json_encode(FV.json)
 		))
 
-	if (!length(sqlrowlist))
+	if (!length_char(sqlrowlist))
 		return
 
 	SSdbcore.MassInsert(format_table_name("feedback"), sqlrowlist, ignore_errors = TRUE, delayed = TRUE, special_columns = special_columns)
@@ -249,7 +249,7 @@ Versioning
 				return
 			if(!islist(FV.json["data"]))
 				FV.json["data"] = list()
-			var/pos = length(FV.json["data"]) + 1
+			var/pos = length_char(FV.json["data"]) + 1
 			FV.json["data"]["[pos]"] = list() //in 512 "pos" can be replaced with "[FV.json["data"].len+1]"
 			for(var/i in data)
 				if(islist(data[i]))

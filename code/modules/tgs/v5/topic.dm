@@ -9,11 +9,11 @@
 	var/list/result = ProcessRawTopic(json, check_access_identifier)
 	if(!result)
 		result = TopicResponse("Runtime error!")
-	else if(!length(result))
+	else if(!length_char(result))
 		return "{}" // quirk of json_encode is an empty list returns "[]"
 
 	var/response_json = json_encode(result)
-	if(length(response_json) > DMAPI5_TOPIC_RESPONSE_LIMIT)
+	if(length_char(response_json) > DMAPI5_TOPIC_RESPONSE_LIMIT)
 		// cache response chunks and send the first
 		var/list/chunks = GenerateChunks(response_json, FALSE)
 		var/payload_id = chunks[1][DMAPI5_CHUNK][DMAPI5_CHUNK_PAYLOAD_ID]
@@ -216,7 +216,7 @@
 				payloads = new /list(total_chunks)
 				chunked_topics[cache_key] = payloads
 
-			if(total_chunks != length(payloads))
+			if(total_chunks != length_char(payloads))
 				chunked_topics -= cache_key
 				return TopicResponse("Received differing total chunks for same [DMAPI5_CHUNK_PAYLOAD_ID]! Invalidating [DMAPI5_CHUNK_PAYLOAD_ID]!")
 
@@ -232,7 +232,7 @@
 				if(!payloads[i])
 					missing_sequence_ids += i - 1
 
-			if(length(missing_sequence_ids))
+			if(length_char(missing_sequence_ids))
 				return list(DMAPI5_MISSING_CHUNKS = missing_sequence_ids)
 
 			chunked_topics -= cache_key
@@ -249,7 +249,7 @@
 			chunked_requests = max(chunked_requests, payload_id)
 
 			var/list/missing_chunks = topic_parameters[DMAPI5_MISSING_CHUNKS]
-			if(!istype(missing_chunks) || !length(missing_chunks))
+			if(!istype(missing_chunks) || !length_char(missing_chunks))
 				return TopicResponse("Missing or empty [DMAPI5_MISSING_CHUNKS]!")
 
 			var/sequence_id_to_send = missing_chunks[1]
@@ -266,7 +266,7 @@
 			if(!chunk_to_send)
 				return TopicResponse("Sequence ID [sequence_id_to_send] is not present in response chunk P[payload_id]!")
 
-			if(length(missing_chunks) == 1)
+			if(length_char(missing_chunks) == 1)
 				// sending last chunk, purge the cache
 				chunked_topics -= cache_key
 

@@ -138,7 +138,7 @@ GLOBAL_LIST_EMPTY(GPS_list)
 			if (!a)
 				return
 
-			a = copytext(sanitize(a), 1, 20)
+			a = copytext_char(sanitize(a), 1, 20)
 			gpstag = a
 			. = TRUE
 			parentasatom.name = "global positioning system ([gpstag])"

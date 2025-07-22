@@ -106,13 +106,13 @@
 		resisting = FALSE
 		return // Standing passes your turn, you can't attack.
 	// If we're pathfinding somewhere, move along that path
-	if(length(myPath))
+	if(length_char(myPath))
 		steps_moved_this_turn += move_along_path()
 		// We could return here if we wanted to make moving use your turn.
 	// Special case: Taunt people hiding in trees directly above us.
 	var/turf/my_turf = get_turf(src)
 	var/turf/their_turf = get_turf(target)
-	if(!IsDeadOrIncap() && !length(myPath) && their_turf && my_turf.z < their_turf.z && my_turf.Distance_cardinal_3d(their_turf, src) == 1 && istransparentturf(their_turf))
+	if(!IsDeadOrIncap() && !length_char(myPath) && their_turf && my_turf.z < their_turf.z && my_turf.Distance_cardinal_3d(their_turf, src) == 1 && istransparentturf(their_turf))
 		// They're directly above us, now are they in a tree?
 		var/obj/structure/flora/newbranch/the_branch = locate() in their_turf
 		var/should_try_taunt = prob(5) // this is a var so that when debugging i can just set it to TRUE
@@ -215,13 +215,13 @@
 	/// used when trying to intentionally overshoot to move quicker
 	var/squared_jump_range_bonus = HAS_TRAIT(src, TRAIT_LEAPER) ? squared_jump_range : (jump_range + 1) ** 2
 	// if we have no path or can try to jump ahead in a straight line, try it
-	if(!length(myPath) || inLineOfTravel(src, target))
+	if(!length_char(myPath) || inLineOfTravel(src, target))
 		jump_destination = target
 	else
 		// Find the farthest-along tile in our path that's within range and closest to our target.
 		// Basically: Try to cut ahead.
 		var/min_squared_distance = INFINITY
-		for(var/i in 1 to length(myPath))
+		for(var/i in 1 to length_char(myPath))
 			var/turf/new_destination = myPath[i]
 			var/new_squared_distance = get_dist_euclidean_squared(target, new_destination)
 			var/new_jump_dist = get_dist_euclidean_squared(src, new_destination)
@@ -295,7 +295,7 @@
 	if(pathing_frustration > 8)
 		NPC_THINK("Giving up on this path because of frustration!")
 		give_up = TRUE
-	if(length(myPath) && get_dist(src, myPath[1]) > 5)
+	if(length_char(myPath) && get_dist(src, myPath[1]) > 5)
 		NPC_THINK("Giving up on this path because of distance!")
 		give_up = TRUE
 	if(give_up)
@@ -310,7 +310,7 @@
 /// progress along an existing path or cancel it
 /// returns # of steps taken
 /mob/living/carbon/human/proc/move_along_path()
-	if(!length(myPath))
+	if(!length_char(myPath))
 		// no path, quit early
 		NPC_THINK("Tried to move along a nonexistent path?!")
 		return 0
@@ -324,7 +324,7 @@
 	var/old_pathfinding_target = pathfinding_target
 	var/steps_to_take = maxStepsTick - steps_moved_this_turn // if this isn't our first movement step, limit how many we can take
 	for(var/movement_turn in 1 to steps_to_take)
-		if(!length(myPath))
+		if(!length_char(myPath))
 			NPC_THINK("MOVEMENT TURN [movement_turn]: Path complete!")
 			return
 		// Try jumping prior to validation to avoid losing our path from being too far away.
@@ -432,16 +432,16 @@
 	if(is_currently_pathing)
 		NPC_THINK("Already pathing!")
 		return FALSE
-	if(!length(myPath)) // need a new path
+	if(!length_char(myPath)) // need a new path
 		var/const/MAX_RANGE_FIND = 32
 		NPC_THINK("Pathfinding to [pathfinding_target]...")
 		is_currently_pathing = TRUE
 		myPath = get_path_to(src, turf_of_target, TYPE_PROC_REF(/turf, Heuristic_cardinal_3d), MAX_RANGE_FIND + 1, 250, 1, adjacent = TYPE_PROC_REF(/turf, reachableTurftest3d))
 		is_currently_pathing = FALSE
-		if(length(myPath))
+		if(length_char(myPath))
 			myPath -= get_turf(src) // remove the turf we start on
 			pathing_frustration = 0
-			NPC_THINK("Found a path with length [length(myPath)]!")
+			NPC_THINK("Found a path with length [length_char(myPath)]!")
 			return TRUE
 	NPC_THINK("Failed to find a path!")
 	//too far away or pathing failed; don't immediately lose aggro though
@@ -564,7 +564,7 @@
 				var/turf/target_turf = get_turf(target)
 				// only path if we're more than one tile away
 				if(my_turf.Distance_cardinal_3d(target_turf, src) > 1)
-					if(!length(myPath)) // create a new path to the target
+					if(!length_char(myPath)) // create a new path to the target
 						start_pathing_to(target)
 
 			// Flee before trying to pick up a weapon.
@@ -612,7 +612,7 @@
 						NPC_THINK("Succeeded juke roll ([base_juke_chance + juke_spd_bonus]%)!")
 						// pick a random turf to juke to
 						var/list/turf/juke_candidates = get_dodge_destinations(target)
-						if(length(juke_candidates))
+						if(length_char(juke_candidates))
 							// temporarily force us to path to this turf
 							myPath = list(pick(juke_candidates))
 							var/old_pathfinding_target = pathfinding_target

@@ -65,7 +65,7 @@
 		message_admins("WARNING: No valid town areas found for skeleton siege!")
 		return
 		
-	message_admins("Found [length(indoor_areas)] indoor and [length(outdoor_areas)] outdoor areas")
+	message_admins("Found [length_char(indoor_areas)] indoor and [length_char(outdoor_areas)] outdoor areas")
 	
 	// Pick areas to spawn in, ensuring at least one outdoor area
 	var/list/chosen_areas = list()
@@ -77,11 +77,11 @@
 	
 	// Then fill remaining slots with random areas
 	var/list/remaining_areas = indoor_areas + outdoor_areas
-	while(length(chosen_areas) < 3 && LAZYLEN(remaining_areas))
+	while(length_char(chosen_areas) < 3 && LAZYLEN(remaining_areas))
 		var/area/rogue/chosen = pick_n_take(remaining_areas)
 		chosen_areas += chosen
 		
-	message_admins("Chosen [length(chosen_areas)] areas for skeleton spawns")
+	message_admins("Chosen [length_char(chosen_areas)] areas for skeleton spawns")
 	
 	// Spawn waves of skeletons
 	for(var/wave in 1 to waves)

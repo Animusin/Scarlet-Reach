@@ -574,7 +574,7 @@
 					var/list/colors = list()
 					if(tail.accessory_colors)
 						colors = color_string_to_list(tail.accessory_colors)
-					if(!length(colors))
+					if(!length_char(colors))
 						colors = list("#FFFFFF", "#FFFFFF") // Default colors if none set
 					colors[1] = sanitize_hexcolor(new_color, 6, TRUE)
 					tail.accessory_colors = color_list_to_string(colors)
@@ -594,7 +594,7 @@
 					var/list/colors = list()
 					if(tail.accessory_colors)
 						colors = color_string_to_list(tail.accessory_colors)
-					if(!length(colors))
+					if(!length_char(colors))
 						colors = list("#FFFFFF", "#FFFFFF") // Default colors if none set
 					colors[2] = sanitize_hexcolor(new_color, 6, TRUE)
 					tail.accessory_colors = color_list_to_string(colors)
@@ -694,7 +694,7 @@
 
 	switch(choice)
 		if("name")
-			var/newname = copytext(sanitize_name(input(H, "Who are we again?", "Name change", H.name) as null|text),1,MAX_NAME_LEN)
+			var/newname = copytext_char(sanitize_name(input(H, "Who are we again?", "Name change", H.name) as null|text),1,MAX_NAME_LEN)
 
 			if(!newname)
 				return

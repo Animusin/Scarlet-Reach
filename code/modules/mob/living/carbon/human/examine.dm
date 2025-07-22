@@ -112,7 +112,7 @@
 			. += span_phobia("A foreigner...")
 
 		//For tennite schism god-event
-		if(length(GLOB.tennite_schisms))
+		if(length_char(GLOB.tennite_schisms))
 			var/datum/tennite_schism/S = GLOB.tennite_schisms[1]
 			var/user_side = (WEAKREF(user) in S.supporters_astrata) ? "astrata" : (WEAKREF(user) in S.supporters_challenger) ? "challenger" : null
 			var/mob_side = (WEAKREF(src) in S.supporters_astrata) ? "astrata" : (WEAKREF(src) in S.supporters_challenger) ? "challenger" : null
@@ -367,7 +367,7 @@
 		else
 			str = "[m3] a pair of gloves of some kind!"
 		. += str
-	else if(FR && length(FR.blood_DNA))
+	else if(FR && length_char(FR.blood_DNA))
 		var/hand_number = get_num_arms(FALSE)
 		if(hand_number)
 			if(is_stupid)
@@ -554,7 +554,7 @@
 				if(!bleeder?.get_bleed_rate() || (!observer_privilege && !get_location_accessible(src, bleeder.body_zone)))
 					continue
 				bleeding_limbs += parse_zone(bleeder.body_zone)
-			if(length(bleeding_limbs))
+			if(length_char(bleeding_limbs))
 				if(bleed_rate >= 5)
 					msg += span_bloody("<B>[capitalize(m2)] [english_list(bleeding_limbs)] [bleeding_limbs.len > 1 ? "are" : "is"] [bleed_wording]!</B>")
 				else
@@ -580,7 +580,7 @@
 			missing_head = TRUE
 		missing_limbs += parse_zone(missing_zone)
 
-	if(length(missing_limbs))
+	if(length_char(missing_limbs))
 		var/missing_limb_message = "<B>[capitalize(m2)] [english_list(missing_limbs)] [missing_limbs.len > 1 ? "are" : "is"] gone.</B>"
 		if(missing_head)
 			missing_limb_message = span_dead("[missing_limb_message]")
@@ -625,7 +625,7 @@
 
 	//Status effects
 	var/list/status_examines = status_effect_examines()
-	if(length(status_examines))
+	if(length_char(status_examines))
 		msg += status_examines
 
 	//Disgusting behemoth of stun absorption
@@ -712,7 +712,7 @@
 //			else if(!client)
 //				msg += "[m3] a blank, absent-minded stare and appears completely unresponsive to anything. [t_He] may snap out of it soon."
 
-	if(length(msg))
+	if(length_char(msg))
 		. += span_warning("[msg.Join("\n")]")
 
 	// Show especially large embedded objects at a glance
@@ -835,8 +835,8 @@
 	for(var/V in status_effects)
 		var/datum/status_effect/E = V
 		if(E.examine_text)
-			var/new_text = replacetext(E.examine_text, "SUBJECTPRONOUN", pronoun_replacement)
-			new_text = replacetext(new_text, "[pronoun_replacement] is", "[pronoun_replacement] [p_are()]") //To make sure something become "They are" or "She is", not "They are" and "She are"
+			var/new_text = replacetext_char(E.examine_text, "SUBJECTPRONOUN", pronoun_replacement)
+			new_text = replacetext_char(new_text, "[pronoun_replacement] is", "[pronoun_replacement] [p_are()]") //To make sure something become "They are" or "She is", not "They are" and "She are"
 			dat += "[new_text]\n" //dat.Join("\n") doesn't work here, for some reason
 	if(dat.len)
 		return dat.Join()

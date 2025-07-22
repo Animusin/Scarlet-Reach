@@ -17,8 +17,8 @@
 #define LIST_VALUE_WRAP_LISTS(value) (islist(value) ? list(value) : value)
 
 #define LAZYINITLIST(L) if (!L) L = list()
-#define UNSETEMPTY(L) if (L && !length(L)) L = null
-#define LAZYREMOVE(L, I) if(L) { L -= I; if(!length(L)) { L = list(); } }
+#define UNSETEMPTY(L) if (L && !length_char(L)) L = null
+#define LAZYREMOVE(L, I) if(L) { L -= I; if(!length_char(L)) { L = list(); } }
 #define LAZYADD(L, I) if(!L) { L = list(); } L += I;
 ///This is used to add onto lazy assoc list when the value you're adding is a /list/. This one has extra safety over lazyaddassoc because the value could be null (and thus cant be used to += objects)
 ///Accesses an associative list, returns null if nothing is found
@@ -26,9 +26,9 @@
 #define LAZYADDASSOCLIST(L, K, V) if(!L) { L = list(); } L[K] += list(V);
 #define LAZYOR(L, I) if(!L) { L = list(); } L |= I;
 #define LAZYFIND(L, V) L ? L.Find(V) : 0
-#define LAZYACCESS(L, I) (L ? (isnum(I) ? (I > 0 && I <= length(L) ? L[I] : null) : L[I]) : null)
+#define LAZYACCESS(L, I) (L ? (isnum(I) ? (I > 0 && I <= length_char(L) ? L[I] : null) : L[I]) : null)
 #define LAZYSET(L, K, V) if(!L) { L = list(); } L[K] = V;
-#define LAZYLEN(L) length(L)
+#define LAZYLEN(L) length_char(L)
 #define LAZYCLEARLIST(L) if(L) L.Cut()
 #define SANITIZE_LIST(L) ( islist(L) ? L : list() )
 #define reverseList(L) reverseRange(L.Copy())
@@ -39,7 +39,7 @@
 // TYPECONT: The typepath of the contents of the list
 // COMPARE: The variable on the objects to compare
 #define BINARY_INSERT(IN, LIST, TYPECONT, COMPARE) \
-	var/__BIN_CTTL = length(LIST);\
+	var/__BIN_CTTL = length_char(LIST);\
 	if(!__BIN_CTTL) {\
 		LIST += IN;\
 	} else {\
@@ -63,7 +63,7 @@
 
 //Returns a list in plain english as a string
 /proc/english_list(list/input, nothing_text = "nothing", and_text = " and ", comma_text = ", ", final_comma_text = "" )
-	var/total = length(input)
+	var/total = length_char(input)
 	switch(total)
 		if (0)
 			return "[nothing_text]"
@@ -114,7 +114,7 @@
 	return FALSE
 
 //Checks for specific types in specifically structured (Assoc "type" = TRUE) lists ('typecaches')
-#define is_type_in_typecache(A, L) (A && length(L) && L[(ispath(A) ? A : A:type)])
+#define is_type_in_typecache(A, L) (A && length_char(L) && L[(ispath(A) ? A : A:type)])
 
 //Checks for a string in a list
 /proc/is_string_in_list(string, list/L)
@@ -407,7 +407,7 @@
 	return r
 
 // Returns the key based on the index
-#define KEYBYINDEX(L, index) (((index <= length(L)) && (index > 0)) ? L[index] : null)
+#define KEYBYINDEX(L, index) (((index <= length_char(L)) && (index > 0)) ? L[index] : null)
 
 /proc/count_by_type(list/L, type)
 	var/i = 0
@@ -567,7 +567,7 @@
 		.[thing] = TRUE
 
 //Picks from the list, with some safeties, and returns the "default" arg if it fails
-#define DEFAULTPICK(L, default) ((islist(L) && length(L)) ? pick(L) : default)
+#define DEFAULTPICK(L, default) ((islist(L) && length_char(L)) ? pick(L) : default)
 
 /* Definining a counter as a series of key -> numeric value entries
 
@@ -623,11 +623,11 @@
 //i.e in a list with length 4, a 25 in the 1-100 range will give you the 2nd item
 //This assumes your ranges start with 1, I am not good at math and can't do linear scaling
 /proc/scale_range_pick(min,max,value,list/L)
-	if(!length(L))
+	if(!length_char(L))
 		return null
-	var/index = 1 + (value * (length(L) - 1)) / (max - min)
-	if(index > length(L))
-		index = length(L)
+	var/index = 1 + (value * (length_char(L) - 1)) / (max - min)
+	if(index > length_char(L))
+		index = length_char(L)
 	return L[index]
 
 GLOBAL_LIST_EMPTY(string_lists)

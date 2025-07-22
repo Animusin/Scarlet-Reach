@@ -140,7 +140,7 @@
 	output += "<font size='2'>Poll runs from <b>[poll.start_datetime]</b> until <b>[poll.end_datetime]</b></font><br>"
 	if(poll.allow_revoting)
 		output += "<font size='2'>Revoting is enabled.</font>"
-	if(!length(voted_ratings) || poll.allow_revoting)
+	if(!length_char(voted_ratings) || poll.allow_revoting)
 		output += {"<form action='?src=[REF(src)]' method='get'>
 		<input type='hidden' name='src' value='[REF(src)]'>
 		<input type='hidden' name='votepollref' value='[REF(poll)]'>
@@ -150,7 +150,7 @@
 		var/mid_val = round((option.max_val + option.min_val) / 2)
 		var/selected_rating = text2num(voted_ratings["[option.option_id]"])
 		output += "<label><br>[option.text]: <select name='[REF(option)]'"
-		if(length(voted_ratings) && !poll.allow_revoting)
+		if(length_char(voted_ratings) && !poll.allow_revoting)
 			output += " disabled"
 		output += ">"
 		for(var/rating in option.min_val to option.max_val)
@@ -166,7 +166,7 @@
 				output += " ([option.desc_max])"
 			output += "</option>"
 		output += "</select></label>"
-	if(!length(voted_ratings) || poll.allow_revoting)
+	if(!length_char(voted_ratings) || poll.allow_revoting)
 		output += "<p><input type='submit' value='Submit'></form>"
 	output += "</div>"
 	src << browse(jointext(output, ""),"window=playerpoll;size=500x500")
@@ -195,7 +195,7 @@
 	output += "You can select up to [poll.options_allowed] options. If you select more, the first [poll.options_allowed] will be saved.<br><font size='2'>Poll runs from <b>[poll.start_datetime]</b> until <b>[poll.end_datetime]</b></font><br>"
 	if(poll.allow_revoting)
 		output += "<font size='2'>Revoting is enabled.</font>"
-	if(!length(voted_for) || poll.allow_revoting)
+	if(!length_char(voted_for) || poll.allow_revoting)
 		output += {"<form action='?src=[REF(src)]' method='get'>
 		<input type='hidden' name='src' value='[REF(src)]'>
 		<input type='hidden' name='votepollref' value='[REF(poll)]'>
@@ -204,13 +204,13 @@
 	for(var/o in poll.options)
 		var/datum/poll_option/option = o
 		output += "<label><input type='checkbox' name='[REF(option)]' value='[option.option_id]'"
-		if(length(voted_for) && !poll.allow_revoting)
+		if(length_char(voted_for) && !poll.allow_revoting)
 			output += " disabled"
 		if(option.option_id in voted_for)
 			output += " checked"
 		output += ">[option.text]</label><br>"
 	output += "</td></tr></table>"
-	if(!length(voted_for) || poll.allow_revoting)
+	if(!length_char(voted_for) || poll.allow_revoting)
 		output += "<p><input type='submit' value='Vote'></form>"
 	output += "</div>"
 	src << browse(jointext(output, ""),"window=playerpoll;size=500x300")
@@ -237,21 +237,21 @@
 	qdel(query_irv_get_votes)
 	var/list/prepared_options = list()
 	//if they've already voted we use the order they voted in plus a shuffle of any options they haven't voted for, if any
-	if(length(voted_for))
+	if(length_char(voted_for))
 		for(var/vote_id in voted_for)
 			for(var/o in poll.options)
 				var/datum/poll_option/option = o
 				if(option.option_id == vote_id)
 					prepared_options += option
 		var/list/shuffle_options = poll.options - prepared_options
-		if(length(shuffle_options))
+		if(length_char(shuffle_options))
 			shuffle_options = shuffle(shuffle_options)
 			for(var/shuffled in shuffle_options)
 				prepared_options += shuffled
 	//otherwise just shuffle the options
 	else
 		prepared_options = shuffle(poll.options)
-	var/list/output = list({"<html><head><meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	var/list/output = list({"<html><head><meta charset='UTF-8'><meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
 	<script src="jquery.min.js"></script>
 	<script src="jquery-ui.custom-core-widgit-mouse-sortable-min.js"></script>
@@ -287,7 +287,7 @@
 	if(poll.allow_revoting)
 		output += "<font size='2'>Revoting is enabled.</font>"
 	output += "Please sort the options in the order of <b>most preferred</b> to <b>least preferred</b><br></div>"
-	if(!length(voted_for) || poll.allow_revoting)
+	if(!length_char(voted_for) || poll.allow_revoting)
 		output += {"<form action='?src=[REF(src)]' method='POST'>
 		<input type='hidden' name='src' value='[REF(src)]'>
 		<input type='hidden' name='votepollref' value='[REF(poll)]'>
@@ -298,7 +298,7 @@
 		var/datum/poll_option/option = o
 		output += "<li optionref='[REF(option)]' class='ranking'><span class='grippy'></span> [option.text]</li>\n"
 	output += "</ol><b><center>Least Preferred</center></b><br>"
-	if(!length(voted_for) || poll.allow_revoting)
+	if(!length_char(voted_for) || poll.allow_revoting)
 		output += "<p><input type='submit' value='Vote'></form>"
 	output += "</div>"
 	src << browse(jointext(output, ""),"window=playerpoll;size=500x500")
@@ -417,7 +417,7 @@
 	if(IsAdminAdvancedProcCall())
 		return
 	var/reply_text = href_list["replytext"]
-	if(!reply_text || (length(reply_text) > 2048))
+	if(!reply_text || (length_char(reply_text) > 2048))
 		to_chat(src, span_danger("The text you entered was blank or too long. Please correct the text and submit again."))
 		return
 	var/datum/DBQuery/query_vote_text = SSdbcore.NewQuery({"
@@ -491,7 +491,7 @@
 		return
 	if(IsAdminAdvancedProcCall())
 		return
-	if(length(href_list) > 2)
+	if(length_char(href_list) > 2)
 		href_list.Cut(1,3) //first two values aren't options
 	else
 		to_chat(src, span_danger("No options were selected."))
@@ -538,8 +538,8 @@
 		return
 	if(IsAdminAdvancedProcCall())
 		return
-	var/list/votelist = splittext(href_list["IRVdata"], ",")
-	if(!length(votelist))
+	var/list/votelist = splittext_char(href_list["IRVdata"], ",")
+	if(!length_char(votelist))
 		to_chat(src, span_danger("No ordering data found. Please try again or contact an administrator."))
 
 	var/list/special_columns = list(

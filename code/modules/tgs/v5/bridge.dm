@@ -3,7 +3,7 @@
 		data = list()
 
 	var/single_bridge_request = CreateBridgeRequest(command, data)
-	if(length(single_bridge_request) <= DMAPI5_BRIDGE_REQUEST_LIMIT)
+	if(length_char(single_bridge_request) <= DMAPI5_BRIDGE_REQUEST_LIMIT)
 		return PerformBridgeRequest(single_bridge_request)
 
 	// chunking required
@@ -21,7 +21,7 @@
 			return
 
 	var/list/missing_sequence_ids = response[DMAPI5_MISSING_CHUNKS]
-	if(length(missing_sequence_ids))
+	if(length_char(missing_sequence_ids))
 		do
 			TGS_WARNING_LOG("Server is still missing some chunks of bridge P[payload_id]! Sending missing chunks...")
 			if(!istype(missing_sequence_ids))
@@ -40,7 +40,7 @@
 					return
 
 			missing_sequence_ids = response[DMAPI5_MISSING_CHUNKS]
-		while(length(missing_sequence_ids))
+		while(length_char(missing_sequence_ids))
 
 	return response
 
@@ -66,7 +66,7 @@
 		// Wait up to one minute
 		for(var/i in 1 to 600)
 			sleep(world.tick_lag)
-			if(!detached && (!require_channels || length(chat_channels)))
+			if(!detached && (!require_channels || length_char(chat_channels)))
 				break
 
 			// dad went out for milk and cigarettes 20 years ago...

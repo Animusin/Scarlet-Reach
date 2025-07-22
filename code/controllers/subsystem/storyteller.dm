@@ -197,7 +197,7 @@ SUBSYSTEM_DEF(gamemode)
 		event_pools[track] = list()
 
 	// Populate storytellers
-	if(!length(storytellers))//unit tests can force this before init.
+	if(!length_char(storytellers))//unit tests can force this before init.
 		for(var/type in subtypesof(/datum/storyteller))
 			storytellers[type] = new type()
 
@@ -231,7 +231,7 @@ SUBSYSTEM_DEF(gamemode)
 
 	if(SSticker.HasRoundStarted() && (world.time - SSticker.round_start_time) >= ROUNDSTART_VALID_TIMEFRAME)
 		can_run_roundstart = FALSE
-	else if(current_roundstart_event && length(current_roundstart_event.preferred_events)) //note that this implementation is made for preferred_events being other roundstart events
+	else if(current_roundstart_event && length_char(current_roundstart_event.preferred_events)) //note that this implementation is made for preferred_events being other roundstart events
 		var/list/preferred_copy = current_roundstart_event.preferred_events.Copy()
 		var/datum/round_event_control/selected_event = pickweight(preferred_copy)
 		var/player_count = get_active_player_count(alive_check = TRUE, afk_check = TRUE, human_check = TRUE)
@@ -246,7 +246,7 @@ SUBSYSTEM_DEF(gamemode)
 			selected_event = null
 
 		var/sanity = 0
-		while(!selected_event && length(preferred_copy) && sanity < 100)
+		while(!selected_event && length_char(preferred_copy) && sanity < 100)
 			sanity++
 			selected_event = pickweight(preferred_copy)
 			if(!selected_event.canSpawnEvent(player_count))
@@ -336,7 +336,7 @@ SUBSYSTEM_DEF(gamemode)
 					continue
 			if(restricted_roles && (candidate.mind.assigned_role in restricted_roles))
 				continue
-			if(length(required_roles) && !(candidate.mind.assigned_role in required_roles))
+			if(length_char(required_roles) && !(candidate.mind.assigned_role in required_roles))
 				continue
 
 		if(be_special)
@@ -527,7 +527,7 @@ SUBSYSTEM_DEF(gamemode)
 
 ///Attempts to select players for special roles the mode might have.
 /datum/controller/subsystem/gamemode/proc/pre_setup()
-	if(!length(storytellers))
+	if(!length_char(storytellers))
 		for(var/type in subtypesof(/datum/storyteller))
 			storytellers[type] = new type()
 	set_storyteller(/datum/storyteller/astrata)
@@ -670,7 +670,7 @@ SUBSYSTEM_DEF(gamemode)
 	point_thresholds[EVENT_TRACK_RAIDS] = CONFIG_GET(number/objectives_point_threshold) * 2
 
 /datum/controller/subsystem/gamemode/proc/handle_picking_storyteller()
-	if(length(GLOB.clients) > MAX_POP_FOR_STORYTELLER_VOTE)
+	if(length_char(GLOB.clients) > MAX_POP_FOR_STORYTELLER_VOTE)
 		secret_storyteller = TRUE
 		selected_storyteller = pickweight(get_valid_storytellers(TRUE))
 		return
@@ -686,7 +686,7 @@ SUBSYSTEM_DEF(gamemode)
 			pick_from[storyboy.name] = storyboy.weight //might be able to refactor this to be slightly better due to get_valid_storytellers returning a weighted list
 
 	var/added_storytellers = 0
-	while(added_storytellers < DEFAULT_STORYTELLER_VOTE_OPTIONS && length(pick_from))
+	while(added_storytellers < DEFAULT_STORYTELLER_VOTE_OPTIONS && length_char(pick_from))
 		added_storytellers++
 		var/picked_storyteller = pickweight(pick_from)
 		final_choices[picked_storyteller] = 0
@@ -710,7 +710,7 @@ SUBSYSTEM_DEF(gamemode)
 
 ///return a weighted list of all storytellers that are currently valid to roll, if return_types is set then we will return types instead of instances
 /datum/controller/subsystem/gamemode/proc/get_valid_storytellers(return_types = FALSE)
-	var/client_amount = length(GLOB.clients)
+	var/client_amount = length_char(GLOB.clients)
 	var/list/valid_storytellers = list()
 	for(var/storyteller_type in storytellers)
 		var/datum/storyteller/storyboy = storytellers[storyteller_type]
@@ -1051,9 +1051,9 @@ SUBSYSTEM_DEF(gamemode)
 		fdel("data/last_round_events.txt")
 	if(!massive_string)
 		return
-	last_round_events = splittext(massive_string, ",")
+	last_round_events = splittext_char(massive_string, ",")
 
-	if(!length(last_round_events))
+	if(!length_char(last_round_events))
 		return
 	for(var/event_name as anything in last_round_events)
 		for(var/datum/round_event_control/listed as anything in control)

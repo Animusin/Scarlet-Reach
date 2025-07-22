@@ -15,7 +15,7 @@
 
 /datum/customizer_choice/New()
 	. = ..()
-	if(length(sprite_accessories))
+	if(length_char(sprite_accessories))
 		if(!default_accessory)
 			default_accessory = sprite_accessories[1]
 		if(!(default_accessory in sprite_accessories))
@@ -67,13 +67,13 @@
 	if(accessory)
 		var/accessory_link
 		var/arrows_string
-		if(length(sprite_accessories) > 1)
+		if(length_char(sprite_accessories) > 1)
 			accessory_link = "href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=choose_acc'"
 			arrows_string = "<a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=rotate;rotate=prev''><</a><a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=rotate;rotate=next''>></a>"
 		else
 			accessory_link = "class='linkOff'"
 			arrows_string = "<a class='linkOff'><</a><a class='linkOff'>></a>"
-		if(length(sprite_accessories) > 1)
+		if(length_char(sprite_accessories) > 1)
 			dat += "<br>[arrows_string]<a [accessory_link]>[accessory.name]</a>"
 
 		if(allows_accessory_color_customization && !(accessory.color_disabled))

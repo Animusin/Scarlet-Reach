@@ -63,7 +63,7 @@
 	if (thingtocall)
 		object = thingtocall
 	delegate = proctocall
-	if (length(args) > 2)
+	if (length_char(args) > 2)
 		arguments = args.Copy(3)
 	if(usr)
 		user = WEAKREF(usr)
@@ -81,7 +81,7 @@
 	if (!thingtocall)
 		return
 
-	var/list/calling_arguments = length(args) > 2 ? args.Copy(3) : null
+	var/list/calling_arguments = length_char(args) > 2 ? args.Copy(3) : null
 
 	if (thingtocall == GLOBAL_PROC)
 		call(proctocall)(arglist(calling_arguments))
@@ -102,7 +102,7 @@
 		if(W)
 			var/mob/M = W.resolve()
 			if(M)
-				if (length(args))
+				if (length_char(args))
 					return world.PushUsr(arglist(list(M, src) + args))
 				return world.PushUsr(M, src)
 
@@ -115,8 +115,8 @@
 			return
 
 	var/list/calling_arguments = arguments
-	if (length(args))
-		if (length(arguments))
+	if (length_char(args))
+		if (length_char(arguments))
 			calling_arguments = calling_arguments + args //not += so that it creates a new list so the arguments list stays clean
 		else
 			calling_arguments = args
@@ -142,7 +142,7 @@
 		if(W)
 			var/mob/M = W.resolve()
 			if(M)
-				if (length(args))
+				if (length_char(args))
 					return world.PushUsr(arglist(list(M, src) + args))
 				return world.PushUsr(M, src)
 
@@ -150,8 +150,8 @@
 		return
 
 	var/list/calling_arguments = arguments
-	if (length(args))
-		if (length(arguments))
+	if (length_char(args))
+		if (length_char(arguments))
 			calling_arguments = calling_arguments + args //not += so that it creates a new list so the arguments list stays clean
 		else
 			calling_arguments = args
@@ -180,7 +180,7 @@
 	if (!callback || !istype(callback))
 		//This check only exists because the alternative is callback_select would block forever if given invalid data
 		CRASH("invalid callback passed to invoke_callback")
-	if (!length(callback_args))
+	if (!length_char(callback_args))
 		callback_args = list()
 	pendingcount++
 	var/rtn = callback.Invoke(arglist(callback_args))
@@ -202,7 +202,7 @@
 /proc/callback_select(list/callbacks, list/callback_args, savereturns = TRUE, resolution = 1)
 	if (!callbacks)
 		return
-	var/count = length(callbacks)
+	var/count = length_char(callbacks)
 	if (!count)
 		return
 	if (!callback_args)

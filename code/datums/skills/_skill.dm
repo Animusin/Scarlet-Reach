@@ -14,7 +14,7 @@
 	return
 
 /datum/skill/proc/get_dream_cost_for_level(level, mob/living/user)
-	if(length(specific_dream_costs) >= level)
+	if(length_char(specific_dream_costs) >= level)
 		return specific_dream_costs[level]
 	var/cost = FLOOR(dream_cost_base + (dream_cost_per_level * (level - 1)), 1)
 	if(level == SKILL_LEVEL_LEGENDARY)

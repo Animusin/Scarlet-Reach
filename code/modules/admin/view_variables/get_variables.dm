@@ -9,7 +9,7 @@
 			. = VV_NUM
 
 	else if(istext(var_value))
-		if(findtext(var_value, "\n"))
+		if(findtext_char(var_value, "\n"))
 			. = VV_MESSAGE
 		else
 			. = VV_TEXT

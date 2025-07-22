@@ -55,7 +55,7 @@
 			return
 
 	var/list/shitlist = controller.blackboard[shitlist_key]
-	if (!length(shitlist))
+	if (!length_char(shitlist))
 		finish_action(controller, succeeded = FALSE)
 		return
 
@@ -75,7 +75,7 @@
 			continue
 		enemies_list += living_target
 
-	if (!length(enemies_list)) // no valid targets, not shitlist or target so just clear everything. start again
+	if (!length_char(enemies_list)) // no valid targets, not shitlist or target so just clear everything. start again
 		controller.clear_blackboard_key(shitlist_key)
 		controller.clear_blackboard_key(target_key)
 		finish_action(controller, succeeded = FALSE)

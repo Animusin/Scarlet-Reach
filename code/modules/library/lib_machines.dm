@@ -377,9 +377,9 @@ GLOBAL_LIST(cachedbooks) // List of our cached book datums
 		if(checkoutperiod < 1)
 			checkoutperiod = 1
 	if(href_list["editbook"])
-		buffer_book = copytext(sanitize(input("Enter the book's title:") as text|null),1,MAX_MESSAGE_LEN)
+		buffer_book = copytext_char(sanitize(input("Enter the book's title:") as text|null),1,MAX_MESSAGE_LEN)
 	if(href_list["editmob"])
-		buffer_mob = copytext(sanitize(input("Enter the recipient's name:") as text|null),1,MAX_NAME_LEN)
+		buffer_mob = copytext_char(sanitize(input("Enter the recipient's name:") as text|null),1,MAX_NAME_LEN)
 	if(href_list["checkout"])
 		var/datum/borrowbook/b = new /datum/borrowbook
 		b.bookname = sanitize(buffer_book)
@@ -396,7 +396,7 @@ GLOBAL_LIST(cachedbooks) // List of our cached book datums
 		if(b && istype(b))
 			inventory.Remove(b)
 	if(href_list["setauthor"])
-		var/newauthor = copytext(sanitize(input("Enter the author's name: ") as text|null),1,MAX_MESSAGE_LEN)
+		var/newauthor = copytext_char(sanitize(input("Enter the author's name: ") as text|null),1,MAX_MESSAGE_LEN)
 		if(newauthor)
 			scanner.cache.author = newauthor
 	if(href_list["setcategory"])
@@ -417,7 +417,7 @@ GLOBAL_LIST(cachedbooks) // List of our cached book datums
 						var/sqlcontent = sanitizeSQL(scanner.cache.dat)
 						var/sqlcategory = sanitizeSQL(upload_category)
 						var/sqlckey = sanitizeSQL(usr.ckey)
-						var/msg = "[key_name(usr)] has uploaded the book titled [scanner.cache.name], [length(scanner.cache.dat)] signs"
+						var/msg = "[key_name(usr)] has uploaded the book titled [scanner.cache.name], [length_char(scanner.cache.dat)] signs"
 						var/datum/DBQuery/query_library_upload = SSdbcore.NewQuery("INSERT INTO [format_table_name("library")] (author, title, content, category, ckey, datetime, round_id_created) VALUES ('[sqlauthor]', '[sqltitle]', '[sqlcontent]', '[sqlcategory]', '[sqlckey]', Now(), '[GLOB.round_id]')")
 						if(!query_library_upload.Execute())
 							qdel(query_library_upload)

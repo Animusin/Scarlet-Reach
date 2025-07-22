@@ -94,7 +94,7 @@ THESE SPAWNERS SPAWN MOBS BY CHOOSING RANDOM TILES AROUND IT AND SCATTERING THE 
 	var/list/turf/open/floor/spawning_turfs = list()
 	for(var/turf/open/floor/spot in view(spawn_range, src))
 		spawning_turfs += spot
-	if(length(spawning_turfs))
+	if(length_char(spawning_turfs))
 		spawning_turf = pick(spawning_turfs)
 		var/spawnmob = pickweight(mob_types)
 		mymobs += new spawnmob(spawning_turf)
@@ -220,7 +220,7 @@ THESE SPAWNERS SPAWN MOBS BY CHOOSING RANDOM TILES AROUND IT AND SCATTERING THE 
 	var/list/turf/open/floor/spawning_turfs = list()
 	for(var/turf/open/floor/spot in view(spawn_range, src))
 		spawning_turfs += spot
-	if(length(spawning_turfs))
+	if(length_char(spawning_turfs))
 		spawning_turf = pick(spawning_turfs)
 		var/spawnmob = pickweight(mob_types)
 		mymobs += new spawnmob(spawning_turf)

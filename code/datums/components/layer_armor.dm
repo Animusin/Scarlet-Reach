@@ -139,7 +139,7 @@
 				color = "#fdfdfd"
 		examine_list += span_info("<b>[type]:</b><font color = '[color]'> \Roman[val]</font>")
 	//Can I do repairs on it at all?
-	if(length(race_repair))
+	if(length_char(race_repair))
 		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
 			if(H.dna.species.type in race_repair)
@@ -148,7 +148,7 @@
 				examine_list += span_info("This is all too foreign for me to repair.")
 				return
 	//What can we repair them with?
-	if(length(repair_items))
+	if(length_char(repair_items))
 		if(!HAS_TRAIT(user, TRAIT_TRAINED_SMITH))
 			examine_list += span_info("The layers on this armor can be repaired on:")
 			var/dat = "| "
@@ -159,7 +159,7 @@
 		else
 			examine_list += span_info("I can repair the layers anywhere.")
 	//What skills are needed?
-	if(length(repair_skills))
+	if(length_char(repair_skills))
 		examine_list += span_info("The layers on this armor requires these skills to be repaired:")
 		for(var/skill in repair_skills)
 			examine_list += span_info("[SSskills.all_skills[skill]] — [SSskills.level_names_plain[repair_skills[skill]]]")
@@ -168,7 +168,7 @@
 	if(ishuman(user) && istype(I, /obj/item/rogueweapon/hammer))
 		var/mob/living/carbon/human/H = user
 		var/can_do
-		if(length(repair_items) && !HAS_TRAIT(user, TRAIT_TRAINED_SMITH))
+		if(length_char(repair_items) && !HAS_TRAIT(user, TRAIT_TRAINED_SMITH))
 			var/obj/item/IP = parent
 			var/suitable_spot
 			for(var/item in repair_items)
@@ -185,7 +185,7 @@
 				to_chat(user, span_warn("I require \a [str]."))
 				return
 
-		if(length(race_repair))
+		if(length_char(race_repair))
 			if(H.dna.species.type in race_repair)
 				can_do = TRUE
 			else
@@ -195,7 +195,7 @@
 		else
 			can_do = TRUE
 
-		if(length(repair_skills))
+		if(length_char(repair_skills))
 			for(var/skill in repair_skills)
 				if(H.get_skill_level(skill) < repair_skills[skill])	//Checking their skill level vs skill threshold
 					can_do = FALSE
@@ -248,7 +248,7 @@
 		var/new_threshold
 		var/check = newarmor
 		if(isnum(check))
-			if(length(hits_per_layer))
+			if(length_char(hits_per_layer))
 				if(num2text(check) in hits_per_layer)
 					new_threshold = hits_per_layer[num2text(check)]
 			if(!new_threshold)	//We have a mismatch in hits_per_layer with our armor value (very bad) or its empty. Either way, we fall back to hits_default.

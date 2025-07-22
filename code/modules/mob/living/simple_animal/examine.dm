@@ -74,7 +74,7 @@
 	if(stat >= UNCONSCIOUS)
 		msg += "[m1] unconscious."
 
-	if(length(msg))
+	if(length_char(msg))
 		. += span_warning("[msg.Join("\n")]")
 
 	if((user != src) && isliving(user))

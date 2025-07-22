@@ -18,7 +18,7 @@
 	else
 		message += "<B>The heart is still beating.</B>"
 	var/list/soul_message = soul_examine(user)
-	if(length(soul_message))
+	if(length_char(soul_message))
 		message += soul_message
 	return message
 

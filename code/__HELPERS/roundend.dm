@@ -43,13 +43,13 @@
 				file_data["[escaped]"]["npcs"]["[initial(m.name)]"] = 1
 		else
 			if(isobserver(m))
-				var/pos = length(file_data["[escaped]"]) + 1
+				var/pos = length_char(file_data["[escaped]"]) + 1
 				file_data["[escaped]"]["[pos]"] = mob_data
 			else
 				if(!category)
 					category = "others"
 					mob_data += list("name" = m.name, "typepath" = m.type)
-				var/pos = length(file_data["[escaped]"]["[category]"]) + 1
+				var/pos = length_char(file_data["[escaped]"]["[category]"]) + 1
 				file_data["[escaped]"]["[category]"]["[pos]"] = mob_data
 	WRITE_FILE(json_file, json_encode(file_data))
 	SSblackbox.record_feedback("nested tally", "round_end_stats", num_survivors, list("survivors", "total"))
@@ -425,7 +425,7 @@
 		parts += "<hr class='paneldivider'>"
 
 	// Process all minds with personal objectives
-	var/last_index = length(GLOB.personal_objective_minds)
+	var/last_index = length_char(GLOB.personal_objective_minds)
 	var/current_index = 0
 	for(var/datum/mind/mind as anything in GLOB.personal_objective_minds)
 		current_index++

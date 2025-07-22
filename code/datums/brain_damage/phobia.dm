@@ -86,7 +86,7 @@
 	for(var/word in trigger_words)
 		var/regex/reg = regex("(\\b|\\A)[REGEX_QUOTE(word)]'?s*(\\b|\\Z)", "i")
 
-		if(findtext(hearing_args[HEARING_RAW_MESSAGE], reg))
+		if(findtext_char(hearing_args[HEARING_RAW_MESSAGE], reg))
 			addtimer(CALLBACK(src, PROC_REF(freak_out), null, word), 10) //to react AFTER the chat message
 			hearing_args[HEARING_MESSAGE] = reg.Replace(hearing_args[HEARING_MESSAGE], span_phobia("$1"))
 			break
@@ -97,7 +97,7 @@
 	for(var/word in trigger_words)
 		var/regex/reg = regex("(\\b|\\A)[REGEX_QUOTE(word)]'?s*(\\b|\\Z)", "i")
 
-		if(findtext(speech_args[SPEECH_MESSAGE], reg))
+		if(findtext_char(speech_args[SPEECH_MESSAGE], reg))
 			to_chat(owner, span_warning("I can't bring myself to say the word \"<span class='phobia'>[word]</span>\"!"))
 			speech_args[SPEECH_MESSAGE] = ""
 

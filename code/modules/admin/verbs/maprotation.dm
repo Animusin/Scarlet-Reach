@@ -52,7 +52,7 @@
 		if(isnull(map_file))
 			return
 		
-		if(copytext("[map_file]",-4) != ".dmm")
+		if(copytext_char("[map_file]",-4) != ".dmm")
 			to_chat(src, span_warning("Filename must end in '.dmm': [map_file]"))
 			return
 

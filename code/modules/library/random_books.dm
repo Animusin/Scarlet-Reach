@@ -94,7 +94,7 @@
 	for(var/b in 1 to amount)
 		if(prob(0.1))
 			new /obj/item/book_crafting_kit(location)
-		if(prob(clamp(length(player_book_titles), 10, 90)))
+		if(prob(clamp(length_char(player_book_titles), 10, 90)))
 			new /obj/item/book/rogue/playerbook(location)
 		else
 			var/obj/item/book/rogue/addition = pick(possible_books)

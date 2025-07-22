@@ -120,7 +120,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 	if(!client)
 		return
 
-	msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+	msg = copytext_char(msg, 1, MAX_MESSAGE_LEN)
 
 	if(type)
 		if(type & MSG_VISUAL && eye_blind )//Vision related
@@ -141,7 +141,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 	// voice muffling
 	if(stat == UNCONSCIOUS)
 		if(type & MSG_AUDIBLE) //audio
-			if(findtext(msg, "snores.")) //No spamming people with their own snoring.
+			if(findtext_char(msg, "snores.")) //No spamming people with their own snoring.
 				return
 			if(prob(20))
 				msg = "<span class='smallyell'>[msg]</span>"
@@ -623,7 +623,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 		if (world.time < memory_throttle_time)
 			return
 		memory_throttle_time = world.time + 5 SECONDS
-		msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+		msg = copytext_char(msg, 1, MAX_MESSAGE_LEN)
 		msg = sanitize(msg)
 
 		mind.store_memory(msg)
@@ -854,7 +854,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 					SS.stat_entry()
 		if(statpanel("Tickets"))
 			GLOB.ahelp_tickets.stat_entry()
-		if(length(GLOB.sdql2_queries))
+		if(length_char(GLOB.sdql2_queries))
 			if(statpanel("SDQL2"))
 				stat("Access Global SDQL2 List", GLOB.sdql2_vv_statobj)
 				for(var/i in GLOB.sdql2_queries)
@@ -1399,15 +1399,15 @@ GLOBAL_VAR_INIT(mobids, 1)
 
 
 /mob/say_mod(input, message_mode)
-	var/customsayverb = findtext(input, "*")
+	var/customsayverb = findtext_char(input, "*")
 	if(customsayverb)
-		return lowertext(copytext(input, 1, customsayverb))
+		return lowertext(copytext_char(input, 1, customsayverb))
 	. = ..()
 
 /atom/movable/proc/attach_spans(input, list/spans)
-	var/customsayverb = findtext(input, "*")
+	var/customsayverb = findtext_char(input, "*")
 	if(customsayverb)
-		input = capitalize(copytext(input, customsayverb+1))
+		input = capitalize(copytext_char(input, customsayverb+1))
 	return "[message_spans_start(spans)][input]</span>"
 
 /mob/living/proc/can_smell()

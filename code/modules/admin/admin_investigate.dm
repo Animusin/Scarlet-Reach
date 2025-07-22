@@ -29,7 +29,7 @@
 	if(!(selected in combined) || selected == "---")
 		return
 
-	selected = replacetext(selected, " (empty)", "")
+	selected = replacetext_char(selected, " (empty)", "")
 
 	if(selected == "notes, memos, watchlist" && check_rights(R_ADMIN))
 		browse_messages()

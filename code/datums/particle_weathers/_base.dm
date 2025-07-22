@@ -36,7 +36,7 @@
 
 	//gravity might be x, xy, or xyz
 	var/newGravity = gravity
-	if(length(newGravity))
+	if(length_char(newGravity))
 		newGravity[1] = newWind
 	else
 		newGravity = list(newWind)

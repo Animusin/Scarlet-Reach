@@ -127,7 +127,7 @@
 	SEND_SIGNAL(src, COMSIG_ROGUEWEAPON_OBJFIX)
 
 /obj/item/rogueweapon/rmb_self(mob/user)
-	if(length(alt_intents))
+	if(length_char(alt_intents))
 		if(altgripped)
 			ungrip(user)
 			return

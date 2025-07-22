@@ -9,7 +9,7 @@
 		to_chat(usr, span_danger("Speech is currently admin-disabled."))
 		return
 
-	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
+	msg = copytext_char(sanitize(msg), 1, MAX_MESSAGE_LEN)
 	if(!msg)
 		return
 	log_prayer("[src.key]/([src.name]): [msg]")
@@ -60,17 +60,17 @@
 	//log_admin("HELP: [key_name(src)]: [msg]")
 
 /proc/CentCom_announce(text , mob/Sender)
-	var/msg = copytext(sanitize(text), 1, MAX_MESSAGE_LEN)
+	var/msg = copytext_char(sanitize(text), 1, MAX_MESSAGE_LEN)
 	msg = span_adminnotice("<b><font color=orange>CENTCOM:</font>[ADMIN_FULLMONTY(Sender)] [ADMIN_CENTCOM_REPLY(Sender)]:</b> [msg]")
 	to_chat(GLOB.admins, msg)
 
 /proc/Syndicate_announce(text , mob/Sender)
-	var/msg = copytext(sanitize(text), 1, MAX_MESSAGE_LEN)
+	var/msg = copytext_char(sanitize(text), 1, MAX_MESSAGE_LEN)
 	msg = span_adminnotice("<b><font color=crimson>SYNDICATE:</font>[ADMIN_FULLMONTY(Sender)] [ADMIN_SYNDICATE_REPLY(Sender)]:</b> [msg]")
 	to_chat(GLOB.admins, msg)
 
 /proc/Nuke_request(text , mob/Sender)
-	var/msg = copytext(sanitize(text), 1, MAX_MESSAGE_LEN)
+	var/msg = copytext_char(sanitize(text), 1, MAX_MESSAGE_LEN)
 	msg = span_adminnotice("<b><font color=orange>NUKE CODE REQUEST:</font>[ADMIN_FULLMONTY(Sender)] [ADMIN_CENTCOM_REPLY(Sender)] [ADMIN_SET_SD_CODE]:</b> [msg]")
 	to_chat(GLOB.admins, msg)
 
@@ -81,7 +81,7 @@
 //	if(!usr.client.holder)
 //		return
 //
-	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
+	msg = copytext_char(sanitize(msg), 1, MAX_MESSAGE_LEN)
 	if(!msg)
 		return
 	log_prayer("[src.key]/([src.name]): [msg]")

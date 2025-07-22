@@ -79,7 +79,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 			title = "Resolved Tickets"
 	if(!l2b)
 		return
-	var/list/dat = list("<html><head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'><title>[title]</title></head>")
+	var/list/dat = list("<html><head><meta charset='UTF-8'><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'><title>[title]</title></head>")
 	dat += "<A href='?_src_=holder;[HrefToken()];ahelp_tickets=[state]'>Refresh</A><br><br>"
 	for(var/I in l2b)
 		var/datum/admin_help/AH = I
@@ -407,7 +407,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 
 //Show the ticket panel
 /datum/admin_help/proc/TicketPanel()
-	var/list/dat = list("<html><head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'><title>Ticket #[id]</title></head>")
+	var/list/dat = list("<html><head><meta charset='UTF-8'><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'><title>Ticket #[id]</title></head>")
 	var/ref_src = "[REF(src)]"
 	dat += "<h4>Admin Help Ticket #[id]: [LinkedReplyName(ref_src)]</h4>"
 	dat += "<b>State: "
@@ -598,8 +598,8 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 
 
 /proc/send2irc(msg,msg2)
-	msg = replacetext(replacetext(msg, "\proper", ""), "\improper", "")
-	msg2 = replacetext(replacetext(msg2, "\proper", ""), "\improper", "")
+	msg = replacetext_char(replacetext_char(msg, "\proper", ""), "\improper", "")
+	msg2 = replacetext_char(replacetext_char(msg2, "\proper", ""), "\improper", "")
 	world.TgsTargetedChatBroadcast("[msg] | [msg2]", TRUE)
 
 /proc/send2otherserver(source,msg,type = "Ahelp")
@@ -639,7 +639,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","alien","as", "i")
 
 	//explode the input msg into a list
-	var/list/msglist = splittext(msg, " ")
+	var/list/msglist = splittext_char(msg, " ")
 
 	//generate keywords lookup
 	var/list/surnames = list()
@@ -652,7 +652,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 			indexing += M.mind.name
 
 		for(var/string in indexing)
-			var/list/L = splittext(string, " ")
+			var/list/L = splittext_char(string, " ")
 			var/surname_found = 0
 			//surnames
 			for(var/i=L.len, i>=1, i--)

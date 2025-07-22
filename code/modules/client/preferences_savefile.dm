@@ -137,7 +137,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 /datum/preferences/proc/load_path(ckey,filename="preferences.sav")
 	if(!ckey)
 		return
-	path = "data/player_saves/[copytext(ckey,1,2)]/[ckey]/[filename]"
+	path = "data/player_saves/[copytext_char(ckey,1,2)]/[ckey]/[filename]"
 
 /datum/preferences/proc/load_preferences()
 	if(!path)
@@ -258,7 +258,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		for(var/bind in binds)
 			if(!GLOB.keybindings_by_name[bind])
 				binds -= bind
-		if(!length(binds))
+		if(!length_char(binds))
 			key_bindings -= key
 	// End
 
@@ -579,7 +579,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	features["mcolor"]	= sanitize_hexcolor(features["mcolor"], 6, 0)
 	features["mcolor2"]	= sanitize_hexcolor(features["mcolor2"], 6, 0)
 	features["mcolor3"]	= sanitize_hexcolor(features["mcolor3"], 6, 0)
-	features["ethcolor"]	= copytext(features["ethcolor"],1,7)
+	features["ethcolor"]	= copytext_char(features["ethcolor"],1,7)
 	features["feature_lizard_legs"]	= sanitize_inlist(features["legs"], GLOB.legs_list, "Normal Legs")
 	S["body_markings"] >> body_markings
 	body_markings = SANITIZE_LIST(body_markings)

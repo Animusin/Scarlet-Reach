@@ -62,7 +62,7 @@ GLOBAL_VAR_INIT(running_create_and_destroy, FALSE)
 	ignore += typesof(/atom/movable/screen)
 
 	var/list/cached_contents = spawn_at.contents.Copy()
-	var/baseturf_count = length(spawn_at.baseturfs)
+	var/baseturf_count = length_char(spawn_at.baseturfs)
 
 	GLOB.running_create_and_destroy = TRUE
 	for(var/type_path in typesof(/atom/movable, /turf) - ignore) //No areas please
@@ -70,9 +70,9 @@ GLOBAL_VAR_INIT(running_create_and_destroy, FALSE)
 			spawn_at.ChangeTurf(type_path, /turf/baseturf_skipover)
 			//We change it back to prevent pain, please don't ask
 			spawn_at.ChangeTurf(/turf/open/floor/rogue/wood, /turf/baseturf_skipover)
-			if(baseturf_count != length(spawn_at.baseturfs))
-				Fail("[type_path] changed the amount of baseturfs we have [baseturf_count] -> [length(spawn_at.baseturfs)]")
-				baseturf_count = length(spawn_at.baseturfs)
+			if(baseturf_count != length_char(spawn_at.baseturfs))
+				Fail("[type_path] changed the amount of baseturfs we have [baseturf_count] -> [length_char(spawn_at.baseturfs)]")
+				baseturf_count = length_char(spawn_at.baseturfs)
 		else
 			var/atom/creation = new type_path(spawn_at)
 			if(QDELETED(creation))
@@ -85,7 +85,7 @@ GLOBAL_VAR_INIT(running_create_and_destroy, FALSE)
 
 		//There's a lot of stuff that either spawns stuff in on create, or removes stuff on destroy. Let's cut it all out so things are easier to deal with
 		var/list/to_del = spawn_at.contents - cached_contents
-		if(length(to_del))
+		if(length_char(to_del))
 			for(var/atom/to_kill in to_del)
 				qdel(to_kill, force = TRUE)
 
@@ -121,7 +121,7 @@ GLOBAL_VAR_INIT(running_create_and_destroy, FALSE)
 		var/oldest_packet_creation = INFINITY
 		for(var/index in queues_we_care_about)
 			var/list/queue_to_check = SSgarbage.queues[index]
-			if(!length(queue_to_check))
+			if(!length_char(queue_to_check))
 				continue
 
 			var/list/oldest_packet = queue_to_check[1]

@@ -51,7 +51,7 @@
 	return occupants
 
 /obj/vehicle/proc/occupant_amount()
-	return length(occupants)
+	return length_char(occupants)
 
 /obj/vehicle/proc/return_amount_of_controllers_with_flag(flag)
 	. = 0

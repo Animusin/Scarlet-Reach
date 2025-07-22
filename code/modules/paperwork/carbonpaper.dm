@@ -22,8 +22,8 @@
 		var/obj/item/paper/carbon/Copy = new /obj/item/paper/carbon(user.loc)
 
 		if(info)
-			copycontents = replacetext(copycontents, "<font face=\"[PEN_FONT]\" color=", "<font face=\"[PEN_FONT]\" nocolor=")
-			copycontents = replacetext(copycontents, "<font face=\"[CRAYON_FONT]\" color=", "<font face=\"[CRAYON_FONT]\" nocolor=")
+			copycontents = replacetext_char(copycontents, "<font face=\"[PEN_FONT]\" color=", "<font face=\"[PEN_FONT]\" nocolor=")
+			copycontents = replacetext_char(copycontents, "<font face=\"[CRAYON_FONT]\" color=", "<font face=\"[CRAYON_FONT]\" nocolor=")
 			Copy.info += copycontents
 			Copy.info += "</font>"
 			Copy.name = "Copy - [C.name]"

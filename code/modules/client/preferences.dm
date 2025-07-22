@@ -468,9 +468,9 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			if(is_legacy)
 				dat += "<br><i><font size = 1>(Legacy)<a href='?_src_=prefs;preference=legacyhelp;task=input'>(?)</a></font></i>"
 
-			dat += "<br><b>[(length(flavortext) < MINIMUM_FLAVOR_TEXT) ? "<font color = '#802929'>" : ""]Flavortext:[(length(flavortext) < MINIMUM_FLAVOR_TEXT) ? "</font>" : ""]</b><a href='?_src_=prefs;preference=formathelp;task=input'>(?)</a><a href='?_src_=prefs;preference=flavortext;task=input'>Change</a>"
+			dat += "<br><b>[(length_char(flavortext) < MINIMUM_FLAVOR_TEXT) ? "<font color = '#802929'>" : ""]Flavortext:[(length_char(flavortext) < MINIMUM_FLAVOR_TEXT) ? "</font>" : ""]</b><a href='?_src_=prefs;preference=formathelp;task=input'>(?)</a><a href='?_src_=prefs;preference=flavortext;task=input'>Change</a>"
 
-			dat += "<br><b>[(length(ooc_notes) < MINIMUM_OOC_NOTES) ? "<font color = '#802929'>" : ""]OOC Notes:[(length(ooc_notes) < MINIMUM_OOC_NOTES) ? "</font>" : ""]</b><a href='?_src_=prefs;preference=formathelp;task=input'>(?)</a><a href='?_src_=prefs;preference=ooc_notes;task=input'>Change</a>"
+			dat += "<br><b>[(length_char(ooc_notes) < MINIMUM_OOC_NOTES) ? "<font color = '#802929'>" : ""]OOC Notes:[(length_char(ooc_notes) < MINIMUM_OOC_NOTES) ? "</font>" : ""]</b><a href='?_src_=prefs;preference=formathelp;task=input'>(?)</a><a href='?_src_=prefs;preference=ooc_notes;task=input'>Change</a>"
 
 			if(agevetted)
 				dat += "<br><b>OOC Extra:</b> <a href='?_src_=prefs;preference=ooc_extra;task=input'>Change</a>"
@@ -699,7 +699,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			for (var/category in kb_categories)
 				for (var/i in kb_categories[category])
 					var/datum/keybinding/kb = i
-					if(!length(user_binds[kb.name]))
+					if(!length_char(user_binds[kb.name]))
 						dat += "<label>[kb.full_name]</label> <a href ='?_src_=prefs;preference=keybindings_capture;keybinding=[kb.name];old_key=["Unbound"]'>Unbound</a>"
 //						var/list/default_keys = hotkeys ? kb.hotkey_keys : kb.classic_keys
 //						if(LAZYLEN(default_keys))
@@ -708,10 +708,10 @@ GLOBAL_LIST_EMPTY(chosen_names)
 					else
 						var/bound_key = user_binds[kb.name][1]
 						dat += "<label>[kb.full_name]</label> <a href ='?_src_=prefs;preference=keybindings_capture;keybinding=[kb.name];old_key=[bound_key]'>[bound_key]</a>"
-						for(var/bound_key_index in 2 to length(user_binds[kb.name]))
+						for(var/bound_key_index in 2 to length_char(user_binds[kb.name]))
 							bound_key = user_binds[kb.name][bound_key_index]
 							dat += " | <a href ='?_src_=prefs;preference=keybindings_capture;keybinding=[kb.name];old_key=[bound_key]'>[bound_key]</a>"
-						if(length(user_binds[kb.name]) < MAX_KEYS_PER_KEYBIND)
+						if(length_char(user_binds[kb.name]) < MAX_KEYS_PER_KEYBIND)
 							dat += "| <a href ='?_src_=prefs;preference=keybindings_capture;keybinding=[kb.name]'>Add Secondary</a>"
 						var/list/default_keys = hotkeys ? kb.classic_keys : kb.hotkey_keys
 						if(LAZYLEN(default_keys))
@@ -873,7 +873,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			if(!job.required && !isnull(job.max_pq) && (get_playerquality(user.ckey) > job.max_pq))
 				HTML += "<font color=#a59461>[used_name] (Max PQ: [job.max_pq])</font></td> <td> </td></tr>"
 				continue
-			if(length(job.virtue_restrictions) && length(job.vice_restrictions))
+			if(length_char(job.virtue_restrictions) && length_char(job.vice_restrictions))
 				var/name
 				if(virtue.type in job.virtue_restrictions)
 					name = virtue.name
@@ -891,7 +891,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 						name += charflaw.name
 				if(!isnull(name))
 					HTML += "<font color='#a561a5'>[used_name] (Disallowed by Virtues / Vice: [name])</font></td> <td> </td></tr>"
-			if(length(job.virtue_restrictions))
+			if(length_char(job.virtue_restrictions))
 				var/name
 				if(virtue.type in job.virtue_restrictions)
 					name = virtue.name
@@ -904,7 +904,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 				if(!isnull(name))
 					HTML += "<font color='#a59461'>[used_name] (Disallowed by Virtue: [name])</font></td> <td> </td></tr>"
 					continue
-			if(length(job.vice_restrictions))
+			if(length_char(job.vice_restrictions))
 				if(charflaw.type in job.vice_restrictions)
 					HTML += "<font color='#a56161'>[used_name] (Disallowed by Vice: [charflaw.name])</font></td> <td> </td></tr>"
 					continue
@@ -1131,7 +1131,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 	for (var/category in kb_categories)
 		for (var/i in kb_categories[category])
 			var/datum/keybinding/kb = i
-			if(!length(user_binds[kb.name]))
+			if(!length_char(user_binds[kb.name]))
 				dat += "<label>[kb.full_name]</label> <a href ='?_src_=prefs;preference=keybinds;task=keybindings_capture;keybinding=[kb.name];old_key=["Unbound"]'>Unbound</a>"
 //						var/list/default_keys = hotkeys ? kb.hotkey_keys : kb.classic_keys
 //						if(LAZYLEN(default_keys))
@@ -1140,10 +1140,10 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 			else
 				var/bound_key = user_binds[kb.name][1]
 				dat += "<label>[kb.full_name]</label> <a href ='?_src_=prefs;preference=keybinds;task=keybindings_capture;keybinding=[kb.name];old_key=[bound_key]'>[bound_key]</a>"
-				for(var/bound_key_index in 2 to length(user_binds[kb.name]))
+				for(var/bound_key_index in 2 to length_char(user_binds[kb.name]))
 					bound_key = user_binds[kb.name][bound_key_index]
 					dat += " | <a href ='?_src_=prefs;preference=keybinds;task=keybindings_capture;keybinding=[kb.name];old_key=[bound_key]'>[bound_key]</a>"
-				if(length(user_binds[kb.name]) < MAX_KEYS_PER_KEYBIND)
+				if(length_char(user_binds[kb.name]) < MAX_KEYS_PER_KEYBIND)
 					dat += "| <a href ='?_src_=prefs;preference=keybinds;task=keybindings_capture;keybinding=[kb.name]'>Add Secondary</a>"
 				dat += "<br>"
 
@@ -1327,7 +1327,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 				if(clear_key)
 					if(key_bindings[old_key])
 						key_bindings[old_key] -= kb_name
-						if(!length(key_bindings[old_key]))
+						if(!length_char(key_bindings[old_key]))
 							key_bindings -= old_key
 					user << browse(null, "window=capturekeypress")
 					save_preferences()
@@ -1356,7 +1356,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 						full_key = "[AltMod][CtrlMod][ShiftMod][numpad][new_key]"
 				if(key_bindings[old_key])
 					key_bindings[old_key] -= kb_name
-					if(!length(key_bindings[old_key]))
+					if(!length_char(key_bindings[old_key]))
 						key_bindings -= old_key
 				key_bindings[full_key] += list(kb_name)
 				key_bindings[full_key] = sortList(key_bindings[full_key])
@@ -1679,7 +1679,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					flavortext = new_flavortext
 					var/ft = flavortext
 					ft = html_encode(ft)
-					ft = replacetext(parsemarkdown_basic(ft), "\n", "<BR>")
+					ft = replacetext_char(parsemarkdown_basic(ft), "\n", "<BR>")
 					flavortext_display = ft
 					is_legacy = FALSE
 					to_chat(user, "<span class='notice'>Successfully updated flavortext</span>")
@@ -1699,7 +1699,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 
 					var/ooc = ooc_notes
 					ooc = html_encode(ooc)
-					ooc = replacetext(parsemarkdown_basic(ooc), "\n", "<BR>")
+					ooc = replacetext_char(parsemarkdown_basic(ooc), "\n", "<BR>")
 					ooc_notes_display = ooc
 					is_legacy = FALSE
 					to_chat(user, "<span class='notice'>Successfully updated OOC notes.</span>")
@@ -1729,11 +1729,11 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					if(isnull(flavortext_display) && !isnull(flavortext))	//If there's an FT already in the slot, but no _display, that means it's a legacy slot.
 						is_legacy = TRUE
 						legacy_check = TRUE
-						flavortext_display = replacetext(flavortext, "\n", "<BR>")
+						flavortext_display = replacetext_char(flavortext, "\n", "<BR>")
 					if(isnull(ooc_notes_display) && !isnull(ooc_notes))
 						is_legacy = TRUE
 						legacy_check = TRUE
-						ooc_notes_display = replacetext(ooc_notes, "\n", "<BR>")
+						ooc_notes_display = replacetext_char(ooc_notes, "\n", "<BR>")
 					if(legacy_check)
 						save_character()
 						ShowChoices(user)
@@ -1780,10 +1780,10 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 						ShowChoices(user)
 						return
 
-					var/list/value_split = splittext(new_extra_link, ".")
+					var/list/value_split = splittext_char(new_extra_link, ".")
 
 					// extension will always be the last entry
-					var/extension = value_split[length(value_split)]
+					var/extension = value_split[length_char(value_split)]
 					var/info
 					if((extension in valid_extensions))
 						ooc_extra_link = new_extra_link
@@ -2133,7 +2133,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					if(clear_key)
 						if(key_bindings[old_key])
 							key_bindings[old_key] -= kb_name
-							if(!length(key_bindings[old_key]))
+							if(!length_char(key_bindings[old_key]))
 								key_bindings -= old_key
 						user << browse(null, "window=capturekeypress")
 						save_preferences()
@@ -2162,7 +2162,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 							full_key = "[AltMod][CtrlMod][ShiftMod][numpad][new_key]"
 					if(key_bindings[old_key])
 						key_bindings[old_key] -= kb_name
-						if(!length(key_bindings[old_key]))
+						if(!length_char(key_bindings[old_key]))
 							key_bindings -= old_key
 					key_bindings[full_key] += list(kb_name)
 					key_bindings[full_key] = sortList(key_bindings[full_key])
@@ -2416,8 +2416,8 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 
 	if(roundstart_checks)
 		if(CONFIG_GET(flag/humans_need_surnames) && ((pref_species.id == "human") || (pref_species.id == "humen")))
-			var/firstspace = findtext(real_name, " ")
-			var/name_length = length(real_name)
+			var/firstspace = findtext_char(real_name, " ")
+			var/name_length = length_char(real_name)
 			if(!firstspace)	//we need a surname
 				real_name += " [pick(GLOB.last_names)]"
 			else if(firstspace == name_length)
@@ -2563,29 +2563,29 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 /proc/valid_headshot_link(mob/user, value, silent = FALSE, list/valid_extensions = list("jpg", "png", "jpeg"))
 	var/static/link_regex = regex("i.gyazo.com|a.l3n.co|b.l3n.co|c.l3n.co|images2.imgbox.com|thumbs2.imgbox.com|files.catbox.moe") //gyazo, discord, lensdump, imgbox, catbox
 
-	if(!length(value))
+	if(!length_char(value))
 		return FALSE
 
-	var/find_index = findtext(value, "https://")
+	var/find_index = findtext_char(value, "https://")
 	if(find_index != 1)
 		if(!silent)
 			to_chat(user, "<span class='warning'>Your link must be https!</span>")
 		return FALSE
 
-	if(!findtext(value, ".") || findtext(value, "<") || findtext(value, ">") || findtext(value, "]") || findtext(value, "\["))	//there is no link in the world that would ever need < or >
+	if(!findtext_char(value, ".") || findtext_char(value, "<") || findtext_char(value, ">") || findtext_char(value, "]") || findtext_char(value, "\["))	//there is no link in the world that would ever need < or >
 		if(!silent)
 			to_chat(user, "<span class='warning'>Invalid link!</span>")
 		return FALSE
-	var/list/value_split = splittext(value, ".")
+	var/list/value_split = splittext_char(value, ".")
 
 	// extension will always be the last entry
-	var/extension = value_split[length(value_split)]
+	var/extension = value_split[length_char(value_split)]
 	if(!(extension in valid_extensions))
 		if(!silent)
 			to_chat(usr, "<span class='warning'>The link must be one of the following extensions: '[english_list(valid_extensions)]'</span>")
 		return FALSE
 
-	find_index = findtext(value, link_regex)
+	find_index = findtext_char(value, link_regex)
 	if(find_index != 9)
 		if(!silent)
 			to_chat(usr, "<span class='warning'>The link must be hosted on one of the following sites: 'Gyazo, Lensdump, Imgbox, Catbox'</span>")
@@ -2596,29 +2596,29 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 	var/static/link_regex = regex("i.gyazo.com|a.l3n.co|b.l3n.co|c.l3n.co|images2.imgbox.com|thumbs2.imgbox.com|files.catbox.moe") //gyazo, discord, lensdump, imgbox, catbox
 	var/static/list/valid_extensions = list("jpg", "png", "jpeg") // Regex works fine, if you know how it works
 
-	if(!length(value))
+	if(!length_char(value))
 		return FALSE
 
-	var/find_index = findtext(value, "https://")
+	var/find_index = findtext_char(value, "https://")
 	if(find_index != 1)
 		if(!silent)
 			to_chat(user, "<span class='warning'>Your link must be https!</span>")
 		return FALSE
 
-	if(!findtext(value, "."))
+	if(!findtext_char(value, "."))
 		if(!silent)
 			to_chat(user, "<span class='warning'>Invalid link!</span>")
 		return FALSE
-	var/list/value_split = splittext(value, ".")
+	var/list/value_split = splittext_char(value, ".")
 
 	// extension will always be the last entry
-	var/extension = value_split[length(value_split)]
+	var/extension = value_split[length_char(value_split)]
 	if(!(extension in valid_extensions))
 		if(!silent)
 			to_chat(usr, "<span class='warning'>The image must be one of the following extensions: '[english_list(valid_extensions)]'</span>")
 		return FALSE
 
-	find_index = findtext(value, link_regex)
+	find_index = findtext_char(value, link_regex)
 	if(find_index != 9)
 		if(!silent)
 			to_chat(usr, "<span class='warning'>The image must be hosted on one of the following sites: 'Gyazo, Lensdump, Imgbox, Catbox'</span>")
@@ -2635,7 +2635,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 	var/dat
 	if(V.desc)
 		dat += "<font size = 3>[span_purple(V.desc)]</font><br>"
-	if(length(V.added_skills))
+	if(length_char(V.added_skills))
 		dat += "<font color = '#a3e2ff'><font size = 3>This Virtue adds the following skills: <br>"
 		for(var/list/L in V.added_skills)
 			var/name
@@ -2644,12 +2644,12 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 				name = initial(S.name)
 			dat += "["\Roman[L[2]]"] level[L[2] > 1 ? "s" : ""] of <b>[name]</b>[L[3] ? ", up to <b>[SSskills.level_names_plain[L[3]]]</b>" : ""] <br>"
 		dat += "</font>"
-	if(length(V.added_traits))
+	if(length_char(V.added_traits))
 		dat += "<font color = '#a3ffe0'><font size = 3>This Virtue grants the following traits: <br>"
 		for(var/TR in V.added_traits)
 			dat += "[TR] — <font size = 2>[GLOB.roguetraits[TR]]</font><br>"
 		dat += "</font>"
-	if(length(V.added_stashed_items))
+	if(length_char(V.added_stashed_items))
 		dat += "<font color = '#eeffa3'><font size = 3>This Virtue adds the following items to your stash: <br>"
 		for(var/I in V.added_stashed_items)
 			dat += "<i>[I]</i> <br>"

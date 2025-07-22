@@ -33,9 +33,9 @@
 		H.become_blind("advsetup")
 		if(istype(H.cloak, /obj/item/clothing/cloak/half/vet))
 			var/obj/item/clothing/S = H.cloak
-			var/index = findtext(H.real_name, " ")
+			var/index = findtext_char(H.real_name, " ")
 			if(index)
-				index = copytext(H.real_name, 1,index)
+				index = copytext_char(H.real_name, 1,index)
 			if(!index)
 				index = H.real_name
 			S.name = "veteran cloak ([index])"

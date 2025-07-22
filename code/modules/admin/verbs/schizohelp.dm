@@ -6,7 +6,7 @@ GLOBAL_LIST_EMPTY_TYPED(schizohelps, /datum/schizohelp)
 /mob/proc/schizohelp(msg as text)
 	if(!msg)
 		return
-	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
+	msg = copytext_char(sanitize(msg), 1, MAX_MESSAGE_LEN)
 	if(!msg)
 		return
 
@@ -49,8 +49,8 @@ GLOBAL_LIST_EMPTY_TYPED(schizohelps, /datum/schizohelp)
 	/// generate a consistent but anonymous name
 	var/static/fumbling_seed = text2num(GLOB.rogue_round_id)
 	var/md5_num = text2num(md5(real_name || src.name))
-	var/adjective = possible_adjectives[(md5_num % length(possible_adjectives)) + 1]
-	var/noun = possible_nouns[(round(md5_num * noise_hash(md5_num, fumbling_seed)) % length(possible_nouns)) + 1]
+	var/adjective = possible_adjectives[(md5_num % length_char(possible_adjectives)) + 1]
+	var/noun = possible_nouns[(round(md5_num * noise_hash(md5_num, fumbling_seed)) % length_char(possible_nouns)) + 1]
 	return "[adjective] [noun]"
 
 /client/proc/answer_schizohelp(datum/schizohelp/schizo)
@@ -93,7 +93,7 @@ GLOBAL_LIST_EMPTY_TYPED(schizohelps, /datum/schizohelp)
 /datum/schizohelp/proc/answer_schizo(answer, mob/voice)
 	if(QDELETED(src) || !voice.client)
 		return
-	answer = copytext(sanitize(answer), 1, MAX_MESSAGE_LEN)
+	answer = copytext_char(sanitize(answer), 1, MAX_MESSAGE_LEN)
 	to_chat(owner, "<i>I hear a voice in my head...\n<b>[answer]</i></b>")
 
 	for(var/client/listener in (GLOB.clients - owner.client))
@@ -107,7 +107,7 @@ GLOBAL_LIST_EMPTY_TYPED(schizohelps, /datum/schizohelp)
 			to_chat(listener, span_info("Someone answers:<i>[answer]</i>"))
 
 	answers[voice.key] = answer
-	if(length(answers) >= max_answers)
+	if(length_char(answers) >= max_answers)
 		qdel(src)
 
 /datum/schizohelp/proc/owner_qdeleted(mob/source)

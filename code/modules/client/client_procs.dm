@@ -181,8 +181,8 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		current_featured = pick(GLOB.featured_stats)
 	var/list/stat_keys = GLOB.featured_stats
 	var/current_index = stat_keys.Find(current_featured)
-	var/next_stat = stat_keys[(current_index % length(stat_keys)) + 1]
-	var/prev_stat = stat_keys[current_index == 1 ? length(stat_keys) : (current_index - 1)]
+	var/next_stat = stat_keys[(current_index % length_char(stat_keys)) + 1]
+	var/prev_stat = stat_keys[current_index == 1 ? length_char(stat_keys) : (current_index - 1)]
 
 	// Influential deities section
 	var/max_influence = -INFINITY
@@ -255,7 +255,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	data += "<div style='display: inline-block; text-align: left; margin-left: auto; margin-right: auto;'>"
 	
 	var/stat_is_object = GLOB.featured_stats[current_featured]["object_stat"]
-	var/has_entries = length(GLOB.featured_stats[current_featured]["entries"])
+	var/has_entries = length_char(GLOB.featured_stats[current_featured]["entries"])
 
 	if(has_entries)
 		if(stat_is_object)
@@ -831,9 +831,9 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 #endif
 
 	. = ..()	//calls mob.Login()
-	if (length(GLOB.stickybanadminexemptions))
+	if (length_char(GLOB.stickybanadminexemptions))
 		GLOB.stickybanadminexemptions -= ckey
-		if (!length(GLOB.stickybanadminexemptions))
+		if (!length_char(GLOB.stickybanadminexemptions))
 			restore_stickybans()
 
 	if (byond_version >= 512)
@@ -995,7 +995,7 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		var/datum/verbs/menu/topmenu = thing
 		var/topmenuname = "[topmenu]"
 		if (topmenuname == "[topmenu.type]")
-			var/list/tree = splittext(topmenuname, "/")
+			var/list/tree = splittext_char(topmenuname, "/")
 			topmenuname = tree[tree.len]
 		winset(src, "[topmenu.type]", "parent=menu;name=[url_encode(topmenuname)]")
 		var/list/entries = topmenu.Generate_list(src)
@@ -1003,7 +1003,7 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 			winset(src, "[child]", "[entries[child]]")
 			if (!ispath(child, /datum/verbs/menu))
 				var/procpath/verbpath = child
-				if (copytext(verbpath.name,1,2) != "@")
+				if (copytext_char(verbpath.name,1,2) != "@")
 					new child(src)
 
 	for (var/thing in prefs.menuoptions)

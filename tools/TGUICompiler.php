@@ -167,7 +167,7 @@ catch(Exception $e){
 ?>
 <!DOCTYPE html>
 <html>
-	<head>
+	<head><meta charset='UTF-8'>
 		<title>TGUI .ract Compiler</title>
 	</head>
 	<body>

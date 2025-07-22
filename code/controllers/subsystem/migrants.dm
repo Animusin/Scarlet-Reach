@@ -71,16 +71,16 @@ SUBSYSTEM_DEF(migrants)
 
 	var/list/picked_migrants = list()
 
-	if(!length(active_migrants))
+	if(!length_char(active_migrants))
 		return FALSE
 	/// Try to assign priority players to positions
 	for(var/datum/migrant_assignment/assignment as anything in assignments)
-		if(!length(active_migrants))
+		if(!length_char(active_migrants))
 			break // Out of migrants, we're screwed and will fail
 		if(assignment.client)
 			continue
 		var/list/priority = get_priority_players(active_migrants, assignment.role_type)
-		if(!length(priority))
+		if(!length_char(priority))
 			continue
 		var/client/picked
 		priority = shuffle(priority)
@@ -98,7 +98,7 @@ SUBSYSTEM_DEF(migrants)
 
 	/// Assign rest of the players to positions
 	for(var/datum/migrant_assignment/assignment as anything in assignments)
-		if(!length(active_migrants))
+		if(!length_char(active_migrants))
 			break // Out of migrants, we're screwed and will fail
 		if(assignment.client)
 			continue
@@ -327,7 +327,7 @@ SUBSYSTEM_DEF(migrants)
 				continue
 		available_weighted_waves[wave_type] = wave.weight
 
-	if(!length(available_weighted_waves))
+	if(!length_char(available_weighted_waves))
 		return null
 	return pickweight(available_weighted_waves)
 
@@ -410,7 +410,7 @@ SUBSYSTEM_DEF(migrants)
 		if(!(jobname in sloc.jobspawn_override))
 			continue
 		landmarks += sloc
-	if(!length(landmarks))
+	if(!length_char(landmarks))
 		return null
 	landmarks = shuffle(landmarks)
 	return get_turf(pick(landmarks))

@@ -55,7 +55,7 @@
 			if(target_buckled)
 				target.buckled.unbuckle_mob(target)
 			target.Paralyze(knockdown_time)
-		if(length(msg))
+		if(length_char(msg))
 			user.visible_message(span_danger("[msg]!"))
 
 /datum/component/jousting/proc/mob_move(datum/source, newloc, dir)

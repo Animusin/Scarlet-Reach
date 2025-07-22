@@ -87,7 +87,7 @@
 	if(!fexists(path))
 		return
 	var/dir_index = findlasttext(pathstring, "/")
-	var/dir = copytext(pathstring, 1, dir_index)
+	var/dir = copytext_char(pathstring, 1, dir_index)
 	var/json_path = file("[dir]/metadata.json")
 	if(!fexists(json_path))
 		return
@@ -102,7 +102,7 @@
 	if(!istext(id))
 		return
 	. = "data/picture_logs/"
-	var/list/data = splittext(id, "_")
+	var/list/data = splittext_char(id, "_")
 	if(data.len < 3)
 		return null
 	var/mode = data[1]
@@ -111,9 +111,9 @@
 			if(data.len < 5)
 				return null
 			var/timestamp = data[2]
-			var/year = copytext(timestamp, 1, 5)
-			var/month = copytext(timestamp, 5, 7)
-			var/day = copytext(timestamp, 7, 9)
+			var/year = copytext_char(timestamp, 1, 5)
+			var/month = copytext_char(timestamp, 5, 7)
+			var/day = copytext_char(timestamp, 7, 9)
 			var/round = data[4]
 			. += "[year]/[month]/[day]/round-[round]"
 		if("O")

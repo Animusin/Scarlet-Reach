@@ -58,7 +58,7 @@
 			var/list/all_the_entrys = log_source[log_type]
 			for(var/entry in all_the_entrys)
 				concatenated_logs += "<b>[entry]</b><br>[all_the_entrys[entry]]"
-	if(length(concatenated_logs))
+	if(length_char(concatenated_logs))
 		sortTim(concatenated_logs, cmp = GLOBAL_PROC_REF(cmp_text_dsc)) //Sort by timestamp.
 		dat += "<font size=2px>"
 		dat += concatenated_logs.Join("<br>")

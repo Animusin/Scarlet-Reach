@@ -104,11 +104,11 @@
 	var/base_point = EVENT_POINT_GAINED_PER_SECOND * seconds_per_tick * mode.event_frequency_multiplier
 	for(var/track in mode.event_track_points)
 		if(track == EVENT_TRACK_OMENS)
-			if(!length(GLOB.badomens))
+			if(!length_char(GLOB.badomens))
 				continue
 		var/point_gain = base_point * point_gains_multipliers[track] * mode.point_gain_multipliers[track]
 		if(track == EVENT_TRACK_OMENS)
-			point_gain *= length(GLOB.badomens)
+			point_gain *= length_char(GLOB.badomens)
 		if(mode.allow_pop_scaling)
 			point_gain *= mode.current_pop_scale_multipliers[track]
 		mode.event_track_points[track] += point_gain
@@ -157,13 +157,13 @@
 					continue
 				valid_events[event] = round(event.calculated_weight * 10) //multiply weight by 10 to get first decimal value
 		///If we didn't get any events, remove the points inform admins and dont do anything
-		if(!length(valid_events))
+		if(!length_char(valid_events))
 			message_admins("Storyteller failed to pick an event for track of [track].")
 			mode.event_track_points[track] *= TRACK_FAIL_POINT_PENALTY_MULTIPLIER
 			return
 		picked_event = pickweight(valid_events)
 		if(!picked_event)
-			if(length(valid_events))
+			if(length_char(valid_events))
 				var/added_string = ""
 				for(var/datum/round_event_control/item as anything in valid_events)
 					added_string += "[item.name]:[valid_events[item]]; "

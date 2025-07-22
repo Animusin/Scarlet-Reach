@@ -10,7 +10,7 @@ GLOBAL_PROTECT(blacklist)
 	for(var/line in world.file2list(BLACKLISTFILE))
 		if(!line)
 			continue
-		if(findtextEx(line,"#",1,2))
+		if(findtextEx_char(line,"#",1,2))
 			continue
 		GLOB.blacklist += ckey(line)
 
@@ -36,7 +36,7 @@ GLOBAL_PROTECT(nameban)
 	for(var/line in world.file2list(NAMEBANFILE))
 		if(!line)
 			continue
-		if(findtextEx(line,"#",1,2))
+		if(findtextEx_char(line,"#",1,2))
 			continue
 		GLOB.nameban += ckey(line)
 
@@ -61,7 +61,7 @@ GLOBAL_PROTECT(psychokiller)
 	for(var/line in world.file2list(PSYCHOFILE))
 		if(!line)
 			continue
-		if(findtextEx(line,"#",1,2))
+		if(findtextEx_char(line,"#",1,2))
 			continue
 		GLOB.psychokiller += ckey(line)
 
@@ -86,7 +86,7 @@ GLOBAL_PROTECT(bypassage)
 	for(var/line in world.file2list(BYPASSAGEFILE))
 		if(!line)
 			continue
-		if(findtextEx(line,"#",1,2))
+		if(findtextEx_char(line,"#",1,2))
 			continue
 		GLOB.bypassage += ckey(line)
 

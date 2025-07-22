@@ -104,7 +104,7 @@
 	return TRUE
 
 /datum/devotion/proc/try_add_spells(silent = FALSE)
-	if(length(patron.miracles))
+	if(length_char(patron.miracles))
 		for(var/spell_type in patron.miracles)
 			if(patron.miracles[spell_type] <= level)
 				if(holder.mind.has_spell(spell_type))
@@ -115,7 +115,7 @@
 						to_chat(holder, span_boldnotice("I have unlocked a new spell: [newspell]"))
 					holder.mind.AddSpell(newspell)
 					LAZYADD(granted_spells, newspell)
-	if(length(patron.traits_tier))
+	if(length_char(patron.traits_tier))
 		for(var/trait in patron.traits_tier)
 			if(patron.traits_tier[trait] <= level)
 				ADD_TRAIT(holder, trait, TRAIT_MIRACLE)

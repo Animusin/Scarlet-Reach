@@ -8,7 +8,7 @@ GLOBAL_LIST_INIT(VVpixelmovement, list("bound_x", "bound_y", "step_x", "step_y",
 GLOBAL_PROTECT(VVpixelmovement)
 
 /client/proc/vv_parse_text(O, new_var)
-	if(O && findtext(new_var,"\["))
+	if(O && findtext_char(new_var,"\["))
 		var/process_vars = alert(usr,"\[] detected in string, process as variables?","Process Variables?","Yes","No")
 		if(process_vars == "Yes")
 			. = string2listofvars(new_var, O)
@@ -54,12 +54,12 @@ GLOBAL_PROTECT(VVpixelmovement)
 		//	fancy type with the base type removed from the begaining,
 		//	the type with the base type removed from the begaining
 		var/fancytype = types[D.type]
-		if (findtext(fancytype, types[type]))
-			fancytype = copytext(fancytype, length(types[type])+1)
-		var/shorttype = copytext("[D.type]", length("[type]")+1)
-		if (length(shorttype) > length(fancytype))
+		if (findtext_char(fancytype, types[type]))
+			fancytype = copytext_char(fancytype, length_char(types[type])+1)
+		var/shorttype = copytext_char("[D.type]", length_char("[type]")+1)
+		if (length_char(shorttype) > length_char(fancytype))
 			shorttype = fancytype
-		if (!length(shorttype))
+		if (!length_char(shorttype))
 			shorttype = "/"
 
 		.["[D]([shorttype])[REF(D)]#[i]"] = D
@@ -75,7 +75,7 @@ GLOBAL_PROTECT(VVpixelmovement)
 	if(class == VV_TEXT || class == VV_MESSAGE)
 		var/list/varsvars = vv_parse_text(O, var_value)
 		for(var/V in varsvars)
-			var_value = replacetext(var_value,"\[[V]]","[O.vars[V]]")
+			var_value = replacetext_char(var_value,"\[[V]]","[O.vars[V]]")
 
 	return var_value
 
@@ -90,7 +90,7 @@ GLOBAL_PROTECT(VVpixelmovement)
 	if(class == VV_TEXT || class == VV_MESSAGE)
 		var/list/varsvars = vv_parse_text(O, var_value)
 		for(var/V in varsvars)
-			var_value = replacetext(var_value,"\[[V]]","[O.vars[V]]")
+			var_value = replacetext_char(var_value,"\[[V]]","[O.vars[V]]")
 
 	if (O)
 		L = L.Copy()
@@ -257,7 +257,7 @@ GLOBAL_PROTECT(VVpixelmovement)
 		if(VV_TEXT)
 			var/list/varsvars = vv_parse_text(O, new_var)
 			for(var/V in varsvars)
-				new_var = replacetext(new_var,"\[[V]]","[O.vars[V]]")
+				new_var = replacetext_char(new_var,"\[[V]]","[O.vars[V]]")
 
 
 	if(is_normal_list)
@@ -374,7 +374,7 @@ GLOBAL_PROTECT(VVpixelmovement)
 		if(VV_TEXT)
 			var/list/varsvars = vv_parse_text(O, var_new)
 			for(var/V in varsvars)
-				var_new = replacetext(var_new,"\[[V]]","[O.vars[V]]")
+				var_new = replacetext_char(var_new,"\[[V]]","[O.vars[V]]")
 
 
 	if (O.vv_edit_var(variable, var_new) == FALSE)

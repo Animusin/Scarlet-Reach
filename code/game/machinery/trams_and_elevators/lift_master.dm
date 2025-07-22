@@ -81,7 +81,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 	old_lift_platform.lift_master_datum = null
 	LAZYREMOVE(lift_platforms, old_lift_platform)
 	UnregisterSignal(old_lift_platform, COMSIG_PARENT_QDELETING)
-	if(!length(lift_platforms))
+	if(!length_char(lift_platforms))
 		qdel(src)
 
 ///Collect all bordered platforms via a simple floodfill algorithm. allows multiz trams because its funny
@@ -92,7 +92,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 	while(possible_expansions.len)
 		for(var/obj/structure/industrial_lift/borderline as anything in possible_expansions)
 			var/list/result = borderline.lift_platform_expansion(src)
-			if(length(result))
+			if(length_char(result))
 				for(var/obj/structure/industrial_lift/lift_platform as anything in result)
 					if(lift_platforms.Find(lift_platform))
 						continue
@@ -142,7 +142,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 
 	if(create_multitile_platform)
 		for(var/list/z_list as anything in platforms_by_z)
-			if(!length(z_list))
+			if(!length_char(z_list))
 				continue
 
 			create_multitile_platform_for_z_level(z_list)//this will subtract all but one platform from the list
@@ -299,7 +299,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 	//lift_platforms are sorted in order of lowest z to highest z, so going upwards we need to move them in reverse order to not collide
 	if(going == UP)
 		var/obj/structure/industrial_lift/platform_to_move
-		var/current_index = length(lift_platforms)
+		var/current_index = length_char(lift_platforms)
 
 		while(current_index > 0)
 			platform_to_move = lift_platforms[current_index]
@@ -634,7 +634,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 						request_fufillment |= request
 						request_fufillment[request] = list()
 					request_fufillment[request] |= listed_atom
-					if(length(request_fufillment[request]) >= request.input_amount)
+					if(length_char(request_fufillment[request]) >= request.input_amount)
 						for(var/atom/atom in request_fufillment[request])
 							request_fufillment[request] -= atom
 							qdel(atom)
@@ -656,7 +656,7 @@ GLOBAL_LIST_EMPTY(active_lifts_by_type)
 				total_coin_value += listed_atom.get_real_price()
 				qdel(listed_atom)
 
-		if(!length(requested_supplies))
+		if(!length_char(requested_supplies))
 			spawn_coins(total_coin_value, platform)
 			continue
 

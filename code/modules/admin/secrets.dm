@@ -18,8 +18,8 @@
 			<BR>
 			<A href='?src=[REF(src)];[HrefToken()];secrets=clear_virus'>Cure all diseases currently in existence</A><BR>
 			<A href='?src=[REF(src)];[HrefToken()];secrets=list_bombers'>Bombing List</A><BR>
-			<A href='?src=[REF(src)];[HrefToken()];secrets=list_signalers'>Show last [length(GLOB.lastsignalers)] signalers</A><BR>
-			<A href='?src=[REF(src)];[HrefToken()];secrets=list_lawchanges'>Show last [length(GLOB.lawchanges)] law changes</A><BR>
+			<A href='?src=[REF(src)];[HrefToken()];secrets=list_signalers'>Show last [length_char(GLOB.lastsignalers)] signalers</A><BR>
+			<A href='?src=[REF(src)];[HrefToken()];secrets=list_lawchanges'>Show last [length_char(GLOB.lawchanges)] law changes</A><BR>
 			<A href='?src=[REF(src)];[HrefToken()];secrets=showailaws'>Show AI Laws</A><BR>
 			<A href='?src=[REF(src)];[HrefToken()];secrets=showgm'>Show Game Mode</A><BR>
 			<A href='?src=[REF(src)];[HrefToken()];secrets=manifest'>Show Crew Manifest</A><BR>
@@ -155,7 +155,7 @@
 		if("list_signalers")
 			if(!check_rights(R_ADMIN))
 				return
-			var/dat = "<B>Showing last [length(GLOB.lastsignalers)] signalers.</B><HR>"
+			var/dat = "<B>Showing last [length_char(GLOB.lastsignalers)] signalers.</B><HR>"
 			for(var/sig in GLOB.lastsignalers)
 				dat += "[sig]<BR>"
 			usr << browse(dat, "window=lastsignalers;size=800x500")
@@ -163,7 +163,7 @@
 		if("list_lawchanges")
 			if(!check_rights(R_ADMIN))
 				return
-			var/dat = "<B>Showing last [length(GLOB.lawchanges)] law changes.</B><HR>"
+			var/dat = "<B>Showing last [length_char(GLOB.lawchanges)] law changes.</B><HR>"
 			for(var/sig in GLOB.lawchanges)
 				dat += "[sig]<BR>"
 			usr << browse(dat, "window=lawchanges;size=800x500")
@@ -234,7 +234,7 @@
 			if(!SSticker.HasRoundStarted())
 				alert("The game hasn't started yet!")
 				return
-			var/objective = copytext(sanitize(input("Enter an objective")),1,MAX_MESSAGE_LEN)
+			var/objective = copytext_char(sanitize(input("Enter an objective")),1,MAX_MESSAGE_LEN)
 			if(!objective)
 				return
 			SSblackbox.record_feedback("nested tally", "admin_secrets_fun_used", 1, list("Traitor All", "[objective]"))
@@ -327,7 +327,7 @@
 	if (playlightning)
 		sound_to_playing_players('sound/blank.ogg')
 		sleep(80)
-	priority_announce(replacetext(announcement, "%STATION%", station_name()))
+	priority_announce(replacetext_char(announcement, "%STATION%", station_name()))
 	if (playlightning)
 		sleep(20)
 		sound_to_playing_players('sound/blank.ogg')
@@ -335,7 +335,7 @@
 /proc/doPortalSpawn(turf/loc, mobtype, numtospawn, portal_appearance, players, humanoutfit)
 	for (var/i in 1 to numtospawn)
 		var/mob/spawnedMob = new mobtype(loc)
-		if (length(players))
+		if (length_char(players))
 			var/mob/chosen = players[1]
 			if (chosen.client)
 				chosen.client.prefs.copy_to(spawnedMob)

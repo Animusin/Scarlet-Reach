@@ -87,7 +87,7 @@ GLOBAL_VAR(antag_prototypes)
 	out += "Faction and special role: <b><font color='red'>[special_role]</font></b><br>"
 
 	var/special_statuses = get_special_statuses()
-	if(length(special_statuses))
+	if(length_char(special_statuses))
 		out += get_special_statuses() + "<br>"
 
 	if(!GLOB.antag_prototypes)

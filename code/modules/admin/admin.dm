@@ -20,7 +20,7 @@
 		to_chat(usr, "<span class='warning'>I seem to be selecting a mob that doesn't exist anymore.</span>")
 		return
 
-	var/body = "<html><head><title>Options for [M.key]</title><style>"
+	var/body = "<html><head><meta charset='UTF-8'><title>Options for [M.key]</title><style>"
 	body += "<style>"
 	body += "html, body { height: 100%; margin: 0; padding: 0; overflow-x: hidden; }"
 	body += "#container { display: flex; flex-direction: row; align-items: flex-start; width: 100%; overflow-x: hidden; flex-wrap: nowrap; }"
@@ -351,7 +351,7 @@
 		to_chat(src, span_boldwarning("That's you!"))
 		return
 	*/
-	if(!fexists("data/player_saves/[copytext(ckey,1,2)]/[ckey]/preferences.sav"))
+	if(!fexists("data/player_saves/[copytext_char(ckey,1,2)]/[ckey]/preferences.sav"))
 		to_chat(src, span_boldwarning("User does not exist."))
 		return
 	var/amt2change = input("How much to modify the PQ by? (20 to -20, or 0 to just add a note)") as null|num
@@ -607,7 +607,7 @@
 	if(!check_rights(R_SPAWN) || !object)
 		return
 
-	var/list/preparsed = splittext(object,":")
+	var/list/preparsed = splittext_char(object,":")
 	var/path = preparsed[1]
 	var/amount = 1
 	if(preparsed.len > 1)

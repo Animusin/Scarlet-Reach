@@ -34,7 +34,7 @@
 	if(!tongue)
 		head_status += span_warning("The tongue appears to be missing.")
 	
-	if(length(head_status))
+	if(length_char(head_status))
 		. += "<B>Organs:</B>"
 		. += head_status
 
@@ -95,7 +95,7 @@
 		if(!location_accessible)
 			bodypart_status += "Obscured by clothing."
 
-		if(bandage || length(wounds))
+		if(bandage || length_char(wounds))
 			bodypart_status += "<B>Wounds:</B>"
 			if(bandage)
 				var/usedclass = "notice"
@@ -106,10 +106,10 @@
 				for(var/datum/wound/wound as anything in wounds)
 					bodypart_status += wound.get_visible_name(user)
 		
-	if(length(bodypart_status) <= 1)
+	if(length_char(bodypart_status) <= 1)
 		bodypart_status += "[src] is healthy."
 
-	if(length(embedded_objects))
+	if(length_char(embedded_objects))
 		bodypart_status += "<B>Embedded objects:</B>"
 		for(var/obj/item/embedded as anything in embedded_objects)
 			bodypart_status += "<a href='?src=[owner_ref];embedded_object=[REF(embedded)];embedded_limb=[REF(src)]'>[embedded.name]</a>"
@@ -121,7 +121,7 @@
 	examination += "☼ [capitalize(src.name)]: "
 
 	var/list/status = get_injury_status(user, advanced)
-	if(!length(status))
+	if(!length_char(status))
 		examination += span_green("OK")
 	else
 		examination += status.Join(" | ")
@@ -330,7 +330,7 @@
 			broken_plural = TRUE
 		else
 			var/holder = broken[1]	//our one and only element
-			if(holder[length(holder)] == "s")
+			if(holder[length_char(holder)] == "s")
 				broken_plural = TRUE
 		//Put the items in that list into a string of text
 		for(var/B in broken)
@@ -342,7 +342,7 @@
 			damaged_plural = TRUE
 		else
 			var/holder = damaged[1]
-			if(holder[length(holder)] == "s")
+			if(holder[length_char(holder)] == "s")
 				damaged_plural = TRUE
 		for(var/D in damaged)
 			damaged_message += D

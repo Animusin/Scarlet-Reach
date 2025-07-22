@@ -27,8 +27,8 @@ GLOBAL_LIST_EMPTY(mindlinks)
 		return
 	
 	// Check for the ,y prefix
-	if(findtext(message, ",y", 1, 3))
-		message = trim(copytext(message, 3))
+	if(findtext_char(message, ",y", 1, 3))
+		message = trim(copytext_char(message, 3))
 		var/mob/living/recipient = (speaker == owner ? target : owner)
 		
 		to_chat(speaker, span_purple("You project your thoughts to [recipient]: \"[message]\""))

@@ -41,7 +41,7 @@ GLOBAL_LIST_EMPTY(statpacks)
 			if (value >= 1)
 				modifier = "+"
 
-			var/statlabel = uppertext(copytext(stat, 1, 4))
+			var/statlabel = uppertext(copytext_char(stat, 1, 4))
 			var/blockstring = "[modifier][value] [statlabel]"
 			concat += blockstring
 		else
@@ -54,7 +54,7 @@ GLOBAL_LIST_EMPTY(statpacks)
 
 				chunk_string += "<b>[modifier][sub_range]</b>"
 
-			var/statlabel = uppertext(copytext(stat, 1, 4))
+			var/statlabel = uppertext(copytext_char(stat, 1, 4))
 			concat += "[chunk_string.Join(" to ")] [statlabel]"
 
 	result = "([concat.Join(", ")])"

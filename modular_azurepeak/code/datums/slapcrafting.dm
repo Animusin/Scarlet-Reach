@@ -54,7 +54,7 @@ with edits to work for roguecode */
 		recipe = new recipe()
 		var/list/type_ingredient_list = recipe.reqs
 		qdel(recipe)
-		if(length(type_ingredient_list) == 1) // No ingredients besides itself? We use one of the tools then
+		if(length_char(type_ingredient_list) == 1) // No ingredients besides itself? We use one of the tools then
 			type_ingredient_list = recipe.tools
 			// Check the tool behaviours differently as they aren't types
 			for(var/behaviour in initial(recipe.tool_behaviors))
@@ -78,7 +78,7 @@ with edits to work for roguecode */
 
 	var/final_recipe = valid_recipes[1]
 	var/string_chosen_recipe
-	if(length(valid_recipes) > 1)
+	if(length_char(valid_recipes) > 1)
 		for(var/datum/crafting_recipe/recipe as anything in valid_recipes)
 			var/atom/recipe_result = initial(recipe.result)
 			result_to_recipe[initial(recipe_result.name)] = recipe
@@ -181,7 +181,7 @@ with edits to work for roguecode */
 		string_ingredient_list += "[amount > 1 ? ("[amount]" + " of") : "a"] [initial(ingredient.name)]\n"
 
 	// If we did find ingredients then add them onto the list.
-	if(length(string_ingredient_list))
+	if(length_char(string_ingredient_list))
 		to_chat(user, span_boldnotice("Extra Ingredients:"))
 		to_chat(user, span_danger(span_notice(string_ingredient_list)))
 
@@ -195,7 +195,7 @@ with edits to work for roguecode */
 	for(var/string in cur_recipe.tool_behaviors)
 		tool_list += "\a [string]\n"
 
-	if(length(tool_list))
+	if(length_char(tool_list))
 		to_chat(user, span_boldnotice("Required Tools:"))
 		to_chat(user, span_danger(span_notice(tool_list)))
 

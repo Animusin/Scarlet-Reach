@@ -513,7 +513,7 @@
 	var/obj/effect/bees/new_bee = new(get_turf(src))
 	transfer_genetics(new_bee) // Apply queen's genetics
 
-	if(length(bee_objects))
+	if(length_char(bee_objects))
 		for(var/obj/effect/bees/bee in bee_objects)
 			if(bee.bee_count > 5)
 				continue

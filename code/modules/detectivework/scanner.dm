@@ -125,7 +125,7 @@
 		add_log("<B>[station_time_timestamp()][get_timestamp()] - [target_name]</B>", 0)
 
 		// Fingerprints
-		if(length(fingerprints))
+		if(length_char(fingerprints))
 			sleep(30)
 			add_log(span_info("<B>Prints:</B>"))
 			for(var/finger in fingerprints)
@@ -133,7 +133,7 @@
 			found_something = 1
 
 		// Blood
-		if (length(blood))
+		if (length_char(blood))
 			sleep(30)
 			add_log(span_info("<B>Blood:</B>"))
 			found_something = 1
@@ -141,7 +141,7 @@
 				add_log("Type: <font color='red'>[blood[B]]</font> DNA: <font color='red'>[B]</font>")
 
 		//Fibers
-		if(length(fibers))
+		if(length_char(fibers))
 			sleep(30)
 			add_log(span_info("<B>Fibers:</B>"))
 			for(var/fiber in fibers)
@@ -149,7 +149,7 @@
 			found_something = 1
 
 		//Reagents
-		if(length(reagents))
+		if(length_char(reagents))
 			sleep(30)
 			add_log(span_info("<B>Reagents:</B>"))
 			for(var/R in reagents)

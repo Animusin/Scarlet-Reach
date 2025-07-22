@@ -54,7 +54,7 @@
 	Clicking the center button will return a choice of null
 */
 /proc/show_radial_menu_persistent(mob/user, atom/anchor, list/choices, datum/callback/select_proc, uniqueid, radius, tooltips = FALSE)
-	if(!user || !anchor || !length(choices) || !select_proc)
+	if(!user || !anchor || !length_char(choices) || !select_proc)
 		return
 	if(!uniqueid)
 		uniqueid = "defmenu_[REF(user)]_[REF(anchor)]"

@@ -47,8 +47,8 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		Q.invisibility = INVISIBILITY_MAXIMUM
 		Q.become_blind("advsetup")
 	if(L)
-		var/list/chopped_name = splittext(L.real_name, " ")
-		if(length(chopped_name) > 1)
+		var/list/chopped_name = splittext_char(L.real_name, " ")
+		if(length_char(chopped_name) > 1)
 			chopped_name -= chopped_name[1]
 			GLOB.lordsurname = jointext(chopped_name, " ")
 		else
@@ -231,8 +231,8 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	if(preserve_original)
 		family_guy.fully_replace_character_name(family_guy.real_name, family_guy.real_name + " " + GLOB.lordsurname)
 		return family_guy.real_name
-	var/list/chopped_name = splittext(family_guy.real_name, " ")
-	if(length(chopped_name) > 1)
+	var/list/chopped_name = splittext_char(family_guy.real_name, " ")
+	if(length_char(chopped_name) > 1)
 		family_guy.fully_replace_character_name(family_guy.real_name, chopped_name[1] + " " + GLOB.lordsurname)
 	else
 		family_guy.fully_replace_character_name(family_guy.real_name, family_guy.real_name + " " + GLOB.lordsurname)
@@ -261,7 +261,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		if(!can_title(village_idiot))
 			continue
 		recruitment[village_idiot.name] = village_idiot
-	if(!length(recruitment))
+	if(!length_char(recruitment))
 		to_chat(user, span_warning("There are no potential honoraries in range."))
 		return
 	var/inputty = input(user, "Select an honorary!", "[name]") as anything in recruitment
@@ -314,7 +314,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		if(!can_nobility(village_idiot))
 			continue
 		recruitment[village_idiot.name] = village_idiot
-	if(!length(recruitment))
+	if(!length_char(recruitment))
 		to_chat(user, span_warning("There are no potential honoraries in range."))
 		return
 	var/inputty = input(user, "Select an honorary!", "[name]") as anything in recruitment

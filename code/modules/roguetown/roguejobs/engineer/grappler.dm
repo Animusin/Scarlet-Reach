@@ -212,7 +212,7 @@ Reel teleports the attached atom to the grabbed turf.
 			unload(failure = TRUE)
 
 /obj/item/grapplinghook/proc/destroy_eligible_objects()
-	if(length(obj_to_destroy))
+	if(length_char(obj_to_destroy))
 		for(var/obj/O in obj_to_destroy)
 			if(istype(O,/obj/structure/roguewindow))
 				var/obj/structure/roguewindow/W = O

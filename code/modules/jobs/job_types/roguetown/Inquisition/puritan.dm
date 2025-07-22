@@ -309,7 +309,7 @@
 			if("antag")
 				if(!false_result)
 					for(var/datum/antagonist/antag in mind?.antag_datums)
-						if(!length(antag.confess_lines))
+						if(!length_char(antag.confess_lines))
 							continue
 						confessions += antag.confess_lines
 						antag_type = antag.name
@@ -317,11 +317,11 @@
 			if("patron")
 				if(ispath(false_result, /datum/patron))
 					var/datum/patron/fake_patron = new false_result()
-					if(length(fake_patron.confess_lines))
+					if(length_char(fake_patron.confess_lines))
 						confessions += fake_patron.confess_lines
 						antag_type = fake_patron.name
 				else
-					if(length(patron?.confess_lines))
+					if(length_char(patron?.confess_lines))
 						confessions += patron.confess_lines
 						antag_type = patron.name
 
@@ -336,7 +336,7 @@
 						interrogator.add_stress(/datum/stressevent/tortured)
 
 
-		if(length(confessions))
+		if(length_char(confessions))
 			if(torture) // Only scream your confession if it's due to torture.
 				say(pick(confessions), spans = list("torture"), forced = TRUE)
 			else

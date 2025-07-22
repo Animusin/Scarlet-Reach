@@ -413,7 +413,7 @@
 
 	if(reagents)
 		if(reagents.flags & TRANSPARENT)
-			if(length(reagents.reagent_list))
+			if(length_char(reagents.reagent_list))
 				if(user.can_see_reagents() || (user.Adjacent(src) && (user.get_skill_level(/datum/skill/craft/alchemy) >= 2 || HAS_TRAIT(user, TRAIT_CICERONE)))) //Show each individual reagent
 					. += "It contains:"
 					for(var/datum/reagent/R in reagents.reagent_list)
@@ -450,7 +450,7 @@
 		if(managed_overlays)
 			cut_overlay(managed_overlays)
 			managed_overlays = null
-		if(length(new_overlays))
+		if(length_char(new_overlays))
 			managed_overlays = new_overlays
 			add_overlay(new_overlays)
 
@@ -1149,7 +1149,7 @@
 	//the list isnt created every time as this proc is very hot, its only accessed if anything is actually listening to the signal too
 	var/static/list/forced_gravity = list()
 	if(SEND_SIGNAL(src, COMSIG_ATOM_HAS_GRAVITY, gravity_turf, forced_gravity))
-		if(!length(forced_gravity))
+		if(!length_char(forced_gravity))
 			SEND_SIGNAL(gravity_turf, COMSIG_TURF_HAS_GRAVITY, src, forced_gravity)
 
 		var/max_grav = 0

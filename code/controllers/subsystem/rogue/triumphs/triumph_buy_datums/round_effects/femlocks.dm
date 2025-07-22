@@ -12,13 +12,13 @@
 /datum/triumph_buy/female_power/on_buy()
 	// go thru the jobs
 	for(var/datum/job/cur_job in SSjob.occupations)
-		if(length(cur_job.allowed_sexes))
+		if(length_char(cur_job.allowed_sexes))
 			if(!(FEMALE in cur_job.allowed_sexes))
 				cur_job.allowed_sexes += FEMALE
 				changed_jobs += cur_job
 	// go thru the classes
 	for(var/datum/advclass/cur_class in SSrole_class_handler.sorted_class_categories[CTAG_ALLCLASS])
-		if(length(cur_class.allowed_sexes))
+		if(length_char(cur_class.allowed_sexes))
 			if(!(FEMALE in cur_class.allowed_sexes))
 				cur_class.allowed_sexes += FEMALE
 				changed_advclasses += cur_class

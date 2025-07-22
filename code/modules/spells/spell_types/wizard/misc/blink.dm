@@ -82,7 +82,7 @@
 	// Check if there's a wall in the way, but exclude the target turf
 	var/list/turf_list = getline(start, T)
 	// Remove the last turf (target location) from the check
-	if(length(turf_list) > 0)
+	if(length_char(turf_list) > 0)
 		turf_list.len--
 	
 	for(var/turf/turf in turf_list)

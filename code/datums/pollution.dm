@@ -168,7 +168,7 @@
 				LAZYSET(sharing_turfs, open_turf, TRUE)
 			else
 				LAZYSET(potential_activers, open_turf, TRUE)
-	if(!length(sharing_turfs))
+	if(!length_char(sharing_turfs))
 		SET_UNACTIVE_POLLUTION(src)
 		return
 	LAZYSET(sharing_turfs, my_turf, TRUE)
@@ -185,7 +185,7 @@
 			total_share_pollutants[type] += cached_pollution.pollutants[type]
 			total_share_amount += cached_pollution.pollutants[type]
 
-	var/sharing_len = length(sharing_turfs)
+	var/sharing_len = length_char(sharing_turfs)
 	for(var/type in total_share_pollutants)
 		total_share_pollutants[type] /= sharing_len
 	total_share_amount /= sharing_len
@@ -243,7 +243,7 @@
 /datum/pollution/proc/get_overlay(list/pollutant_list, total_amount)
 	var/datum/pollutant/pollutant
 	var/total_thickness
-	if(length(pollutant_list) == 1)
+	if(length_char(pollutant_list) == 1)
 		pollutant = SSpollution.singletons[pollutant_list[1]]
 		if(!(pollutant.pollutant_flags & POLLUTANT_APPEARANCE))
 			return

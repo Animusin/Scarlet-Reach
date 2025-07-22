@@ -234,6 +234,6 @@
         if(mob.stat == DEAD)
             continue
         found |= mob
-    if(!length(found))
+    if(!length_char(found))
         return null
     return pick(found)

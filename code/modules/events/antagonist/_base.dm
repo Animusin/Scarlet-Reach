@@ -13,7 +13,7 @@
 	var/minor_roleset = FALSE
 
 /datum/round_event_control/antagonist/proc/check_required()
-	if(!length(exclusive_roles))
+	if(!length_char(exclusive_roles))
 		return TRUE
 	for (var/mob/M in GLOB.mob_living_list)
 		if (M.stat == DEAD)
@@ -22,7 +22,7 @@
 			return TRUE
 
 /datum/round_event_control/antagonist/proc/trim_candidates(list/candidates)
-	if(length(needed_job))
+	if(length_char(needed_job))
 		for(var/mob/living/candidate in candidates)
 			if(!(candidate.mind?.assigned_role in needed_job))
 				candidates -= candidate
@@ -30,7 +30,7 @@
 
 /// Check if our enemy_roles requirement is met, if return_players is set then we will return the list of enemy players instead
 /datum/round_event_control/proc/check_enemies(return_players = FALSE)
-	if(!length(enemy_roles))
+	if(!length_char(enemy_roles))
 		return return_players ? list() : TRUE
 
 	var/job_check = 0

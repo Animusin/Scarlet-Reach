@@ -64,7 +64,7 @@
 			to_chat(M, message)
 			
 /datum/component/deadchat_control/proc/count_democracy_votes()
-	if(!length(ckey_to_cooldown))
+	if(!length_char(ckey_to_cooldown))
 		return
 	var/list/votes = list()
 	for(var/command in inputs)

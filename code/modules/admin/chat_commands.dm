@@ -36,7 +36,7 @@
 	admin_only = TRUE
 
 /datum/tgs_chat_command/ahelp/Run(datum/tgs_chat_user/sender, params)
-	var/list/all_params = splittext(params, " ")
+	var/list/all_params = splittext_char(params, " ")
 	if(all_params.len < 2)
 		return "Insufficient parameters"
 	var/target = all_params[1]

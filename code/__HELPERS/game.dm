@@ -212,7 +212,7 @@
 	var/index = 1
 	var/obj/item/organ/found_organ
 
-	while(index <= length(processing_list))
+	while(index <= length_char(processing_list))
 
 		var/atom/A = processing_list[index]
 
@@ -605,13 +605,13 @@
 	*/
 
 /proc/GetRedPart(const/hexa)
-	return hex2num(copytext(hexa, 2, 4))
+	return hex2num(copytext_char(hexa, 2, 4))
 
 /proc/GetGreenPart(const/hexa)
-	return hex2num(copytext(hexa, 4, 6))
+	return hex2num(copytext_char(hexa, 4, 6))
 
 /proc/GetBluePart(const/hexa)
-	return hex2num(copytext(hexa, 6, 8))
+	return hex2num(copytext_char(hexa, 6, 8))
 
 // Find a obstruction free turf that's within the range of the center. Can also condition on if it is of a certain area type.
 /proc/find_obstruction_free_location(range, atom/center, area/specific_area)

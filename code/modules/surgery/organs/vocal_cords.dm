@@ -185,7 +185,7 @@
 	if(specific_listeners.len)
 		listeners = specific_listeners
 		power_multiplier *= (1 + (1/specific_listeners.len)) //2x on a single guy, 1.5x on two and so on
-		message = copytext(message, 0, 1)+copytext(message, 1 + length(found_string), length(message) + 1)
+		message = copytext_char(message, 0, 1)+copytext_char(message, 1 + length_char(found_string), length_char(message) + 1)
 
 	var/static/regex/stun_words = regex("stop|wait|stand still|hold on|halt")
 	var/static/regex/knockdown_words = regex("drop|fall|trip|knockdown")
@@ -233,33 +233,33 @@
 
 	var/i = 0
 	//STUN
-	if(findtext(message, stun_words))
+	if(findtext_char(message, stun_words))
 		cooldown = COOLDOWN_STUN
 		for(var/V in listeners)
 			var/mob/living/L = V
 			L.Stun(60 * power_multiplier)
 
 	//KNOCKDOWN
-	else if(findtext(message, knockdown_words))
+	else if(findtext_char(message, knockdown_words))
 		cooldown = COOLDOWN_STUN
 		for(var/V in listeners)
 			var/mob/living/L = V
 			L.Paralyze(60 * power_multiplier)
 
 	//SLEEP
-	else if((findtext(message, sleep_words)))
+	else if((findtext_char(message, sleep_words)))
 		cooldown = COOLDOWN_STUN
 		for(var/mob/living/carbon/C in listeners)
 			C.Sleeping(40 * power_multiplier)
 
 	//VOMIT
-	else if((findtext(message, vomit_words)))
+	else if((findtext_char(message, vomit_words)))
 		cooldown = COOLDOWN_STUN
 		for(var/mob/living/carbon/C in listeners)
 			C.vomit(10 * power_multiplier, distance = power_multiplier)
 
 	//SILENCE
-	else if((findtext(message, silence_words)))
+	else if((findtext_char(message, silence_words)))
 		cooldown = COOLDOWN_STUN
 		for(var/mob/living/carbon/C in listeners)
 			if(user.mind && (user.mind.assigned_role == "Curator" || user.mind.assigned_role == "Mime"))
@@ -267,40 +267,40 @@
 			C.silent += (10 * power_multiplier)
 
 	//HALLUCINATE
-	else if((findtext(message, hallucinate_words)))
+	else if((findtext_char(message, hallucinate_words)))
 		cooldown = COOLDOWN_MEME
 		for(var/mob/living/carbon/C in listeners)
 			new /datum/hallucination/delusion(C, TRUE, null,150 * power_multiplier,0)
 
 	//WAKE UP
-	else if((findtext(message, wakeup_words)))
+	else if((findtext_char(message, wakeup_words)))
 		cooldown = COOLDOWN_DAMAGE
 		for(var/V in listeners)
 			var/mob/living/L = V
 			L.SetSleeping(0)
 
 	//HEAL
-	else if((findtext(message, heal_words)))
+	else if((findtext_char(message, heal_words)))
 		cooldown = COOLDOWN_DAMAGE
 		for(var/V in listeners)
 			var/mob/living/L = V
 			L.heal_overall_damage(10 * power_multiplier, 10 * power_multiplier)
 
 	//BRUTE DAMAGE
-	else if((findtext(message, hurt_words)))
+	else if((findtext_char(message, hurt_words)))
 		cooldown = COOLDOWN_DAMAGE
 		for(var/V in listeners)
 			var/mob/living/L = V
 			L.apply_damage(15 * power_multiplier, def_zone = BODY_ZONE_CHEST)
 
 	//BLEED
-	else if((findtext(message, bleed_words)))
+	else if((findtext_char(message, bleed_words)))
 		cooldown = COOLDOWN_DAMAGE
 		for(var/mob/living/carbon/human/H in listeners)
 			H.bleed_rate += (5 * power_multiplier)
 
 	//FIRE
-	else if((findtext(message, burn_words)))
+	else if((findtext_char(message, burn_words)))
 		cooldown = COOLDOWN_DAMAGE
 		for(var/V in listeners)
 			var/mob/living/L = V
@@ -308,21 +308,21 @@
 			L.IgniteMob()
 
 	//HOT
-	else if((findtext(message, hot_words)))
+	else if((findtext_char(message, hot_words)))
 		cooldown = COOLDOWN_DAMAGE
 		for(var/V in listeners)
 			var/mob/living/L = V
 			L.adjust_bodytemperature(50 * power_multiplier)
 
 	//COLD
-	else if((findtext(message, cold_words)))
+	else if((findtext_char(message, cold_words)))
 		cooldown = COOLDOWN_DAMAGE
 		for(var/V in listeners)
 			var/mob/living/L = V
 			L.adjust_bodytemperature(-50 * power_multiplier)
 
 	//REPULSE
-	else if((findtext(message, repulse_words)))
+	else if((findtext_char(message, repulse_words)))
 		cooldown = COOLDOWN_DAMAGE
 		for(var/V in listeners)
 			var/mob/living/L = V
@@ -330,14 +330,14 @@
 			L.throw_at(throwtarget, 3 * power_multiplier, 1 * power_multiplier)
 
 	//ATTRACT
-	else if((findtext(message, attract_words)))
+	else if((findtext_char(message, attract_words)))
 		cooldown = COOLDOWN_DAMAGE
 		for(var/V in listeners)
 			var/mob/living/L = V
 			L.throw_at(get_step_towards(user,L), 3 * power_multiplier, 1 * power_multiplier)
 
 	//WHO ARE YOU?
-	else if((findtext(message, whoareyou_words)))
+	else if((findtext_char(message, whoareyou_words)))
 		cooldown = COOLDOWN_MEME
 		for(var/V in listeners)
 			var/mob/living/L = V
@@ -347,7 +347,7 @@
 			i++
 
 	//SAY MY NAME
-	else if((findtext(message, saymyname_words)))
+	else if((findtext_char(message, saymyname_words)))
 		cooldown = COOLDOWN_MEME
 		for(var/V in listeners)
 			var/mob/living/L = V
@@ -355,7 +355,7 @@
 			i++
 
 	//KNOCK KNOCK
-	else if((findtext(message, knockknock_words)))
+	else if((findtext_char(message, knockknock_words)))
 		cooldown = COOLDOWN_MEME
 		for(var/V in listeners)
 			var/mob/living/L = V
@@ -363,16 +363,16 @@
 			i++
 
 	//MOVE
-	else if((findtext(message, move_words)))
+	else if((findtext_char(message, move_words)))
 		cooldown = COOLDOWN_MEME
 		var/direction
-		if(findtext(message, up_words))
+		if(findtext_char(message, up_words))
 			direction = NORTH
-		else if(findtext(message, down_words))
+		else if(findtext_char(message, down_words))
 			direction = SOUTH
-		else if(findtext(message, left_words))
+		else if(findtext_char(message, left_words))
 			direction = WEST
-		else if(findtext(message, right_words))
+		else if(findtext_char(message, right_words))
 			direction = EAST
 		for(var/iter in 1 to 5 * power_multiplier)
 			for(var/V in listeners)
@@ -380,7 +380,7 @@
 				addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(_step), L, direction? direction : pick(GLOB.cardinals)), 10 * (iter - 1))
 
 	//WALK
-	else if((findtext(message, walk_words)))
+	else if((findtext_char(message, walk_words)))
 		cooldown = COOLDOWN_MEME
 		for(var/V in listeners)
 			var/mob/living/L = V
@@ -388,7 +388,7 @@
 				L.toggle_move_intent()
 
 	//RUN
-	else if((findtext(message, run_words)))
+	else if((findtext_char(message, run_words)))
 		cooldown = COOLDOWN_MEME
 		for(var/V in listeners)
 			var/mob/living/L = V
@@ -396,7 +396,7 @@
 				L.toggle_move_intent()
 
 	//HELP INTENT
-	else if((findtext(message, helpintent_words)))
+	else if((findtext_char(message, helpintent_words)))
 		cooldown = COOLDOWN_MEME
 		for(var/mob/living/carbon/human/H in listeners)
 			addtimer(CALLBACK(H, TYPE_VERB_REF(/mob, a_intent_change), INTENT_HELP), i * 2)
@@ -404,7 +404,7 @@
 			i++
 
 	//DISARM INTENT
-	else if((findtext(message, disarmintent_words)))
+	else if((findtext_char(message, disarmintent_words)))
 		cooldown = COOLDOWN_MEME
 		for(var/mob/living/carbon/human/H in listeners)
 			addtimer(CALLBACK(H, TYPE_VERB_REF(/mob, a_intent_change), INTENT_DISARM), i * 2)
@@ -412,7 +412,7 @@
 			i++
 
 	//GRAB INTENT
-	else if((findtext(message, grabintent_words)))
+	else if((findtext_char(message, grabintent_words)))
 		cooldown = COOLDOWN_MEME
 		for(var/mob/living/carbon/human/H in listeners)
 			addtimer(CALLBACK(H, TYPE_VERB_REF(/mob, a_intent_change), INTENT_GRAB), i * 2)
@@ -420,7 +420,7 @@
 			i++
 
 	//HARM INTENT
-	else if((findtext(message, harmintent_words)))
+	else if((findtext_char(message, harmintent_words)))
 		cooldown = COOLDOWN_MEME
 		for(var/mob/living/carbon/human/H in listeners)
 			addtimer(CALLBACK(H, TYPE_VERB_REF(/mob, a_intent_change), INTENT_HARM), i * 2)
@@ -428,20 +428,20 @@
 			i++
 
 	//THROW/CATCH
-	else if((findtext(message, throwmode_words)))
+	else if((findtext_char(message, throwmode_words)))
 		cooldown = COOLDOWN_MEME
 		for(var/mob/living/carbon/C in listeners)
 			C.throw_mode_on()
 
 	//FLIP
-	else if((findtext(message, flip_words)))
+	else if((findtext_char(message, flip_words)))
 		cooldown = COOLDOWN_MEME
 		for(var/V in listeners)
 			var/mob/living/L = V
 			L.emote("flip")
 
 	//SPEAK
-	else if((findtext(message, speak_words)))
+	else if((findtext_char(message, speak_words)))
 		cooldown = COOLDOWN_MEME
 		for(var/V in listeners)
 			var/mob/living/L = V
@@ -449,7 +449,7 @@
 			i++
 
 	//GET UP
-	else if((findtext(message, getup_words)))
+	else if((findtext_char(message, getup_words)))
 		cooldown = COOLDOWN_DAMAGE //because stun removal
 		for(var/V in listeners)
 			var/mob/living/L = V
@@ -457,7 +457,7 @@
 			L.SetAllImmobility(0)
 
 	//SIT
-	else if((findtext(message, sit_words)))
+	else if((findtext_char(message, sit_words)))
 		cooldown = COOLDOWN_MEME
 		for(var/V in listeners)
 			var/mob/living/L = V
@@ -466,7 +466,7 @@
 				break
 
 	//STAND UP
-	else if((findtext(message, stand_words)))
+	else if((findtext_char(message, stand_words)))
 		cooldown = COOLDOWN_MEME
 		for(var/V in listeners)
 			var/mob/living/L = V
@@ -474,7 +474,7 @@
 				L.buckled.unbuckle_mob(L)
 
 	//DANCE
-	else if((findtext(message, dance_words)))
+	else if((findtext_char(message, dance_words)))
 		cooldown = COOLDOWN_MEME
 		for(var/V in listeners)
 			var/mob/living/L = V
@@ -482,7 +482,7 @@
 			i++
 
 	//JUMP
-	else if((findtext(message, jump_words)))
+	else if((findtext_char(message, jump_words)))
 		cooldown = COOLDOWN_MEME
 		for(var/V in listeners)
 			var/mob/living/L = V
@@ -492,7 +492,7 @@
 			i++
 
 	//SALUTE
-	else if((findtext(message, salute_words)))
+	else if((findtext_char(message, salute_words)))
 		cooldown = COOLDOWN_MEME
 		for(var/V in listeners)
 			var/mob/living/L = V
@@ -500,7 +500,7 @@
 			i++
 
 	//PLAY DEAD
-	else if((findtext(message, deathgasp_words)))
+	else if((findtext_char(message, deathgasp_words)))
 		cooldown = COOLDOWN_MEME
 		for(var/V in listeners)
 			var/mob/living/L = V
@@ -508,7 +508,7 @@
 			i++
 
 	//PLEASE CLAP
-	else if((findtext(message, clap_words)))
+	else if((findtext_char(message, clap_words)))
 		cooldown = COOLDOWN_MEME
 		for(var/V in listeners)
 			var/mob/living/L = V
@@ -516,7 +516,7 @@
 			i++
 
 	//HONK
-	else if((findtext(message, honk_words)))
+	else if((findtext_char(message, honk_words)))
 		cooldown = COOLDOWN_MEME
 		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound), get_turf(user), 'sound/blank.ogg', 300, 1), 25)
 		if(user.mind && user.mind.assigned_role == "Clown")
@@ -525,7 +525,7 @@
 			cooldown = COOLDOWN_MEME
 
 	//RIGHT ROUND
-	else if((findtext(message, multispin_words)))
+	else if((findtext_char(message, multispin_words)))
 		cooldown = COOLDOWN_MEME
 		for(var/V in listeners)
 			var/mob/living/L = V

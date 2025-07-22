@@ -67,7 +67,7 @@
 
 	var/datum/species/pref_species = H.dna.species
 	var/list/local_allowed_sexes = list()
-	if(length(allowed_sexes))
+	if(length_char(allowed_sexes))
 		local_allowed_sexes |= allowed_sexes
 	if(!immune_to_genderswap && pref_species?.gender_swapping)
 		if(MALE in allowed_sexes)
@@ -76,16 +76,16 @@
 		if(FEMALE in allowed_sexes)
 			local_allowed_sexes -= FEMALE
 			local_allowed_sexes += MALE
-	if(length(local_allowed_sexes) && !(H.gender in local_allowed_sexes))
+	if(length_char(local_allowed_sexes) && !(H.gender in local_allowed_sexes))
 		return FALSE
 
-	if(length(allowed_races) && !(H.dna.species.type in allowed_races))
+	if(length_char(allowed_races) && !(H.dna.species.type in allowed_races))
 		return FALSE
 
-	if(length(allowed_ages) && !(H.age in allowed_ages))
+	if(length_char(allowed_ages) && !(H.age in allowed_ages))
 		return FALSE
 
-	if(length(allowed_patrons) && !(H.patron in allowed_patrons))
+	if(length_char(allowed_patrons) && !(H.patron in allowed_patrons))
 		return FALSE
 
 	if(maximum_possible_slots > -1)

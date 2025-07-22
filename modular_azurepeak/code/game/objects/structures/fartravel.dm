@@ -43,12 +43,12 @@
 			var/target_job = SSrole_class_handler.get_advclass_by_name(user.advjob)
 			if(target_job)
 				SSrole_class_handler.adjust_class_amount(target_job, -1)
-	if(!length(departing_mob.contents))
+	if(!length_char(departing_mob.contents))
 		dat += " none."
 	else
 		var/atom/movable/content = departing_mob.contents[1]
 		dat += " [content.name]"
-		for(var/i in 2 to length(departing_mob.contents))
+		for(var/i in 2 to length_char(departing_mob.contents))
 			content = departing_mob.contents[i]
 			dat += ", [content.name]"
 		dat += "."

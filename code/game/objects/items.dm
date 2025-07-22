@@ -512,14 +512,14 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 			if(C.body_parts_inherent)
 				inspec += "<b>CANNOT BE PEELED: </b>"
 				var/list/inherentList = body_parts_covered2organ_names(C.body_parts_inherent)
-				if(length(inherentList) == 1)
+				if(length_char(inherentList) == 1)
 					inspec += "<b><font color = '#77cde2'>[capitalize(inherentList[1])]</font></b>"
 				else
 					inspec += "| "
 					for(var/zone in inherentList)
 						inspec += "<b><font color = '#77cde2'>[capitalize(zone)]</b></font> | "
 			if(C.prevent_crits)
-				if(length(C.prevent_crits))
+				if(length_char(C.prevent_crits))
 					inspec += "\n<b>PREVENTS CRITS:</b>"
 					for(var/X in C.prevent_crits)
 						if(X == BCLASS_PICK)	//BCLASS_PICK is named "stab", and "stabbing" is its own damage class. Prevents confusion.
@@ -1367,7 +1367,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 				playsound(src, 'sound/foley/peeled_coverage.ogg', 100)
 				var/list/peeledpart = body_parts_covered2organ_names(coveragezone, precise = TRUE)
 				var/parttext
-				if(length(peeledpart))
+				if(length_char(peeledpart))
 					parttext = peeledpart[1]	//There should really only be one bodypart that gets exposed here.
 				visible_message("<font color = '#f5f5f5'><b>[parttext ? parttext : "Coverage"]</font></b> gets peeled off of [src]!")
 				reset_peel(success = TRUE)

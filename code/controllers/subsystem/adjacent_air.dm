@@ -8,13 +8,13 @@ SUBSYSTEM_DEF(adjacent_air)
 
 /datum/controller/subsystem/adjacent_air/stat_entry()
 	#ifdef TESTING
-	..("P:[length(queue)], S:[GLOB.atmos_adjacent_savings[1]], T:[GLOB.atmos_adjacent_savings[2]]")
+	..("P:[length_char(queue)], S:[GLOB.atmos_adjacent_savings[1]], T:[GLOB.atmos_adjacent_savings[2]]")
 	#else
-	..("P:[length(queue)]")
+	..("P:[length_char(queue)]")
 	#endif
 
 /datum/controller/subsystem/adjacent_air/Initialize()
-	while(length(queue))
+	while(length_char(queue))
 		fire(mc_check = FALSE)
 	return ..()
 
@@ -22,7 +22,7 @@ SUBSYSTEM_DEF(adjacent_air)
 
 	var/list/queue = src.queue
 
-	while (length(queue))
+	while (length_char(queue))
 		var/turf/currT = queue[1]
 		queue.Cut(1,2)
 
@@ -102,7 +102,7 @@ SUBSYSTEM_DEF(adjacent_air)
 /turf/proc/GetAtmosAdjacentTurfs(alldir = 0)
 	var/adjacent_turfs
 	air_update_turf(TRUE) // since no atmos subsystem, we need to generate turf atmos adjacency manually
-	if(length(atmos_adjacent_turfs))
+	if(length_char(atmos_adjacent_turfs))
 		adjacent_turfs = atmos_adjacent_turfs.Copy()
 	else
 		return null

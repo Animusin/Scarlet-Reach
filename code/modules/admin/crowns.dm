@@ -8,7 +8,7 @@ GLOBAL_PROTECT(crownwearers)
 	for(var/line in world.file2list(CROWNFILE))
 		if(!line)
 			continue
-		if(findtextEx(line,"#",1,2))
+		if(findtextEx_char(line,"#",1,2))
 			continue
 		GLOB.crownwearers += ckey(line)
 

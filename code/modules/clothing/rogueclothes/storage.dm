@@ -288,7 +288,7 @@
 	if(!tied && (slot == SLOT_BACK_L || slot == SLOT_BACK_R))
 		var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 		var/list/things = STR.contents()
-		if(length(things))
+		if(length_char(things))
 			visible_message(span_warning("The loose bag empties as it is swung around [user]'s shoulder!"))
 			STR.quick_empty(user)
 

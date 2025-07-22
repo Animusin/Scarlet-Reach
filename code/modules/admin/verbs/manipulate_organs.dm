@@ -9,7 +9,7 @@
 	switch(operation)
 		if("add organ")
 			for(var/path in subtypesof(/obj/item/organ))
-				var/dat = replacetext("[path]", "/obj/item/organ/", ":")
+				var/dat = replacetext_char("[path]", "/obj/item/organ/", ":")
 				organs[dat] = path
 
 			var/obj/item/organ/organ = input("Select organ type:", "Organ Manipulation", null) as null|anything in organs

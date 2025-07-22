@@ -57,7 +57,7 @@ GLOBAL_VAR(restart_counter)
 	//DB schema and set RoundID if we can
 //	SSdbcore.CheckSchemaVersion()
 	SSdbcore.SetRoundID()
-	var/timestamp = replacetext(time_stamp(), ":", ".")
+	var/timestamp = replacetext_char(time_stamp(), ":", ".")
 
 	if(!GLOB.round_id) // we do not have a db connected, back to pointless random numbers
 		GLOB.rogue_round_id = "[pick(GLOB.roundid)][rand(0,9)][rand(0,9)][rand(0,9)]-[timestamp]"
@@ -142,7 +142,7 @@ GLOBAL_VAR(restart_counter)
 		GLOB.picture_logging_prefix = "L_[time2text(realtime, "YYYYMMDD")]_"
 		GLOB.picture_log_directory = "data/picture_logs/[texttime]/round-"
 		if(GLOB.rogue_round_id)
-			var/timestamp = replacetext(time_stamp(), ":", ".")
+			var/timestamp = replacetext_char(time_stamp(), ":", ".")
 			GLOB.log_directory += "[timestamp]-"
 			GLOB.picture_log_directory += "[timestamp]-"
 			GLOB.picture_logging_prefix += "T_[timestamp]_"
@@ -150,7 +150,7 @@ GLOBAL_VAR(restart_counter)
 			GLOB.picture_logging_prefix += "R_[GLOB.rogue_round_id]_"
 			GLOB.picture_log_directory += "[GLOB.rogue_round_id]"
 		else
-			var/timestamp = replacetext(time_stamp(), ":", ".")
+			var/timestamp = replacetext_char(time_stamp(), ":", ".")
 			GLOB.log_directory += "[timestamp]"
 			GLOB.picture_log_directory += "[timestamp]"
 			GLOB.picture_logging_prefix += "T_[timestamp]_"

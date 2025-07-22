@@ -16,7 +16,7 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 				is_legacy = TRUE		//We toggle it on in prefs and on mob
 				client.prefs.is_legacy = TRUE
 				legacy_check = TRUE
-				client.prefs?.flavortext_display = replacetext(flavortext, "\n", "<BR>")	//We only do the basic legacy conversion
+				client.prefs?.flavortext_display = replacetext_char(flavortext, "\n", "<BR>")	//We only do the basic legacy conversion
 				flavortext_display = client.prefs?.flavortext_display
 			else
 				flavortext_display = client.prefs?.flavortext_display	//In this case, something went wrong and we can fix it.
@@ -25,7 +25,7 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 				is_legacy = TRUE
 				client.prefs.is_legacy = TRUE
 				legacy_check = TRUE
-				client.prefs?.ooc_notes_display = replacetext(ooc_notes, "\n", "<BR>")
+				client.prefs?.ooc_notes_display = replacetext_char(ooc_notes, "\n", "<BR>")
 				ooc_notes_display = client.prefs?.ooc_notes_display
 			else
 				ooc_notes_display = client.prefs?.ooc_notes_display
@@ -64,7 +64,7 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 		var/obj/item/bodypart/bodypart = get_bodypart(checked_zone)
 		if(bodypart)
 			var/list/bodypart_status = bodypart.inspect_limb(user)
-			if(length(bodypart_status))
+			if(length_char(bodypart_status))
 				msg += bodypart_status
 			else
 				msg += "<B>[capitalize(bodypart.name)]:</B>"
@@ -273,7 +273,7 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 					if(C.body_parts_covered_dynamic)
 						readable_coverage = body_parts_covered2organ_names(C.body_parts_covered_dynamic, verbose = TRUE)
 					
-					if(length(C.prevent_crits) && (is_normal || is_smart))
+					if(length_char(C.prevent_crits) && (is_normal || is_smart))
 						for(var/critzone in C.prevent_crits)
 							for(var/crit in critclasses)
 								if(critzone == crit)
@@ -292,7 +292,7 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 								if("piercing")
 									piercing_max[coverageflag] = max(C.armor.getRating(type), piercing_max[coverageflag])
 						coverage[coverageflag] += 1
-						if(length(critclasses) && (is_normal || is_smart))
+						if(length_char(critclasses) && (is_normal || is_smart))
 							var/str
 							for(var/critzone in critclasses)
 								if(critzone == BCLASS_PICK)
@@ -367,7 +367,7 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 
 			if(!is_stupid)
 				dat += "<b><center>BODY:</center></b><br>"
-			if(length(coverage))
+			if(length_char(coverage))
 				var/str
 				if(!is_smart && !is_normal)	//We get a significantly simplified printout if we don't have the stats / trait
 					coverage.Remove(READABLE_ZONE_NECK, READABLE_ZONE_MOUTH, READABLE_ZONE_EYES, READABLE_ZONE_NOSE, READABLE_ZONE_FACE, READABLE_ZONE_VITALS, READABLE_ZONE_GROIN, READABLE_ZONE_HANDS, READABLE_ZONE_FEET, READABLE_ZONE_L_FOOT, READABLE_ZONE_R_FOOT, READABLE_ZONE_L_HAND, READABLE_ZONE_R_HAND, READABLE_ZONE_L_ARM, READABLE_ZONE_R_ARM, READABLE_ZONE_L_LEG, READABLE_ZONE_R_LEG)
@@ -375,7 +375,7 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 					coverage.Remove(READABLE_ZONE_NECK, READABLE_ZONE_MOUTH, READABLE_ZONE_EYES, READABLE_ZONE_NOSE, READABLE_ZONE_FACE, READABLE_ZONE_VITALS, READABLE_ZONE_GROIN, READABLE_ZONE_HANDS, READABLE_ZONE_FEET, READABLE_ZONE_L_FOOT, READABLE_ZONE_R_FOOT, READABLE_ZONE_L_HAND, READABLE_ZONE_R_HAND)
 				if(!is_stupid)
 					if(is_normal || is_smart)
-						if(length(coverage_exposed))
+						if(length_char(coverage_exposed))
 							for(var/exposed in coverage_exposed)
 								str += "<b>[exposed]</b>: <font color = '#770404'><b>EXPOSED!</B></font><br>"
 					for(var/thing in coverage)

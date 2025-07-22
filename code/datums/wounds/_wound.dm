@@ -108,19 +108,19 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 
 /// Crit message that should be appended when this wound is applied in combat
 /datum/wound/proc/get_crit_message(mob/living/affected, obj/item/bodypart/affected_bodypart)
-	if(!length(crit_message))
+	if(!length_char(crit_message))
 		return
 	var/final_message = pick(crit_message)
 	if(affected)
-		final_message = replacetext(final_message, "%VICTIM", "[affected.name]")
-		final_message = replacetext(final_message, "%P_THEIR", "[affected.p_their()]")
+		final_message = replacetext_char(final_message, "%VICTIM", "[affected.name]")
+		final_message = replacetext_char(final_message, "%P_THEIR", "[affected.p_their()]")
 	else
-		final_message = replacetext(final_message, "%VICTIM", "victim")
-		final_message = replacetext(final_message, "%P_THEIR", "their")
+		final_message = replacetext_char(final_message, "%VICTIM", "victim")
+		final_message = replacetext_char(final_message, "%P_THEIR", "their")
 	if(affected_bodypart)
-		final_message = replacetext(final_message, "%BODYPART", "[affected_bodypart.name]")
+		final_message = replacetext_char(final_message, "%BODYPART", "[affected_bodypart.name]")
 	else
-		final_message = replacetext(final_message, "%BODYPART", parse_zone(BODY_ZONE_CHEST))
+		final_message = replacetext_char(final_message, "%BODYPART", parse_zone(BODY_ZONE_CHEST))
 	if(critical)
 		final_message = "<span class='crit'><b>Critical hit!</b> [final_message]</span>"
 	return final_message

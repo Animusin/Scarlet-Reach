@@ -84,11 +84,11 @@
 	. = ..() //Do this after, else mat datums is mad.
 
 	if (set_obj_flags)
-		var/flagslist = splittext(set_obj_flags,";")
+		var/flagslist = splittext_char(set_obj_flags,";")
 		var/list/string_to_objflag = GLOB.bitfields["obj_flags"]
 		for (var/flag in flagslist)
-			if (findtext(flag,"!",1,2))
-				flag = copytext(flag,1-(length(flag))) // Get all but the initial !
+			if (findtext_char(flag,"!",1,2))
+				flag = copytext_char(flag,1-(length_char(flag))) // Get all but the initial !
 				obj_flags &= ~string_to_objflag[flag]
 			else
 				obj_flags |= string_to_objflag[flag]

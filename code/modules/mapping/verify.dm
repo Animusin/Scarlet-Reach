@@ -61,7 +61,7 @@
 	var/list/modelCache = build_cache(TRUE, report.bad_paths)
 
 	for(var/path in report.bad_paths)
-		if(copytext(path, 1, 7) == "/turf/" || copytext(path, 1, 7) == "/area/")
+		if(copytext_char(path, 1, 7) == "/turf/" || copytext_char(path, 1, 7) == "/area/")
 			report.loadable = FALSE
 
 	// check for tiles with the wrong number of turfs or areas

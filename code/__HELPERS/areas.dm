@@ -17,7 +17,7 @@
 		found_turfs.Cut(1, 2)
 		var/dir_flags = checked_turfs[sourceT]
 		for(var/dir in GLOB.alldirs)
-			if(length(.) > max_size)
+			if(length_char(.) > max_size)
 				return
 			if(dir_flags & dir) // This means we've checked this dir before, probably from the other turf
 				continue
@@ -68,9 +68,9 @@
 	var/area/oldA = get_area(get_turf(creator))
 	if(!isarea(area_choice))
 		var/str = stripped_input(creator,"New area name:", "Blueprint Editing", "", MAX_NAME_LEN)
-		if(!str || !length(str)) //cancel
+		if(!str || !length_char(str)) //cancel
 			return
-		if(length(str) > 50)
+		if(length_char(str) > 50)
 			to_chat(creator, "<span class='warning'>The given name is too long. The area remains undefined.</span>")
 			return
 		newA = new area_choice

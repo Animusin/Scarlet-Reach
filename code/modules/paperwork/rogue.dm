@@ -68,7 +68,7 @@
 		user.hud_used.reads.icon_state = "scroll"
 		user.hud_used.reads.show()
 		var/dat = {"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">
-			<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><style type=\"text/css\">
+			<html><head><meta charset='UTF-8'><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><style type=\"text/css\">
 					body { background-image:url('book.png');background-repeat: repeat; }</style></head><body scroll=yes>"}
 		dat += "[info]<br>"
 		dat += "<a href='?src=[REF(src)];close=1' style='position:absolute;right:50px'>Close</a>"
@@ -280,7 +280,7 @@
 					continue
 				var/pref_name = path.name ? path.name : path.name
 				divine_gods[pref_name] = path
-			if(length(divine_gods)) // sanity check
+			if(length_char(divine_gods)) // sanity check
 				var/fake_patron = input(M, "Who will you pretend your patron is?", "DECEPTION") as null|anything in divine_gods
 				if(!fake)
 					fake_patron = pick(divine_gods)
@@ -312,7 +312,7 @@
 		user.hud_used.reads.icon_state = "scroll"
 		user.hud_used.reads.show()
 		var/dat = {"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">
-					<html><head><style type=\"text/css\">
+					<html><head><meta charset='UTF-8'><style type=\"text/css\">
 					body { background-image:url('book.png');background-repeat: repeat; }</style>
 					</head><body scroll=yes>"}
 		dat += "[info]<br>"
@@ -345,7 +345,7 @@
 		faction = pick("Heartfelt", "Hammerhold", "Grenzelhoft", "Kingsfield")		//add more as time goes, idk
 
 	sell_prices = prices
-	if(!length(sell_prices))
+	if(!length_char(sell_prices))
 		sell_prices = generated_test_data()
 	writers_name = pick( world.file2list("strings/rt/names/human/humnorm.txt") )
 	rebuild_info()

@@ -41,7 +41,7 @@
 		return
 	var/client/C
 	if(istext(whom))
-		if(cmptext(copytext(whom,1,2),"@"))
+		if(cmptext(copytext_char(whom,1,2),"@"))
 			whom = findStealthKey(whom)
 		C = GLOB.directory[whom]
 	else if(istype(whom, /client))
@@ -76,7 +76,7 @@
 	var/client/recipient
 	var/irc = 0
 	if(istext(whom))
-		if(cmptext(copytext(whom,1,2),"@"))
+		if(cmptext(copytext_char(whom,1,2),"@"))
 			whom = findStealthKey(whom)
 		if(whom == "IRCKEY")
 			irc = 1
@@ -133,7 +133,7 @@
 
 	//clean the message if it's not sent by a high-rank admin
 	if(!check_rights(R_SERVER|R_DEBUG,0)||irc)//no sending html to the poor bots
-		msg = trim(sanitize(copytext(msg,1,MAX_MESSAGE_LEN)))
+		msg = trim(sanitize(copytext_char(msg,1,MAX_MESSAGE_LEN)))
 		if(!msg)
 			return
 
@@ -224,7 +224,7 @@
 	var/datum/admin_help/ticket = C ? C.current_ticket : GLOB.ahelp_tickets.CKey2ActiveTicket(target)
 	var/compliant_msg = trim(lowertext(msg))
 	var/irc_tagged = "[sender](IRC)"
-	var/list/splits = splittext(compliant_msg, " ")
+	var/list/splits = splittext_char(compliant_msg, " ")
 	if(splits.len && splits[1] == "ticket")
 		if(splits.len < 2)
 			return IRC_AHELP_USAGE
@@ -286,7 +286,7 @@
 	if(!stealthkey)
 		stealthkey = GenIrcStealthKey()
 
-	msg = sanitize(copytext(msg,1,MAX_MESSAGE_LEN))
+	msg = sanitize(copytext_char(msg,1,MAX_MESSAGE_LEN))
 	if(!msg)
 		return "Error: No message"
 

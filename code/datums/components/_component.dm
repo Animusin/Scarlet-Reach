@@ -97,7 +97,7 @@
 		var/test = dc[I]
 		if(test) //already another component of this type here
 			var/list/components_of_type
-			if(!length(test))
+			if(!length_char(test))
 				components_of_type = list(test)
 				dc[I] = components_of_type
 			else
@@ -127,7 +127,7 @@
 	var/list/dc = P.datum_components
 	for(var/I in _GetInverseTypeList())
 		var/list/components_of_type = dc[I]
-		if(length(components_of_type)) //
+		if(length_char(components_of_type)) //
 			var/list/subtracted = components_of_type - src
 			if(subtracted.len == 1) //only 1 guy left
 				dc[I] = subtracted[1] //make him special
@@ -198,7 +198,7 @@
 			lookup[sig_type] = src
 		else if(lookup[sig_type] == src) // We already registered here
 			continue
-		else if(!length(lookup[sig_type])) // One other thing registered here
+		else if(!length_char(lookup[sig_type])) // One other thing registered here
 			lookup[sig_type] = list(lookup[sig_type]=TRUE)
 			lookup[sig_type][src] = TRUE
 		else // Many other things have registered here
@@ -226,21 +226,21 @@
 			if(!istext(sig))
 				stack_trace("We're unregistering with something that isn't a valid signal \[[sig]\], you fucked up")
 			continue
-		switch(length(lookup[sig]))
+		switch(length_char(lookup[sig]))
 			if(2)
 				lookup[sig] = (lookup[sig]-src)[1]
 			if(1)
 				stack_trace("[target] ([target.type]) somehow has single length list inside comp_lookup")
 				if(src in lookup[sig])
 					lookup -= sig
-					if(!length(lookup))
+					if(!length_char(lookup))
 						target.comp_lookup = null
 						break
 			if(0)
 				if(lookup[sig] != src)
 					continue
 				lookup -= sig
-				if(!length(lookup))
+				if(!length_char(lookup))
 					target.comp_lookup = null
 					break
 			else
@@ -313,7 +313,7 @@
  */
 /datum/proc/_SendSignal(sigtype, list/arguments)
 	var/target = comp_lookup[sigtype]
-	if(!length(target))
+	if(!length_char(target))
 		var/datum/listening_datum = target
 		return NONE | call(listening_datum, listening_datum.signal_procs[src][sigtype])(arglist(arguments))
 	. = NONE
@@ -343,7 +343,7 @@
 	if(!dc)
 		return null
 	. = dc[c_type]
-	if(length(.))
+	if(length_char(.))
 		return .[1]
 
 // The type arg is casted so initial works, you shouldn't be passing a real instance into this
@@ -364,7 +364,7 @@
 		return null
 	var/datum/component/C = dc[c_type]
 	if(C)
-		if(length(C))
+		if(length_char(C))
 			C = C[1]
 		if(C.type == c_type)
 			return C

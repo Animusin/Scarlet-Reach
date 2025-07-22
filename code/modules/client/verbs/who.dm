@@ -90,7 +90,7 @@
 //#else
 //	for(var/line in sortList(Lines))
 //		msg += "[line]\n"
-	msg += "<b>Players at the table:</b> [length(Lines)]"
+	msg += "<b>Players at the table:</b> [length_char(Lines)]"
 	if(holder)
 		msg += "<br><b>Whitelisted players:</b> [wled]"
 	to_chat(src, msg)

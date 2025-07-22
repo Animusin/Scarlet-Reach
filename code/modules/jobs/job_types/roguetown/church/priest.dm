@@ -376,7 +376,7 @@ GLOBAL_LIST_EMPTY(heretical_players)
                 H.remove_curse(temp)
                 priority_announce("[real_name] has lifted [curse_pick] from [H.real_name]!", title = "Mercy of the Faith", sound = 'sound/misc/bell.ogg')
             else
-                if (length(H.curses) >= 1)
+                if (length_char(H.curses) >= 1)
                     to_chat(src, span_warning("[H.real_name] is already afflicted by another curse."))
                     return
 

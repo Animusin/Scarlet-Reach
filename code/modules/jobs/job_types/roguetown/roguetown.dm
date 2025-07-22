@@ -49,7 +49,7 @@
 /datum/outfit/job/roguetown/pre_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
 	. = ..()
 	var/datum/patron/old_patron = H.patron
-	if(length(allowed_patrons) && (!old_patron || !(old_patron.type in allowed_patrons)))
+	if(length_char(allowed_patrons) && (!old_patron || !(old_patron.type in allowed_patrons)))
 		var/list/datum/patron/possiblegods = list()
 		var/list/datum/patron/preferredgods = list()
 		for(var/god in GLOB.patronlist)
@@ -59,7 +59,7 @@
 			var/datum/patron/PA = GLOB.patronlist[god]
 			if(PA.associated_faith == old_patron.associated_faith) // prefer to pick a patron within the same faith before apostatizing
 				preferredgods |= god
-		if(length(preferredgods))
+		if(length_char(preferredgods))
 			H.set_patron(default_patron || pick(preferredgods))
 		else
 			H.set_patron(default_patron || pick(possiblegods))

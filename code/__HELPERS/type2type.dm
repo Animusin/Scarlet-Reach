@@ -16,8 +16,8 @@
 /proc/hex2num(hex, safe=FALSE)
 	. = 0
 	var/place = 1
-	for(var/i in length(hex) to 1 step -1)
-		var/num = text2ascii(hex, i)
+	for(var/i in length_char(hex) to 1 step -1)
+		var/num = text2ascii_char(hex, i)
 		switch(num)
 			if(48 to 57)
 				num -= 48	//0-9
@@ -72,8 +72,8 @@
 //returns an empty list if the file doesn't exist
 /world/proc/file2list(filename, seperator="\n", trim = TRUE)
 	if (trim)
-		return splittext(trim(file2text(filename)),seperator)
-	return splittext(file2text(filename),seperator)
+		return splittext_char(trim(file2text(filename)),seperator)
+	return splittext_char(file2text(filename),seperator)
 
 //Turns a direction into text
 /proc/dir2text(direction)
@@ -517,23 +517,23 @@
 
 	. = list()
 
-	var/var_found = findtext(t_string,"\[") //Not the actual variables, just a generic "should we even bother" check
+	var/var_found = findtext_char(t_string,"\[") //Not the actual variables, just a generic "should we even bother" check
 	if(var_found)
 		//Find var names
 
 		// "A dog said hi [name]!"
-		// splittext() --> list("A dog said hi ","name]!"
+		// splittext_char() --> list("A dog said hi ","name]!"
 		// jointext() --> "A dog said hi name]!"
-		// splittext() --> list("A","dog","said","hi","name]!")
+		// splittext_char() --> list("A","dog","said","hi","name]!")
 
-		t_string = replacetext(t_string,"\[","\[ ")//Necessary to resolve "word[var_name]" scenarios
-		var/list/list_value = splittext(t_string,"\[")
+		t_string = replacetext_char(t_string,"\[","\[ ")//Necessary to resolve "word[var_name]" scenarios
+		var/list/list_value = splittext_char(t_string,"\[")
 		var/intermediate_stage = jointext(list_value, null)
 
-		list_value = splittext(intermediate_stage," ")
+		list_value = splittext_char(intermediate_stage," ")
 		for(var/value in list_value)
-			if(findtext(value,"]"))
-				value = splittext(value,"]") //"name]!" --> list("name","!")
+			if(findtext_char(value,"]"))
+				value = splittext_char(value,"]") //"name]!" --> list("name","!")
 				for(var/A in value)
 					if(var_source.vars.Find(A))
 						. += A
@@ -542,22 +542,22 @@
 /proc/color_hex2num(A)
 	if(!A)
 		return 0
-	var/R = hex2num(copytext(A,2,4))
-	var/G = hex2num(copytext(A,4,6))
-	var/B = hex2num(copytext(A,6,0))
+	var/R = hex2num(copytext_char(A,2,4))
+	var/G = hex2num(copytext_char(A,4,6))
+	var/B = hex2num(copytext_char(A,6,0))
 	return R+G+B
 
 //word of warning: using a matrix like this as a color value will simplify it back to a string after being set
 /proc/color_hex2color_matrix(string)
-	var/length = length(string)
+	var/length = length_char(string)
 	if(length != 7 && length != 9)
 		return color_matrix_identity()
-	var/r = hex2num(copytext(string, 2, 4))/255
-	var/g = hex2num(copytext(string, 4, 6))/255
-	var/b = hex2num(copytext(string, 6, 8))/255
+	var/r = hex2num(copytext_char(string, 2, 4))/255
+	var/g = hex2num(copytext_char(string, 4, 6))/255
+	var/b = hex2num(copytext_char(string, 6, 8))/255
 	var/a = 1
 	if(length == 9)
-		a = hex2num(copytext(string, 8, 10))/255
+		a = hex2num(copytext_char(string, 8, 10))/255
 	if(!isnum(r) || !isnum(g) || !isnum(b) || !isnum(a))
 		return color_matrix_identity()
 	return list(r,0,0,0, 0,g,0,0, 0,0,b,0, 0,0,0,a, 0,0,0,0)
@@ -581,7 +581,7 @@
 				return /atom
 			else
 				return /datum
-	return text2path(copytext(string_type, 1, last_slash))
+	return text2path(copytext_char(string_type, 1, last_slash))
 
 //returns a string the last bit of a type, without the preceeding '/'
 /proc/type2top(the_type)
@@ -602,15 +602,15 @@
 		if(/turf)
 			return "turf"
 		else //regex everything else (works for /proc too)
-			return lowertext(replacetext("[the_type]", "[type2parent(the_type)]/", ""))
+			return lowertext(replacetext_char("[the_type]", "[type2parent(the_type)]/", ""))
 
 /proc/strtohex(str)
 	if(!istext(str)||!str)
 		return
 	var/r
 	var/c
-	for(var/i = 1 to length(str))
-		c= text2ascii(str,i)
+	for(var/i = 1 to length_char(str))
+		c= text2ascii_char(str,i)
 		r+= num2hex(c)
 	return r
 
@@ -621,8 +621,8 @@
 		return
 	var/r
 	var/c
-	for(var/i = 1 to length(str)/2)
-		c = hex2num(copytext(str,i*2-1,i*2+1), safe)
+	for(var/i = 1 to length_char(str)/2)
+		c = hex2num(copytext_char(str,i*2-1,i*2+1), safe)
 		if(isnull(c))
 			return null
 		r += ascii2text(c)

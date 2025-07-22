@@ -3,12 +3,12 @@
 	. = ..()
 	if(href_list["inspect_animal"] && (isobserver(usr) || usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY)))
 		var/list/msg = list()
-		if(length(simple_wounds))
+		if(length_char(simple_wounds))
 			msg += "<B>Wounds:</B>"
 			for(var/datum/wound/wound as anything in simple_wounds)
 				msg += wound.get_visible_name(usr)
 
-		if(length(simple_embedded_objects))
+		if(length_char(simple_embedded_objects))
 			msg += "<B>Embedded objects:</B>"
 			for(var/obj/item/embedded in simple_embedded_objects)
 				msg += "<a href='?src=[REF(src)];embedded_object=[REF(embedded)]'>[embedded.name]</a>"

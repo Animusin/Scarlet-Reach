@@ -13,7 +13,7 @@ public class RGBA {
     @Override
     public String toString() {
         String s = Long.toString(toRGBA8888());
-        while(s.length() < 8)
+        while(s.length_char() < 8)
             s = "0" + s;
         return "#" + s;
     }

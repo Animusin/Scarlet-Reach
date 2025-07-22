@@ -67,7 +67,7 @@
 	var/list/new_gradient = list()
 	for (var/i in args)
 		new_gradient += counter
-		counter += 1/length(args)
+		counter += 1/length_char(args)
 		new_gradient += i
 	gradient = new_gradient
 

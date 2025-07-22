@@ -6,7 +6,7 @@
 		viewX = totalviewrange
 		viewY = totalviewrange
 	else
-		var/list/viewrangelist = splittext(view,"x")
+		var/list/viewrangelist = splittext_char(view,"x")
 		viewX = text2num(viewrangelist[1])
 		viewY = text2num(viewrangelist[2])
 	return list(viewX, viewY)

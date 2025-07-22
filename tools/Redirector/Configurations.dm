@@ -28,12 +28,12 @@ var/list/adminkeys = list()
 				server_gen = 0
 
 		else
-			if(findtext(line, ".") && !findtext(line, "##"))
+			if(findtext_char(line, ".") && !findtext_char(line, "##"))
 				if(server_gen)
 					var/filterline = dd_replacetext(line, " ", "")
-					var/serverlink = copytext(filterline, findtext( filterline, ")") + 1)
+					var/serverlink = copytext_char(filterline, findtext_char( filterline, ")") + 1)
 					servers.Add(serverlink)
-					servernames.Add( copytext(line, findtext(line, "("), findtext(line, ")") + 1))
+					servernames.Add( copytext_char(line, findtext_char(line, "("), findtext_char(line, ")") + 1))
 
 				else if(admin_gen)
 					adminfiles.Add(line)
@@ -47,7 +47,7 @@ var/list/adminkeys = list()
 
 		for(var/line in admin_config_stream)
 
-			var/akey = copytext(line, 1, findtext(line, " "))
+			var/akey = copytext_char(line, 1, findtext_char(line, " "))
 			adminkeys.Add(akey)
 
 

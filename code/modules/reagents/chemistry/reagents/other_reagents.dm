@@ -418,9 +418,9 @@
 
 			if(MUTCOLORS in N.dna.species.species_traits) //take current alien color and darken it slightly
 				var/newcolor = ""
-				var/len = length(N.dna.features["mcolor"])
+				var/len = length_char(N.dna.features["mcolor"])
 				for(var/i=1, i<=len, i+=1)
-					var/ascii = text2ascii(N.dna.features["mcolor"],i)
+					var/ascii = text2ascii_char(N.dna.features["mcolor"],i)
 					switch(ascii)
 						if(48)
 							newcolor += "0"

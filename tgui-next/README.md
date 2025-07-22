@@ -417,7 +417,7 @@ siblings.
 - `shrink: number` - This defines the ability for a flex item to shrink
 if necessary. Inverse of `grow`.
 - `basis: string` - This defines the default size of an element before the
-remaining space is distributed. It can be a length (e.g. `20%`, `5rem`, etc.),
+remaining space is distributed. It can be a length_char(e.g. `20%`, `5rem`, etc.),
 an `auto` or `content` keyword.
 - `align: string` - This allows the default alignment (or the one specified by align-items) to be overridden for individual flex items. See: [Flex](#flex).
 

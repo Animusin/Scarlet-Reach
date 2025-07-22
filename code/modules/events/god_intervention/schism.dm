@@ -253,7 +253,7 @@ GLOBAL_LIST_EMPTY(tennite_schisms)
 	var/uses_remaining = 2
 
 /obj/effect/proc_holder/spell/self/choose_schism_side/cast(mob/living/carbon/human/user)
-	if(!length(GLOB.tennite_schisms))
+	if(!length_char(GLOB.tennite_schisms))
 		to_chat(user, span_warning("There is no active schism to participate in."))
 		return
 

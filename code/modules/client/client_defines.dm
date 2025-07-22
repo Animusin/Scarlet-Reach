@@ -152,7 +152,7 @@
 		return
 	if(!force)
 		if(last_lighting_update)
-			if(length(last_lighting_update & list(mob.x, mob.y, mob.z)) == 3)
+			if(length_char(last_lighting_update & list(mob.x, mob.y, mob.z)) == 3)
 				return
 	last_lighting_update = list(mob.x, mob.y, mob.z)
 	var/area/A = get_area(mob)

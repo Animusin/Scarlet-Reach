@@ -15,7 +15,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		var/vv = FALSE
 		var/datum/outfit/varedit/VO = O
 		if(istype(VO))
-			vv = length(VO.vv_values)
+			vv = length_char(VO.vv_values)
 		dat += "<li>[O.name][vv ? "(VV)" : ""]</li> <a href='?_src_=holder;[HrefToken()];save_outfit=1;chosen_outfit=[REF(O)]'>Save</a> <a href='?_src_=holder;[HrefToken()];delete_outfit=1;chosen_outfit=[REF(O)]'>Delete</a>"
 	dat += "</ul>"
 	dat += "<a href='?_src_=holder;[HrefToken()];create_outfit_menu=1'>Create</a><br>"
@@ -97,7 +97,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 	mask_select += "</select>"
 
 	var/dat = {"
-	<html><head><title>Create Outfit</title></head><body>
+	<html><head><meta charset='UTF-8'><title>Create Outfit</title></head><body>
 	<form name="outfit" action="byond://?src=[REF(src)];[HrefToken()]" method="get">
 	<input type="hidden" name="src" value="[REF(src)]">
 	[HrefTokenFormField()]

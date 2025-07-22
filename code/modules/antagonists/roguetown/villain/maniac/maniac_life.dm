@@ -43,7 +43,7 @@
 			weight = 2
 		objects[object] = weight
 	objects -= dreamer.contents
-	if(!length(objects))
+	if(!length_char(objects))
 		return
 	var/static/list/speech_sounds = list(
 		'sound/villain/female_talk1.ogg',
@@ -64,7 +64,7 @@
 		speech = "[rand(0,9)][rand(0,9)][rand(0,9)][rand(0,9)]"
 	else
 		speech = pick_list_replacements("maniac.json", "dreamer_object")
-		speech = replacetext(speech, "%OWNER", "[dreamer.real_name]")
+		speech = replacetext_char(speech, "%OWNER", "[dreamer.real_name]")
 	var/language = dreamer.get_random_understood_language()
 	var/message = dreamer.compose_message(speaker, language, speech)
 	dreamer.playsound_local(dreamer, pick(speech_sounds), vol = 60, vary = FALSE)
@@ -80,7 +80,7 @@
 	var/list/turf/spawning_turfs = list()
 	for(var/turf/turf in view(dreamer))
 		spawning_turfs += turf
-	if(length(spawning_turfs))
+	if(length_char(spawning_turfs))
 		spawning_turf = pick(spawning_turfs)
 	if(!spawning_turf)
 		return

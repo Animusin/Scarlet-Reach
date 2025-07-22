@@ -399,7 +399,7 @@
 	if (!inertia_moving)
 		inertia_next_move = world.time + inertia_move_delay
 		newtonian_move(Dir)
-	if (length(client_mobs_in_contents))
+	if (length_char(client_mobs_in_contents))
 		update_parallax_contents()
 
 	return TRUE
@@ -680,7 +680,7 @@
 
 	SEND_SIGNAL(src, COMSIG_MOVABLE_POST_THROW, TT, spin)
 	SSthrowing.processing[src] = TT
-	if (SSthrowing.state == SS_PAUSED && length(SSthrowing.currentrun))
+	if (SSthrowing.state == SS_PAUSED && length_char(SSthrowing.currentrun))
 		SSthrowing.currentrun[src] = TT
 	TT.tick()
 

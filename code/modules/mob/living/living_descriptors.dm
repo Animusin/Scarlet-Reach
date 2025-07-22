@@ -9,7 +9,7 @@
 	if(!mob_descriptors)
 		return
 	mob_descriptors -= descriptor_type
-	if(!length(mob_descriptors))
+	if(!length_char(mob_descriptors))
 		mob_descriptors = null
 
 /mob/living/proc/clear_mob_descriptors()
@@ -108,7 +108,7 @@
 	for(var/i in 1 to descs.len)
 		var/desc_type = descs[i]
 		var/datum/mob_descriptor/descriptor = MOB_DESCRIPTOR(desc_type)
-		string = replacetext(string, "%DESC[i]%", descriptor.get_coalesce_text(described, used_verbage))
+		string = replacetext_char(string, "%DESC[i]%", descriptor.get_coalesce_text(described, used_verbage))
 		var/used_verb = descriptor.get_verbage(described)
 		if(used_verb)
 			used_verbage |= used_verb
@@ -163,12 +163,12 @@
 				man_replace = "creacher"
 				him_replace = "it"
 	// LETHALSTONE EDIT END
-	string = replacetext(string, "%THEY%", they_replace)
+	string = replacetext_char(string, "%THEY%", they_replace)
 	if(they_replace == "they")
-		string = replacetext(string, "%HAVE%", "have")
+		string = replacetext_char(string, "%HAVE%", "have")
 	else
-		string = replacetext(string, "%HAVE%", "has")
-	string = replacetext(string, "%MAN%", man_replace)
-	string = replacetext(string, "%HIM%", him_replace)
+		string = replacetext_char(string, "%HAVE%", "has")
+	string = replacetext_char(string, "%MAN%", man_replace)
+	string = replacetext_char(string, "%HIM%", him_replace)
 	string = capitalize(string)
 	return string

@@ -14,7 +14,7 @@ GLOBAL_PROTECT(agevetted_list)
 /mob/proc/check_agevet()
 	if(client)
 		return client.check_agevet()
-	if(LAZYACCESS(GLOB.agevetted_list, ckey) || copytext(key,1,2)=="@") //aghosted people stay verified
+	if(LAZYACCESS(GLOB.agevetted_list, ckey) || copytext_char(key,1,2)=="@") //aghosted people stay verified
 		return TRUE
 	return FALSE
 

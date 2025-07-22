@@ -52,7 +52,7 @@
 	else
 		STOP_PROCESSING(SSfastprocess, src)
 	dropContents()
-	if(length(component_parts))
+	if(length_char(component_parts))
 		for(var/atom/A in component_parts)
 			qdel(A)
 		component_parts.Cut()

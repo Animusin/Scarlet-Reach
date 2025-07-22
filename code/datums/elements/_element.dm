@@ -100,7 +100,7 @@
 		return
 	var/list/arguments = list(eletype)
 	/// 3 is the length of fixed args of this proc, any further one is passed down to AddElement.
-	if(length(args) > 3)
+	if(length_char(args) > 3)
 		arguments += args.Copy(4)
 	/// We actually pass down a copy of the arguments since it's manipulated by the end of the proc.
 	_AddElement(arguments.Copy())

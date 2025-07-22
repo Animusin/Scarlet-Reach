@@ -53,8 +53,8 @@
 	if(!color_string)
 		return null
 	. = list()
-	var/list/split_colors = splittext(color_string, "#")
-	for(var/color in 2 to length(split_colors))
+	var/list/split_colors = splittext_char(color_string, "#")
+	for(var/color in 2 to length_char(split_colors))
 		. += "#[split_colors[color]]"
 
 /// Turns a list such as ("#FFFFFF", #00FFFF) into a color string of "#FFFFFF#00FFFF"

@@ -94,7 +94,7 @@
 
 	var/perpage = 100
 	var/requested_page = 1
-	var/hub_url = replacetext(hub_address,".","/")
+	var/hub_url = replacetext_char(hub_address,".","/")
 	var/list/medal_data = list()
 	var/regex/datepart_regex = regex(@"[/\s]")
 	while(1)
@@ -114,7 +114,7 @@
 		while(R.Find(data))
 			var/key = ckey(R.group[1])
 			var/medal = R.group[2]
-			var/list/dateparts = splittext(R.group[3],datepart_regex)
+			var/list/dateparts = splittext_char(R.group[3],datepart_regex)
 			var/list/out_date = list(dateparts[3],dateparts[1],dateparts[2]) // YYYY/MM/DD
 			if(!valid_medals.Find(medal))
 				continue

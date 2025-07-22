@@ -229,7 +229,7 @@ Delayed insert mode was removed in mysql 7 and only works with MyISAM type table
 			has_question_mark[column] = TRUE
 	for (var/column in special_columns)
 		columns[column] = special_columns[column]
-		has_question_mark[column] = findtext(special_columns[column], "?")
+		has_question_mark[column] = findtext_char(special_columns[column], "?")
 
 	// Prepare SQL query full of placeholders
 	var/list/query_parts = list("INSERT")
@@ -253,7 +253,7 @@ Delayed insert mode was removed in mysql 7 and only works with MyISAM type table
 				query_parts += ", "
 			if (has_question_mark[column])
 				var/name = "p[arguments.len]"
-				query_parts += replacetext(columns[column], "?", ":[name]")
+				query_parts += replacetext_char(columns[column], "?", ":[name]")
 				arguments[name] = row[column]
 			else
 				query_parts += columns[column]
@@ -337,7 +337,7 @@ Delayed insert mode was removed in mysql 7 and only works with MyISAM type table
 		start_time = REALTIMEOFDAY
 	Close()
 	. = run_query(async)
-	var/timed_out = !. && findtext(last_error, "Operation timed out")
+	var/timed_out = !. && findtext_char(last_error, "Operation timed out")
 	if(!. && log_error)
 		log_sql("[last_error] | Query used: [sql]")
 	if(!async && timed_out)

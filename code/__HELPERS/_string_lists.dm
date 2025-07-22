@@ -29,7 +29,7 @@ GLOBAL_VAR(string_filename_current_key)
 
 /proc/special_chars_to_html_tags(list/strings)
 	for (var/key in strings)
-		strings[replacetext(key, "\'", "&#39;")] = strings[key]
+		strings[replacetext_char(key, "\'", "&#39;")] = strings[key]
 	return strings
 
 /proc/load_strings_file(filename, directory = "strings", convert_HTML)

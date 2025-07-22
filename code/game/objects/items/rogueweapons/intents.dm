@@ -117,7 +117,7 @@
 	if(blade_class == BCLASS_EFFECT)
 		var/datum/intent/effect/int = src
 		inspec += "\nThis intent will apply a status effect on a successful hit. Damage dealt is not required."
-		if(length(int.target_parts))
+		if(length_char(int.target_parts))
 			inspec += "\nWorks on these bodyparts: "
 			var/str
 			for(var/part in int.target_parts)

@@ -70,8 +70,8 @@ unsigned int totalHardDels = 0;
 bool endofbuffer = false;
 //like substr, but returns an empty string if the string is smaller then start, rather then an exception.
 inline string safe_substr(string * S, size_t start = 0, size_t end = string::npos) {
-	if (start > S->length())
-		start = S->length();
+	if (start > S->length_char())
+		start = S->length_char();
 	return S->substr(start, end);
 }
 //get_line() is slow as fucking balls. this is quicker because we prefill a buffer rather then read 1 byte at a time searching for newlines, lowering on i/o calls and overhead. (110MB/s vs 40MB/s on a 1.8GB file pre-filled into the disk cache)
@@ -125,17 +125,17 @@ inline void forward_progress(FILE * inputFile) {
 		}
 
 		//strip out any timestamps.
-		if (nextLine->length() >= 10) {
+		if (nextLine->length_char() >= 10) {
 			if ((*nextLine)[0] == '[' && (*nextLine)[3] == ':' && (*nextLine)[6] == ':' && (*nextLine)[9] == ']')
 				nextLine->erase(0, 10);
-			else if (nextLine->length() >= 26 && ((*nextLine)[0] == '[' && (*nextLine)[5] == '-' && (*nextLine)[14] == ':' && (*nextLine)[20] == '.' && (*nextLine)[24] == ']'))
+			else if (nextLine->length_char() >= 26 && ((*nextLine)[0] == '[' && (*nextLine)[5] == '-' && (*nextLine)[14] == ':' && (*nextLine)[20] == '.' && (*nextLine)[24] == ']'))
 				nextLine->erase(0, 26);
 		}
 		//strip out log cats
-		if (nextLine->length() >= 9 && safe_substr(nextLine, 0, 9) == "RUNTIME: ") {
+		if (nextLine->length_char() >= 9 && safe_substr(nextLine, 0, 9) == "RUNTIME: ") {
 			nextLine->erase(0, 9);
 		}
-	} while (!endofbuffer && nextLine->length() < 1);
+	} while (!endofbuffer && nextLine->length_char() < 1);
 
 }
 //deallocates to, copys from to to.
@@ -181,9 +181,9 @@ bool readFromFile(bool isstdin) {
 		}
 		//Found a runtime!
 		if (safe_substr(currentLine, 0, 14) == "runtime error:") {
-			if (currentLine->length() <= 17) { //empty runtime, check next line.
+			if (currentLine->length_char() <= 17) { //empty runtime, check next line.
 				//runtime is on the line before this one. (byond bug)
-				if (nextLine->length() < 2) {
+				if (nextLine->length_char() < 2) {
 					string_send(lastLine, nextLine);
 				}
 				forward_progress(inputFile);
@@ -324,15 +324,15 @@ bool writeToFile(bool usestdio) {
 				runtime* R = &infiniteLoops[i];
 				*output << endl << endl << "The following infinite loop has occurred " << R->count << " time(s).\n";
 				*output << R->text << endl;
-				if(R->proc.length())
+				if(R->proc.length_char())
 					*output << R->proc << endl;
-				if(R->source.length())
+				if(R->source.length_char())
 					*output << R->source << endl;
-				if(R->usr.length())
+				if(R->usr.length_char())
 					*output << R->usr << endl;
-				if(R->src.length())
+				if(R->src.length_char())
 					*output << R->src << endl;
-				if(R->loc.length())
+				if(R->loc.length_char())
 					*output << R->loc << endl;
 			}
 			*output << endl << endl; //For spacing
@@ -351,15 +351,15 @@ bool writeToFile(bool usestdio) {
 			runtime* R = &runtimes[i];
 			*output << endl << endl << "The following runtime has occurred " << R->count << " time(s).\n";
 			*output << R->text << endl;
-			if(R->proc.length())
+			if(R->proc.length_char())
 				*output << R->proc << endl;
-			if(R->source.length())
+			if(R->source.length_char())
 				*output << R->source << endl;
-			if(R->usr.length())
+			if(R->usr.length_char())
 				*output << R->usr << endl;
-			if(R->src.length())
+			if(R->src.length_char())
 				*output << R->src << endl;
-			if(R->loc.length())
+			if(R->loc.length_char())
 				*output << R->loc << endl;
 		}
 		*output << endl << endl; //For spacing

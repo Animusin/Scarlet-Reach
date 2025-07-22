@@ -556,7 +556,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/clothing/mask/cigarette/pipe/attack_self(mob/user)
 	var/turf/location = get_turf(user)
 	if(lit)
-		name = copytext(name,5,length(name)+1)
+		name = copytext_char(name,5,length_char(name)+1)
 		user.visible_message(span_notice("[user] puts out [src]."), span_notice("I put out [src]."))
 		lit = 0
 		set_light_on(FALSE)

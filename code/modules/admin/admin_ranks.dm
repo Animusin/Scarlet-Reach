@@ -51,7 +51,7 @@ GLOBAL_PROTECT(protected_ranks)
 		message_admins("[key_name_admin(usr)][msg]")
 		log_admin("[key_name(usr)][msg]")
 		return
-	var/list/keywords = splittext(group, " ")
+	var/list/keywords = splittext_char(group, " ")
 	var/flag = 0
 	for(var/k in keywords)
 		switch(k)

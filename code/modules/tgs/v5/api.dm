@@ -196,7 +196,7 @@
 	return new /datum/tgs_message_content(message)
 
 /datum/tgs_api/v5/ChatBroadcast(datum/tgs_message_content/message2, list/channels)
-	if(!length(channels))
+	if(!length_char(channels))
 		channels = ChatChannelInfo()
 
 	var/list/ids = list()
@@ -221,7 +221,7 @@
 /datum/tgs_api/v5/proc/SendChatMessageRaw(datum/tgs_message_content/message2, list/channel_ids)
 	message2 = UpgradeDeprecatedChatMessage(message2)
 
-	if (!length(channel_ids))
+	if (!length_char(channel_ids))
 		return
 
 	var/list/data = message2._interop_serialize()

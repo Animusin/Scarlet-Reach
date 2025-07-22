@@ -159,7 +159,7 @@
 	var/list/processing_list = get_equipped_items(include_pockets = TRUE) + held_items
 	listclearnulls(processing_list) // handles empty hands
 	var/i = 0
-	while(i < length(processing_list))
+	while(i < length_char(processing_list))
 		var/atom/A = processing_list[++i]
 		var/datum/component/storage/STR = A.GetComponent(/datum/component/storage)
 		if(STR)

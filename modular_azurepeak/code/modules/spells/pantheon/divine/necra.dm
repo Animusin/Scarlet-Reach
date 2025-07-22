@@ -281,10 +281,10 @@
 			if((O.type in whitelisted_objects))
 				add_to_scry(O, user)
 				return TRUE
-		if(length(marked_objects))
+		if(length_char(marked_objects))
 			success = try_scry(user)
 	if(ismob(targets[1]))
-		if(length(marked_objects))
+		if(length_char(marked_objects))
 			success = try_scry(user)
 	if(success)
 		return TRUE
@@ -321,7 +321,7 @@
 		revert_cast()
 		return
 	var/holyskill = user.get_skill_level(/datum/skill/magic/holy)
-	if(length(marked_objects) >= holyskill)
+	if(length_char(marked_objects) >= holyskill)
 		to_chat(user, span_warning("I'm focusing on too many gravestones already! I will replace this one with the first I recall."))
 		marked_objects[last_index] = O
 		last_index++

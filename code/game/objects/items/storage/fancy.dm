@@ -36,7 +36,7 @@
 /obj/item/storage/fancy/examine(mob/user)
 	. = ..()
 	if(fancy_open)
-		if(length(contents) == 1)
+		if(length_char(contents) == 1)
 			. += "There is one [icon_type] left."
 		else
 			. += "There are [contents.len <= 0 ? "no" : "[contents.len]"] [icon_type]s left."

@@ -549,7 +549,7 @@
 			to_chat(user, span_warning("This object has already been offered to the tree!"))
 			return TRUE
 
-		if(length(tree_offerings) >= 3)
+		if(length_char(tree_offerings) >= 3)
 			to_chat(user, span_warning("The tree has received enough offerings for now!"))
 			return TRUE
 
@@ -610,12 +610,12 @@
 	else
 		. += span_info("The branches are elaborately pruned.")
 
-	if(length(tree_offerings) < 3)
+	if(length_char(tree_offerings) < 3)
 		. += span_info("The tree yearns for an offering. Whispers enter your mind. A red crystal that shimmers... Something that sculpts one's form... A glittering seed...")
 
 /obj/structure/eoran_pomegranate_tree/proc/reset_care()
 	//The benefit of rare offerings are kept through harvests.
-	happiness = 0 + (10 * length(tree_offerings))
+	happiness = 0 + (10 * length_char(tree_offerings))
 	water_happiness = 0
 	fertilizer_happiness = 0
 	prune_count = 0

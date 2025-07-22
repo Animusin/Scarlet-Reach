@@ -25,13 +25,13 @@
 	. = ..()
 	if(!.)
 		return
-	return length(bodypart.embedded_objects)
+	return length_char(bodypart.embedded_objects)
 
 /datum/surgery_step/remove_object/validate_target(mob/user, mob/living/target, target_zone, datum/intent/intent)
 	. = ..()
 	if(!.)
 		return
-	return length(target.get_embedded_objects())
+	return length_char(target.get_embedded_objects())
 
 /datum/surgery_step/remove_object/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	display_results(user, target, span_notice("I look for objects embedded in [target]'s [parse_zone(user.zone_selected)]..."),

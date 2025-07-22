@@ -15,7 +15,7 @@
 			return bodypart
 
 /mob/living/carbon/proc/get_bodypart_complex(list/zones)
-	if(!length(zones))
+	if(!length_char(zones))
 		zones = list(BODY_ZONE_CHEST)
 	var/list/targets = list()
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
@@ -27,7 +27,7 @@
 					continue
 				targets += bodypart
 				break
-	if(length(targets))
+	if(length_char(targets))
 		return pick(targets)
 
 /mob/living/carbon/has_hand_for_held_index(i, extra_checks)

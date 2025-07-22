@@ -12,7 +12,7 @@
 	var/message = input(usr, "", "say") as text|null
 	// If they don't type anything just drop the message.
 	clear_typing_indicator()
-	if(!length(message))
+	if(!length_char(message))
 		return
 	return say_verb(message)
 
@@ -21,7 +21,7 @@
 	set category = "IC"
 	set hidden = 1
 
-	if(!length(message))
+	if(!length_char(message))
 		return
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
@@ -55,7 +55,7 @@
 	var/message = input(usr, "", "me") as text|null
 	// If they don't type anything just drop the message.
 	clear_typing_indicator()		// clear it immediately!
-	if(!length(message))
+	if(!length_char(message))
 		return
 	return me_verb(message)
 
@@ -70,7 +70,7 @@
 #endif
 	// If they don't type anything just drop the message.
 	clear_typing_indicator()
-	if(!length(message))
+	if(!length_char(message))
 		return
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, span_danger("Speech is currently admin-disabled."))
@@ -90,7 +90,7 @@
 	var/message = input(usr, "", "me") as message|null
 	// If they don't type anything just drop the message.
 	clear_typing_indicator()
-	if(!length(message))
+	if(!length_char(message))
 		return
 	return me_big_verb(message)
 
@@ -104,7 +104,7 @@
 #endif
 	// If they don't type anything just drop the message.
 	clear_typing_indicator()
-	if(!length(message))
+	if(!length_char(message))
 		return
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, span_danger("Speech is currently admin-disabled."))
@@ -128,7 +128,7 @@
 
 /mob/proc/check_whisper(message, forced)
 	if(copytext_char(message, 1, 2) == "+")
-		var/text = copytext(message, 2)
+		var/text = copytext_char(message, 2)
 		var/boldcheck = findtext_char(text, "+")	//Check for a *second* + in the text, implying the message is meant to have something formatted as bold (+text+)
 		whisper(copytext_char(message, boldcheck ? 1 : 2),sanitize = FALSE)//already sani'd
 		return 1
@@ -157,6 +157,6 @@
 		return MODE_HEADSET
 	else if(key == "%")
 		return MODE_SING
-	else if(length(message) > 2 && (key in GLOB.department_radio_prefixes))
+	else if(length_char(message) > 2 && (key in GLOB.department_radio_prefixes))
 		var/key_symbol = lowertext(copytext_char(message, 2, 3))
 		return GLOB.department_radio_keys[key_symbol]

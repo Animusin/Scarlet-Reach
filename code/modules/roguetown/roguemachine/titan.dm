@@ -65,10 +65,10 @@ GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 		notlord = FALSE
 
 	if(mode)
-		if(findtext(message, "nevermind"))
+		if(findtext_char(message, "nevermind"))
 			mode = 0
 			return
-	if(findtext(message, "summon crown")) //This must never fail, thus place it before all other modestuffs.
+	if(findtext_char(message, "summon crown")) //This must never fail, thus place it before all other modestuffs.
 		if(!SSroguemachine.crown)
 			new /obj/item/clothing/head/roguetown/crown/serpcrown(src.loc)
 			say("The crown is summoned!")
@@ -107,7 +107,7 @@ GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 			say("The crown is summoned!")
 			playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
 			playsound(src, 'sound/misc/hiss.ogg', 100, FALSE, -1)
-	if(findtext(message, "summon key"))
+	if(findtext_char(message, "summon key"))
 		if(nocrown)
 			say("You need the crown.")
 			playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
@@ -142,10 +142,10 @@ GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 			playsound(src, 'sound/misc/hiss.ogg', 100, FALSE, -1)
 	switch(mode)
 		if(0)
-			if(findtext(message, "secrets of the throat"))
+			if(findtext_char(message, "secrets of the throat"))
 				say("My commands are: Make Decree, Make Announcement, Set Taxes, Declare Outlaw, Summon Crown, Summon Key, Make Law, Remove Law, Purge Laws, Purge Decrees, Become Regent, Nevermind")
 				playsound(src, 'sound/misc/machinelong.ogg', 100, FALSE, -1)
-			if(findtext(message, "make announcement"))
+			if(findtext_char(message, "make announcement"))
 				if(nocrown)
 					say("You need the crown.")
 					playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
@@ -157,7 +157,7 @@ GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 				playsound(src, 'sound/misc/machineyes.ogg', 100, FALSE, -1)
 				mode = 1
 				return
-			if(findtext(message, "make decree"))
+			if(findtext_char(message, "make decree"))
 				if(!SScommunications.can_announce(H))
 					say("I must gather my strength!")
 					playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
@@ -170,7 +170,7 @@ GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 				playsound(src, 'sound/misc/machineyes.ogg', 100, FALSE, -1)
 				mode = 2
 				return
-			if(findtext(message, "purge decrees"))
+			if(findtext_char(message, "purge decrees"))
 				if(!SScommunications.can_announce(H))
 					say("I must gather my strength!")
 					playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
@@ -183,7 +183,7 @@ GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 				playsound(src, 'sound/misc/machineyes.ogg', 100, FALSE, -1)
 				purge_decrees()
 				return
-			if(findtext(message, "make law"))
+			if(findtext_char(message, "make law"))
 				if(!SScommunications.can_announce(H))
 					say("I must gather my strength!")
 					playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
@@ -196,7 +196,7 @@ GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 				playsound(src, 'sound/misc/machineyes.ogg', 100, FALSE, -1)
 				mode = 4
 				return
-			if(findtext(message, "remove law"))
+			if(findtext_char(message, "remove law"))
 				if(!SScommunications.can_announce(H))
 					say("I must gather my strength!")
 					playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
@@ -205,7 +205,7 @@ GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 					say("You are not my master!")
 					playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
 					return
-				var/message_clean = replacetext(message, "remove law", "")
+				var/message_clean = replacetext_char(message, "remove law", "")
 				var/law_index = text2num(message_clean) || 0
 				if(!law_index || !GLOB.laws_of_the_land[law_index])
 					say("That law doesn't exist!")
@@ -214,7 +214,7 @@ GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 				playsound(src, 'sound/misc/machineyes.ogg', 100, FALSE, -1)
 				remove_law(law_index)
 				return
-			if(findtext(message, "purge laws"))
+			if(findtext_char(message, "purge laws"))
 				if(!SScommunications.can_announce(H))
 					say("I must gather my strength!")
 					playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
@@ -227,7 +227,7 @@ GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 				playsound(src, 'sound/misc/machineyes.ogg', 100, FALSE, -1)
 				purge_laws()
 				return
-			if(findtext(message, "declare outlaw"))
+			if(findtext_char(message, "declare outlaw"))
 				if(notlord || nocrown)
 					say("You are not my master!")
 					playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
@@ -236,7 +236,7 @@ GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 				playsound(src, 'sound/misc/machinequestion.ogg', 100, FALSE, -1)
 				mode = 3
 				return
-			if(findtext(message, "set taxes"))
+			if(findtext_char(message, "set taxes"))
 				if(notlord || nocrown)
 					say("You are not my master!")
 					playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
@@ -245,7 +245,7 @@ GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 				playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
 				give_tax_popup(H)
 				return
-			if(findtext(message, "become regent"))
+			if(findtext_char(message, "become regent"))
 				if(nocrown)
 					say("You need the crown.")
 					playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
@@ -300,7 +300,7 @@ GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 	if(newtax)
 		if(!Adjacent(user))
 			return
-		if(findtext(num2text(newtax), "."))
+		if(findtext_char(num2text(newtax), "."))
 			return
 		newtax = CLAMP(newtax, 1, 99)
 		SStreasury.tax_value = newtax / 100
@@ -370,7 +370,7 @@ GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 
 /proc/make_law(raw_message)
 	GLOB.laws_of_the_land += raw_message
-	priority_announce("[length(GLOB.laws_of_the_land)]. [raw_message]", "A LAW IS DECLARED", pick('sound/misc/new_law.ogg', 'sound/misc/new_law2.ogg'), "Captain")
+	priority_announce("[length_char(GLOB.laws_of_the_land)]. [raw_message]", "A LAW IS DECLARED", pick('sound/misc/new_law.ogg', 'sound/misc/new_law2.ogg'), "Captain")
 	GLOB.scarlet_round_stats[STATS_LAWS_AND_DECREES_MADE]++
 
 /proc/remove_law(law_index)

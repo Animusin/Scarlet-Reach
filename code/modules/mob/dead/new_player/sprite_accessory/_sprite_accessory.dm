@@ -193,11 +193,11 @@
 	var/list/color_list = list()
 	for(var/i in 1 to color_keys)
 		var/color
-		if(length(default_colors) >= i && !isnull(default_colors[i]))
+		if(length_char(default_colors) >= i && !isnull(default_colors[i]))
 			color = default_colors[i]
 		else
 			var/used_define
-			if(length(color_key_defaults) >= i && color_key_defaults[i] != null)
+			if(length_char(color_key_defaults) >= i && color_key_defaults[i] != null)
 				used_define = color_key_defaults[i]
 			else
 				used_define = default_define_for_color_key(i)
@@ -283,7 +283,7 @@
 			var/color_suffix = ""
 			if(color_keys != 1)
 				color_suffix = "_[color_index]"
-			if(length(layer_suffixes))
+			if(length_char(layer_suffixes))
 				for(var/layer_suffix in layer_suffixes)
 					var/final_state = "[state][layer_suffix][color_suffix]"
 					final_states += final_state
@@ -292,7 +292,7 @@
 				final_states += final_state
 	if(extra_state)
 		for(var/icon_state in icon_states)
-			if(length(layer_suffixes))
+			if(length_char(layer_suffixes))
 				for(var/layer_suffix in layer_suffixes)
 					final_states += "[icon_state][layer_suffix]_extra"
 			else

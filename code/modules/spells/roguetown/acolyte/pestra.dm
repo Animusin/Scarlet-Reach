@@ -87,7 +87,7 @@
 		if(!target.getorganslot(missing_organ_slot))
 			continue
 		missing_organs -= missing_organ_slot
-	if(!length(missing_organs))
+	if(!length_char(missing_organs))
 		return
 	var/list/organs = list()
 	//try to get from user's hands first
@@ -109,7 +109,7 @@
 
 /obj/effect/proc_holder/spell/invoked/attach_bodypart/proc/get_limbs(mob/living/target, mob/living/user)
 	var/list/missing_limbs = target.get_missing_limbs()
-	if(!length(missing_limbs))
+	if(!length_char(missing_limbs))
 		return
 	var/list/limbs = list()
 	//try to get from user's hands first

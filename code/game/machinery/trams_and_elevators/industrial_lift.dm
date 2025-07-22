@@ -131,7 +131,7 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 
 	UnregisterSignal(potential_rider, list(COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_UPDATE_GLIDE_SIZE))
 
-	if(!length(held_cargo))
+	if(!length_char(held_cargo))
 		SEND_SIGNAL(src, COMSIG_TRAM_EMPTY)
 
 /obj/structure/industrial_lift/proc/AddItemOnLift(datum/source, atom/movable/new_lift_contents)
@@ -511,7 +511,7 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	consider_anything_past = isnum(consider_anything_past) ? max(consider_anything_past, 0) : 0
 	//just in case someone fucks up the arguments
 
-	if(consider_anything_past && length(lift_load) <= consider_anything_past)
+	if(consider_anything_past && length_char(lift_load) <= consider_anything_past)
 		return FALSE
 
 	///list of resolve()'d initial_contents that are still in lift_load

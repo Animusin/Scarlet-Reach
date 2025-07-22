@@ -106,7 +106,7 @@
 					if(bool_combined_condition) //Idk but it works like this.
 						valid_parts += BP
 
-				if(length(valid_parts))
+				if(length_char(valid_parts))
 					var/obj/item/bodypart/BP = pick(valid_parts)
 					BP.add_wound(/datum/wound/slash, FALSE, "looks sickly and ashen.")
 					new /obj/item/ash(owner.loc)
@@ -160,7 +160,7 @@
 		M.blood_volume = min(M.blood_volume + healing_power * 2, BLOOD_VOLUME_NORMAL)
 
 	var/list/wounds = M.get_wounds()
-	if(length(wounds))
+	if(length_char(wounds))
 		M.heal_wounds(healing_power)
 		M.update_damage_overlays()
 

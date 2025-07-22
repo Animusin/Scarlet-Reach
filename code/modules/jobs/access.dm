@@ -40,7 +40,7 @@
 	. = list()
 	if(!access_text)
 		return
-	var/list/split = splittext(access_text,";")
+	var/list/split = splittext_char(access_text,";")
 	for(var/x in split)
 		var/n = text2num(x)
 		if(n)
@@ -68,17 +68,17 @@
 	if(!islist(req_access)) //something's very wrong
 		return TRUE
 
-	if(!req_access.len && !length(req_one_access))
+	if(!req_access.len && !length_char(req_one_access))
 		return TRUE
 
-	if(!length(access_list) || !islist(access_list))
+	if(!length_char(access_list) || !islist(access_list))
 		return FALSE
 
 	for(var/req in req_access)
 		if(!(req in access_list)) //doesn't have this access
 			return FALSE
 
-	if(length(req_one_access))
+	if(length_char(req_one_access))
 		for(var/req in req_one_access)
 			if(req in access_list) //has an access from the single access list
 				return TRUE

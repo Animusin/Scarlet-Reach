@@ -44,7 +44,7 @@ GLOBAL_VAR(king_throne)
 	. = ..()
 
 /obj/structure/roguethrone/proc/process_rebel_leader_sit(dt)
-	if(!length(buckled_mobs))
+	if(!length_char(buckled_mobs))
 		return
 	var/mob/living/user = buckled_mobs[1]
 	if(user.stat != CONSCIOUS)

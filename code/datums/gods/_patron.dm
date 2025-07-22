@@ -69,7 +69,7 @@ GLOBAL_LIST_EMPTY(preference_patrons)
 /datum/patron/proc/hear_prayer(mob/living/follower, message)
     if(!follower || !message)
         return FALSE
-    if(length(message) < 15)
+    if(length_char(message) < 15)
         to_chat(follower, span_warning("Your prayer is too weak to be considered!"))
         return FALSE
     var/prayer = sanitize_hear_message(message)

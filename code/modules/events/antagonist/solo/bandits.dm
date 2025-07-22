@@ -58,7 +58,7 @@
 	var/list/candidates = get_candidates()
 	
 	// Allow the event to run if there's at least 1 candidate, even if fewer than desired
-	if(length(candidates) < 1)
+	if(length_char(candidates) < 1)
 		return FALSE
 	
 	return TRUE
@@ -68,9 +68,9 @@
 
 /datum/round_event/antagonist/solo/bandits/start()
 	var/datum/job/bandit_job = SSjob.GetJob("Bandit")
-	bandit_job.total_positions = length(setup_minds)
-	bandit_job.spawn_positions = length(setup_minds)
-	SSmapping.retainer.bandit_goal = rand(200,400) + (length(setup_minds) * rand(200,400))
+	bandit_job.total_positions = length_char(setup_minds)
+	bandit_job.spawn_positions = length_char(setup_minds)
+	SSmapping.retainer.bandit_goal = rand(200,400) + (length_char(setup_minds) * rand(200,400))
 	for(var/datum/mind/antag_mind as anything in setup_minds)
 		var/datum/job/J = SSjob.GetJob(antag_mind.current?.job)
 		J?.current_positions = max(J?.current_positions-1, 0)

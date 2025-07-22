@@ -207,7 +207,7 @@
 	if(!.)
 		return FALSE
 	var/list/allowed_sexes = list()
-	if(length(allowed_sex))
+	if(length_char(allowed_sex))
 		allowed_sexes |= allowed_sex
 	var/mob/living/carbon/human/H
 	if(ishuman(M))
@@ -220,8 +220,8 @@
 				allowed_sexes -= FEMALE
 				allowed_sexes += MALE
 	if(slot_flags & slotdefine2slotbit(slot))
-		if(!length(allowed_sexes) || (M.gender in allowed_sex))
-			if(length(allowed_race) && H)
+		if(!length_char(allowed_sexes) || (M.gender in allowed_sex))
+			if(length_char(allowed_race) && H)
 				if(H.dna.species.type in allowed_race)
 					return TRUE
 				return FALSE

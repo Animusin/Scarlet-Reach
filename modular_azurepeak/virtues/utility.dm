@@ -70,7 +70,7 @@
 				if(T && T.z == target_z && T.y > target_y && istype(C, /obj/structure/chair/wood/rogue) && !T.density && !T.is_blocked_turf(FALSE))
 					possible_chairs += C
 
-			if(length(possible_chairs))
+			if(length_char(possible_chairs))
 				var/obj/structure/chair/chosen_chair = pick(possible_chairs)
 				recipient.forceMove(get_turf(chosen_chair))
 				chosen_chair.buckle_mob(recipient)
@@ -81,7 +81,7 @@
 					if(T.z == target_z && T.y > (target_y + 4) && !T.density && !T.is_blocked_turf(FALSE))
 						possible_spawns += T
 
-				if(length(possible_spawns))
+				if(length_char(possible_spawns))
 					var/turf/spawn_loc = pick(possible_spawns)
 					recipient.forceMove(spawn_loc)
 					to_chat(recipient, span_notice("As a resident of Scarlet Reach, you find yourself in the local tavern."))
@@ -139,7 +139,7 @@
 		var/datum/language/a_language = new language_type()
 		choices[a_language.name] = language_type
 
-	if(length(choices))	//If this isn't true then we have no new languages learn -- we probably picked archivist
+	if(length_char(choices))	//If this isn't true then we have no new languages learn -- we probably picked archivist
 		var/lang_count = 3
 		var/count = lang_count
 		for(var/i in 1 to lang_count)

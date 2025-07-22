@@ -15,7 +15,7 @@
 
 /datum/customizer/New()
 	. = ..()
-	if(!length(customizer_choices))
+	if(!length_char(customizer_choices))
 		CRASH("Customizer [type] lacks choices")
 	if(!default_choice)
 		default_choice = customizer_choices[1]

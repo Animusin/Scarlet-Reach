@@ -1,7 +1,7 @@
 /client/proc/OpenMaturityPrompt()
 	var/dat = "<html>"
 	dat += {"
-	<head>
+	<head><meta charset='UTF-8'>
 		<style>
 			p {
 				text-align: center;

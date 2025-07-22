@@ -17,14 +17,14 @@
 	if (!apply_parallax_pref(viewmob)) //don't want shit computers to crash when specing someone with insane parallax, so use the viewer's pref
 		return
 
-	if(!length(C.parallax_layers_cached))
+	if(!length_char(C.parallax_layers_cached))
 		C.parallax_layers_cached = list()
 		C.parallax_layers_cached += new /atom/movable/screen/parallax_layer/rogue(null, C.view)
 		C.parallax_layers_cached += new /atom/movable/screen/parallax_layer/rogue/fog(null, C.view)
 
 	C.parallax_layers = C.parallax_layers_cached.Copy()
 
-	if (length(C.parallax_layers) > C.parallax_layers_max)
+	if (length_char(C.parallax_layers) > C.parallax_layers_max)
 		C.parallax_layers.len = C.parallax_layers_max
 
 	C.screen |= (C.parallax_layers)
@@ -150,10 +150,10 @@
 		L.screen_loc = "CENTER-7:[round(L.offset_x,1)],CENTER-7:[round(L.offset_y,1)]"
 
 /atom/movable/proc/update_parallax_contents()
-	if(length(client_mobs_in_contents))
+	if(length_char(client_mobs_in_contents))
 		for(var/thing in client_mobs_in_contents)
 			var/mob/M = thing
-			if(M && M.client && M.hud_used && length(M.client.parallax_layers))
+			if(M && M.client && M.hud_used && length_char(M.client.parallax_layers))
 				M.hud_used.update_parallax()
 
 /atom/movable/screen/parallax_layer

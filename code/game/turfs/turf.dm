@@ -251,7 +251,7 @@
 		if((movable_content == source_atom))
 			continue
 		// dont consider ignored atoms or their types
-		if(length(ignore_atoms))
+		if(length_char(ignore_atoms))
 			if(!type_list && (movable_content in ignore_atoms))
 				continue
 			else if(type_list && is_type_in_list(movable_content, ignore_atoms))
@@ -429,12 +429,12 @@
 	var/static/list/created_baseturf_lists = list()
 	var/turf/current_target
 	if(fake_baseturf_type)
-		if(length(fake_baseturf_type)) // We were given a list, just apply it and move on
+		if(length_char(fake_baseturf_type)) // We were given a list, just apply it and move on
 			baseturfs = fake_baseturf_type
 			return
 		current_target = fake_baseturf_type
 	else
-		if(length(baseturfs))
+		if(length_char(baseturfs))
 			return // No replacement baseturf has been given and the current baseturfs value is already a list/assembled
 		if(!baseturfs)
 			current_target = initial(baseturfs) || type // This should never happen but just in case...
@@ -445,7 +445,7 @@
 	// If we've made the output before we don't need to regenerate it
 	if(created_baseturf_lists[current_target])
 		var/list/premade_baseturfs = created_baseturf_lists[current_target]
-		if(length(premade_baseturfs))
+		if(length_char(premade_baseturfs))
 			baseturfs = premade_baseturfs.Copy()
 		else
 			baseturfs = premade_baseturfs
@@ -492,7 +492,7 @@
 	. = ..()
 	if(.)
 		return
-	if(length(src_object.contents()))
+	if(length_char(src_object.contents()))
 		to_chat(usr, "<span class='notice'>I start dumping out the contents...</span>")
 		if(!do_after(usr,20,target=src_object.parent))
 			return FALSE

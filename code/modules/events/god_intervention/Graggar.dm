@@ -113,15 +113,15 @@ GLOBAL_LIST_EMPTY(graggar_cullings)
 
 		contenders += human_mob
 
-	if(length(contenders) < 2)
+	if(length_char(contenders) < 2)
 		return
 
 	// 25% chance for grand culling (multiple pairs)
 	var/grand_culling = prob(25)
-	var/max_pairs = grand_culling ? floor(length(contenders) / 2) : 1
+	var/max_pairs = grand_culling ? floor(length_char(contenders) / 2) : 1
 
 	for(var/i in 1 to max_pairs)
-		if(length(contenders) < 2)
+		if(length_char(contenders) < 2)
 			break
 
 		var/mob/living/carbon/human/first_chosen = pick_n_take(contenders)

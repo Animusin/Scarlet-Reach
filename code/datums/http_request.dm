@@ -13,11 +13,11 @@
 
 /datum/http_request/New(...)
 	. = ..()
-	if(length(args))
+	if(length_char(args))
 		src.prepare(arglist(args))
 
 /datum/http_request/proc/prepare(method, url, body = "", list/headers, output_file)
-	if (!length(headers))
+	if (!length_char(headers))
 		headers = ""
 	else
 		headers = json_encode(headers)

@@ -96,7 +96,7 @@ GLOBAL_LIST_INIT(moldable_organs, list(BODY_ZONE_PRECISE_GROIN=list(ORGAN_SLOT_P
 			span_notice("[user] begins to insert something into [target]'s [parse_zone(target_zone)]."))
 	else
 		var/list/organs = target.getorganszone(target_zone, subzones = FALSE)
-		if(!length(organs))
+		if(!length_char(organs))
 			to_chat(user, span_warning("There are no removable organs in [target]'s [parse_zone(target_zone)]!"))
 			return FALSE
 		for(var/obj/item/organ/found_organ as anything in organs)
@@ -179,7 +179,7 @@ GLOBAL_LIST_INIT(moldable_organs, list(BODY_ZONE_PRECISE_GROIN=list(ORGAN_SLOT_P
 		if(!carbonize.dna.organ_dna[organslot])
 			organs -= organslot
 			continue
-	if(!length(organs))
+	if(!length_char(organs))
 		to_chat(user, span_warning("There are no organs you can mold in [target]'s [parse_zone(target_zone)]!"))
 		return FALSE
 	var/selected = input(user, "Create which organ?", "PESTRA") as null|anything in sortList(organs)

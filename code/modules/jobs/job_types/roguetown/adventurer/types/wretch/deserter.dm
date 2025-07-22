@@ -446,7 +446,7 @@
 		if(!can_convert(recruit))
 			continue
 		recruitment[recruit.name] = recruit
-	if(!length(recruitment))
+	if(!length_char(recruitment))
 		to_chat(user, span_warning("There are no potential recruits in range."))
 		return
 	var/inputty = input(user, "Select a potential recruit!", "[name]") as anything in recruitment

@@ -12,7 +12,7 @@
 	var/list/letter_count = list()
 	while(R.Find(message) != 0)
 		if(R.group[1])
-			letter_count += length(R.group[1])
+			letter_count += length_char(R.group[1])
 		if(R.group[2])
 			letter_count += R.group[2]
 

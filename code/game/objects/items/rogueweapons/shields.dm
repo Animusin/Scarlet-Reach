@@ -125,7 +125,7 @@
 	var/icon/J = new('icons/roguetown/weapons/shield_heraldry.dmi')
 	var/list/istates = J.IconStates()
 	for(var/icon_s in istates)
-		if(!findtext(icon_s, "[icon_state]_"))
+		if(!findtext_char(icon_s, "[icon_state]_"))
 			istates.Remove(icon_s)
 			continue
 		istates.Add(replacetextEx(icon_s, "[icon_state]_", ""))

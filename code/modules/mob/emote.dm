@@ -5,8 +5,8 @@
 	var/param = message
 	var/custom_param = findchar(act, " ")
 //	if(custom_param)
-//		param = copytext(act, custom_param + 1, length(act) + 1)
-//		act = copytext(act, 1, custom_param)
+//		param = copytext_char(act, custom_param + 1, length_char(act) + 1)
+//		act = copytext_char(act, 1, custom_param)
 
 	if(intentional || !forced)
 		if(custom_me)
@@ -18,7 +18,7 @@
 
 	var/list/key_emotes = GLOB.emote_list[act]
 	var/mute_time = 0
-	if(!length(key_emotes) || custom_param)
+	if(!length_char(key_emotes) || custom_param)
 		if(intentional)
 			var/list/custom_emote = GLOB.emote_list["me"]
 			for(var/datum/emote/P in custom_emote)

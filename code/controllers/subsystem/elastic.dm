@@ -42,7 +42,7 @@ SUBSYSTEM_DEF(elastic)
 	compiled["cpu"] = world.cpu
 	compiled["elapsed_process_time"] = world.time
 	compiled["elapsed_real_time"] = (REALTIMEOFDAY - world_init_time)
-	compiled["client_count"] = length(GLOB.clients)
+	compiled["client_count"] = length_char(GLOB.clients)
 	compiled["round_id"] = GLOB.rogue_round_id // if you are on literally any other server change this to a text2num(GLOB.round_id)
 	compiled |= assoc_list_data // you see why this needs to be an assoc list now?
 
@@ -71,17 +71,17 @@ SUBSYSTEM_DEF(elastic)
 	return round_data
 
 /datum/controller/subsystem/elastic/proc/add_list_data(main_cat = ELASCAT_GENERIC, list/assoc_data)
-	if(!main_cat || !length(assoc_data))
+	if(!main_cat || !length_char(assoc_data))
 		return
 
 	assoc_list_data |= main_cat
-	if(!length(assoc_list_data[main_cat]))
+	if(!length_char(assoc_list_data[main_cat]))
 		assoc_list_data[main_cat] = list()
 	assoc_list_data[main_cat] |= assoc_data
 
 /// Inserts `(|=)` a datapoint into an elasticsearch category's data packet.
 /proc/add_elastic_data(main_cat, list/assoc_data)
-	if(!main_cat || !length(assoc_data))
+	if(!main_cat || !length_char(assoc_data))
 		return
 	SSelastic.add_list_data(main_cat, assoc_data)
 	return TRUE

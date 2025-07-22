@@ -68,7 +68,7 @@
 	if(heat_required)
 		html += "<strong>Requires that this be made in a distiller thats atleast [heat_required - 273.1]C.</stong><br>"
 
-	if(length(needed_crops) || length(needed_items))
+	if(length_char(needed_crops) || length_char(needed_items))
 		html += "<h3>Items Required</h3>"
 		for(var/atom/path as anything in needed_crops)
 			var/count = needed_crops[path]
@@ -77,7 +77,7 @@
 			var/count = needed_items[path]
 			html += "[count] parts [initial(path.name)]<br>"
 		html += "<br>"
-	if(length(needed_reagents))
+	if(length_char(needed_reagents))
 		html += "<h3>Liquids Required</h3>"
 		for(var/atom/path as anything in needed_reagents)
 			var/count = needed_reagents[path]

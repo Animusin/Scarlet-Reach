@@ -177,7 +177,7 @@ GLOBAL_LIST_EMPTY(fake_ckeys)
 	var/list/bot = list()
 	var/list/misc = list()
 	var/dat = {"
-	<head><style>
+	<head><meta charset='UTF-8'><style>
 		.manifest {border-collapse:collapse;}
 		.manifest td, th {border:1px solid [monochrome?"black":"#DEF; background-color:white; color:black"]; padding:.25em}
 		.manifest th {height: 2em; [monochrome?"border-top-width: 3px":"background-color: #48C; color:white"]}
@@ -268,8 +268,8 @@ GLOBAL_LIST_EMPTY(fake_ckeys)
 			even = !even
 
 	dat += "</table>"
-	dat = replacetext(dat, "\n", "")
-	dat = replacetext(dat, "\t", "")
+	dat = replacetext_char(dat, "\n", "")
+	dat = replacetext_char(dat, "\t", "")
 	return dat
 
 

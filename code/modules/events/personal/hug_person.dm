@@ -45,7 +45,7 @@
 		if(H.patron && istype(H.patron, /datum/patron/divine/eora))
 			valid_targets += H
 
-	if(!length(valid_targets))
+	if(!length_char(valid_targets))
 		return
 
 	var/mob/living/carbon/human/chosen_one = pick(valid_targets)

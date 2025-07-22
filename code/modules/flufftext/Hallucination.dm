@@ -525,7 +525,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 		var/chosen = specific_message
 		if(!chosen)
 			chosen = capitalize(pick(speak_messages))
-		chosen = replacetext(chosen, "%TARGETNAME%", target_name)
+		chosen = replacetext_char(chosen, "%TARGETNAME%", target_name)
 		var/image/speech_overlay = image('icons/mob/talk.dmi', person, "default0a", layer = ABOVE_MOB_LAYER)
 		var/message = target.compose_message(person,understood_language,chosen,null,list(person.speech_span),face_name = TRUE)
 		feedback_details += "Type: Talk, Source: [person.real_name], Message: [message]"
@@ -543,7 +543,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 		var/chosen = specific_message
 		if(!chosen)
 			chosen = capitalize(pick(radio_messages))
-		chosen = replacetext(chosen, "%TARGETNAME%", target_name)
+		chosen = replacetext_char(chosen, "%TARGETNAME%", target_name)
 		var/list/humans = list()
 		for(var/mob/living/carbon/human/H in GLOB.alive_mob_list)
 			humans += H

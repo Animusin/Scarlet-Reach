@@ -12,7 +12,7 @@
 	var/custom_index
 
 /datum/mob_descriptor/prominent/custom/can_describe(mob/living/described)
-	if(length(described.custom_descriptors) < custom_index)
+	if(length_char(described.custom_descriptors) < custom_index)
 		return FALSE
 	return TRUE
 

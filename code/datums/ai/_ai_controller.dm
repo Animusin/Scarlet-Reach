@@ -170,7 +170,7 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	if(!pawn_turf)
 		CRASH("AI controller [src] controlling pawn ([pawn]) is not on a turf.")
 #endif
-	if(!length(SSmobs.clients_by_zlevel[pawn_turf?.z]))
+	if(!length_char(SSmobs.clients_by_zlevel[pawn_turf?.z]))
 		return AI_STATUS_OFF
 	return AI_STATUS_ON
 
@@ -327,7 +327,7 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	LAZYADDASSOC(planned_behaviors, behavior, TRUE)
 
 	arguments.Cut(1, 2)
-	if(length(arguments))
+	if(length_char(arguments))
 		behavior_args[behavior_type] = arguments
 	else
 		behavior_args -= behavior_type
@@ -380,7 +380,7 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	if (isdatum(key_value))
 		return !QDELETED(key_value)
 	if (islist(key_value))
-		return length(key_value) > 0
+		return length_char(key_value) > 0
 	return !!key_value
 
 /**
@@ -600,13 +600,13 @@ have ways of interacting with a specific atom and control it. They posses a blac
 
 	var/list/list/remove_queue = list(blackboard)
 	var/index = 1
-	while(index <= length(remove_queue))
+	while(index <= length_char(remove_queue))
 		var/list/next_to_clear = remove_queue[index]
 		for(var/inner_value in next_to_clear)
 			var/associated_value = next_to_clear[inner_value]
 			// We are a lists of lists, add the next value to the queue so we can handle references in there
 			// (But we only need to bother checking the list if it's not empty.)
-			if(islist(inner_value) && length(inner_value))
+			if(islist(inner_value) && length_char(inner_value))
 				UNTYPED_LIST_ADD(remove_queue, inner_value)
 
 			// We found the value that's been deleted. Clear it out from this list
@@ -615,7 +615,7 @@ have ways of interacting with a specific atom and control it. They posses a blac
 
 			// We are an assoc lists of lists, the list at the next value so we can handle references in there
 			// (But again, we only need to bother checking the list if it's not empty.)
-			if(islist(associated_value) && length(associated_value))
+			if(islist(associated_value) && length_char(associated_value))
 				UNTYPED_LIST_ADD(remove_queue, associated_value)
 
 			// We found the value that's been deleted, it was an assoc value. Clear it out entirely

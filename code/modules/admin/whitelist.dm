@@ -12,7 +12,7 @@ GLOBAL_PROTECT(whitelist)
 	for(var/line in world.file2list(WHITELISTFILE))
 		if(!line)
 			continue
-		if(findtextEx(line,"#",1,2))
+		if(findtextEx_char(line,"#",1,2))
 			continue
 		GLOB.whitelist += ckey(line)
 

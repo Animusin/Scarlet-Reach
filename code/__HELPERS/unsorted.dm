@@ -8,11 +8,11 @@
 	if (!( istext(HTMLstring) ))
 		CRASH("Given non-text argument!")
 	else
-		if (length(HTMLstring) != 7)
+		if (length_char(HTMLstring) != 7)
 			CRASH("Given non-HTML argument!")
-	var/textr = copytext(HTMLstring, 2, 4)
-	var/textg = copytext(HTMLstring, 4, 6)
-	var/textb = copytext(HTMLstring, 6, 8)
+	var/textr = copytext_char(HTMLstring, 2, 4)
+	var/textg = copytext_char(HTMLstring, 4, 6)
+	var/textb = copytext_char(HTMLstring, 6, 8)
 	var/r = hex2num(textr)
 	var/g = hex2num(textg)
 	var/b = hex2num(textb)
@@ -178,13 +178,13 @@ Turf and target are separate in case you want to teleport some distance from a t
 
 //Returns whether or not a player is a guest using their ckey as an input
 /proc/IsGuestKey(key)
-	if (findtext(key, "Guest-", 1, 7) != 1) //was findtextEx
+	if (findtext_char(key, "Guest-", 1, 7) != 1) //was findtextEx
 		return 0
 
-	var/i, ch, len = length(key)
+	var/i, ch, len = length_char(key)
 
 	for (i = 7, i <= len, ++i)
-		ch = text2ascii(key, i)
+		ch = text2ascii_char(key, i)
 		if (ch < 48 || ch > 57)
 			return 0
 	return 1
@@ -386,7 +386,7 @@ Turf and target are separate in case you want to teleport some distance from a t
 	return assembled
 
 /atom/proc/GetAllContentsIgnoring(list/ignore_typecache)
-	if(!length(ignore_typecache))
+	if(!length_char(ignore_typecache))
 		return GetAllContents()
 	var/list/processing = list(src)
 	var/list/assembled = list()
@@ -774,7 +774,7 @@ GLOBAL_LIST_INIT(WALLITEMS_INVERSE, typecacheof(list(
 	return 0
 
 /proc/format_text(text)
-	return replacetext(replacetext(text,"\proper ",""),"\improper ","")
+	return replacetext_char(replacetext_char(text,"\proper ",""),"\improper ","")
 
 /proc/check_target_facings(mob/living/initator, mob/living/target)
 	/*This can be used to add additional effects on interactions between mobs depending on how the mobs are facing each other, such as adding a crit damage to blows to the back of a guy's head.
@@ -819,11 +819,11 @@ GLOBAL_LIST_INIT(WALLITEMS_INVERSE, typecacheof(list(
 /proc/params2turf(scr_loc, turf/origin, client/C)
 	if(!scr_loc || !origin)
 		return null
-	var/tX = splittext(scr_loc, ",")
-	var/tY = splittext(tX[2], ":")
+	var/tX = splittext_char(scr_loc, ",")
+	var/tY = splittext_char(tX[2], ":")
 	var/tZ = origin.z
 	tY = tY[1]
-	tX = splittext(tX[1], ":")
+	tX = splittext_char(tX[1], ":")
 	tX = tX[1]
 	var/list/actual_view = getviewsize(C ? C.view : world.view)
 	tX = CLAMP(origin.x + text2num(tX) - round(actual_view[1] / 2) - 1, 1, world.maxx)
@@ -833,10 +833,10 @@ GLOBAL_LIST_INIT(WALLITEMS_INVERSE, typecacheof(list(
 /proc/screen_loc2turf(text, turf/origin, client/C)
 	if(!text)
 		return null
-	var/tZ = splittext(text, ",")
-	var/tX = splittext(tZ[1], "-")
+	var/tZ = splittext_char(text, ",")
+	var/tX = splittext_char(tZ[1], "-")
 	var/tY = text2num(tX[2])
-	tX = splittext(tZ[2], "-")
+	tX = splittext_char(tZ[2], "-")
 	tX = text2num(tX[2])
 	tZ = origin.z
 	var/list/actual_view = getviewsize(C ? C.view : world.view)
@@ -1169,7 +1169,7 @@ GLOBAL_REAL_VAR(list/stack_trace_storage)
 /proc/random_nukecode()
 	var/val = rand(0, 99999)
 	var/str = "[val]"
-	while(length(str) < 5)
+	while(length_char(str) < 5)
 		str = "0" + str
 	. = str
 
@@ -1342,7 +1342,7 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 /proc/GUID()
 	var/const/GUID_VERSION = "b"
 	var/const/GUID_VARIANT = "d"
-	var/node_id = copytext(md5("[rand()*rand(1,9999999)][world.name][world.hub][world.hub_password][world.internet_address][world.address][world.contents.len][world.status][world.port][rand()*rand(1,9999999)]"), 1, 13)
+	var/node_id = copytext_char(md5("[rand()*rand(1,9999999)][world.name][world.hub][world.hub_password][world.internet_address][world.address][world.contents.len][world.status][world.port][rand()*rand(1,9999999)]"), 1, 13)
 
 	var/time_high = "[num2hex(text2num(time2text(world.realtime,"YYYY")), 2)][num2hex(world.realtime, 6)]"
 
@@ -1373,7 +1373,7 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 /world/proc/PushUsr(mob/M, datum/callback/CB, ...)
 	var/temp = usr
 	usr = M
-	if (length(args) > 2)
+	if (length_char(args) > 2)
 		. = CB.Invoke(arglist(args.Copy(3)))
 	else
 		. = CB.Invoke()
@@ -1392,7 +1392,7 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 #define VARSET_CALLBACK(datum, var, var_value) CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(___callbackvarset), ##datum, NAMEOF(##datum, ##var), ##var_value)
 
 /proc/___callbackvarset(list_or_datum, var_name, var_value)
-	if(length(list_or_datum))
+	if(length_char(list_or_datum))
 		list_or_datum[var_name] = var_value
 		return
 	var/datum/D = list_or_datum
@@ -1487,7 +1487,7 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 			. |= i
 
 /proc/special_list_filter(list/L, datum/callback/condition)
-	if(!islist(L) || !length(L) || !istype(condition))
+	if(!islist(L) || !length_char(L) || !istype(condition))
 		return list()
 	. = list()
 	for(var/i in L)

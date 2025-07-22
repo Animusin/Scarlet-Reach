@@ -25,7 +25,7 @@ SUBSYSTEM_DEF(parallax)
 	//cache for sanic speed (lists are references anyways)
 	var/list/currentrun = src.currentrun
 
-	while(length(currentrun))
+	while(length_char(currentrun))
 		var/client/C = currentrun[currentrun.len]
 		currentrun.len--
 		if (!C || !C.eye)

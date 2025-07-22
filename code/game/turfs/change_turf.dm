@@ -167,7 +167,7 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 /turf/proc/ScrapeAway(amount=1, flags)
 	if(!amount)
 		return
-	if(length(baseturfs))
+	if(length_char(baseturfs))
 		var/list/new_baseturfs = baseturfs.Copy()
 		var/turf_type = new_baseturfs[max(1, new_baseturfs.len - amount + 1)]
 		while(ispath(turf_type, /turf/baseturf_skipover))
@@ -234,20 +234,20 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 /turf/proc/PlaceOnBottom(list/new_baseturfs, turf/fake_turf_type)
 	if(fake_turf_type)
 		if(!new_baseturfs)
-			if(!length(baseturfs))
+			if(!length_char(baseturfs))
 				baseturfs = list(baseturfs)
 			var/list/old_baseturfs = baseturfs.Copy()
 			assemble_baseturfs(fake_turf_type)
-			if(!length(baseturfs))
+			if(!length_char(baseturfs))
 				baseturfs = list(baseturfs)
 			baseturfs -= baseturfs & GLOB.blacklisted_automated_baseturfs
 			baseturfs += old_baseturfs
 			return
-		else if(!length(new_baseturfs))
+		else if(!length_char(new_baseturfs))
 			new_baseturfs = list(new_baseturfs, fake_turf_type)
 		else
 			new_baseturfs += fake_turf_type
-	if(!length(baseturfs))
+	if(!length_char(baseturfs))
 		baseturfs = list(baseturfs)
 	baseturfs.Insert(1, new_baseturfs)
 
@@ -257,7 +257,7 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 // Returns the new turf
 /turf/proc/PlaceOnTop(list/new_baseturfs, turf/fake_turf_type, flags)
 	var/area/turf_area = loc
-	if(new_baseturfs && !length(new_baseturfs))
+	if(new_baseturfs && !length_char(new_baseturfs))
 		new_baseturfs = list(new_baseturfs)
 	flags = turf_area.PlaceOnTopReact(new_baseturfs, fake_turf_type, flags) // A hook so areas can modify the incoming args
 
@@ -268,31 +268,31 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 		assemble_baseturfs()
 	if(fake_turf_type)
 		if(!new_baseturfs) // If no baseturfs list then we want to create one from the turf type
-			if(!length(baseturfs))
+			if(!length_char(baseturfs))
 				baseturfs = list(baseturfs)
 			var/list/old_baseturfs = baseturfs.Copy()
 			if(!istype(src, /turf/closed))
 				old_baseturfs += type
 			newT = ChangeTurf(fake_turf_type, null, flags)
 			newT.assemble_baseturfs(initial(fake_turf_type.baseturfs)) // The baseturfs list is created like roundstart
-			if(!length(newT.baseturfs))
+			if(!length_char(newT.baseturfs))
 				newT.baseturfs = list(baseturfs)
 			newT.baseturfs -= GLOB.blacklisted_automated_baseturfs
 			newT.baseturfs.Insert(1, old_baseturfs) // The old baseturfs are put underneath
 			return newT
-		if(!length(baseturfs))
+		if(!length_char(baseturfs))
 			baseturfs = list(baseturfs)
 		if(!istype(src, /turf/closed))
 			baseturfs += type
 		baseturfs += new_baseturfs
 		testing("fuck2")
 		return ChangeTurf(fake_turf_type, null, flags)
-	if(!length(baseturfs))
+	if(!length_char(baseturfs))
 		baseturfs = list(baseturfs)
 	if(!istype(src, /turf/closed))
 		baseturfs += type
 	var/turf/change_type
-	if(length(new_baseturfs))
+	if(length_char(new_baseturfs))
 		change_type = new_baseturfs[new_baseturfs.len]
 		new_baseturfs.len--
 		if(new_baseturfs.len)
@@ -319,7 +319,7 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 
 	if(depth)
 		var/list/target_baseturfs
-		if(length(copytarget.baseturfs))
+		if(length_char(copytarget.baseturfs))
 			// with default inputs this would be Copy(CLAMP(2, -INFINITY, baseturfs.len))
 			// Don't forget a lower index is lower in the baseturfs stack, the bottom is baseturfs[1]
 			target_baseturfs = copytarget.baseturfs.Copy(CLAMP(1 + ignore_bottom, 1 + copytarget.baseturfs.len - depth, copytarget.baseturfs.len))

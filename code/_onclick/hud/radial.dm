@@ -286,7 +286,7 @@ GLOBAL_LIST_EMPTY(radial_menus)
 	and list values are movables/icons/images used for element icons
 */
 /proc/show_radial_menu(mob/user, atom/anchor, list/choices, uniqueid, radius, datum/callback/custom_check, require_near = FALSE, tooltips = FALSE)
-	if(!user || !anchor || !length(choices))
+	if(!user || !anchor || !length_char(choices))
 		return
 	if(!uniqueid)
 		uniqueid = "defmenu_[REF(user)]_[REF(anchor)]"

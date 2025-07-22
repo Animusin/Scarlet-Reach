@@ -100,20 +100,20 @@
 			cur_acc[i] = "n"
 
 		for(var/line in lines)
-			for(var/beat in splittext(lowertext(line), ","))
-				var/list/notes = splittext(beat, "/")
-				for(var/note in splittext(notes[1], "-"))
+			for(var/beat in splittext_char(lowertext(line), ","))
+				var/list/notes = splittext_char(beat, "/")
+				for(var/note in splittext_char(notes[1], "-"))
 					if(!playing || shouldStopPlaying(user))//If the instrument is playing, or special case
 						playing = FALSE
 						hearing_mobs = null
 						return
-					if(!length(note))
+					if(!length_char(note))
 						continue
-					var/cur_note = text2ascii(note) - 96
+					var/cur_note = text2ascii_char(note) - 96
 					if(cur_note < 1 || cur_note > 7)
 						continue
-					for(var/i=2 to length(note))
-						var/ni = copytext(note,i,i+1)
+					for(var/i=2 to length_char(note))
+						var/ni = copytext_char(note,i,i+1)
 						if(!text2num(ni))
 							if(ni == "#" || ni == "b" || ni == "n")
 								cur_acc[cur_note] = ni
@@ -200,10 +200,10 @@
 /datum/song/proc/ParseSong(text)
 	set waitfor = FALSE
 	//split into lines
-	lines = splittext(text, "\n")
+	lines = splittext_char(text, "\n")
 	if(lines.len)
-		if(copytext(lines[1],1,6) == "BPM: ")
-			tempo = sanitize_tempo(600 / text2num(copytext(lines[1],6)))
+		if(copytext_char(lines[1],1,6) == "BPM: ")
+			tempo = sanitize_tempo(600 / text2num(copytext_char(lines[1],6)))
 			lines.Cut(1,2)
 		else
 			tempo = sanitize_tempo(5) // default 120 BPM
@@ -212,7 +212,7 @@
 			lines.Cut(MUSIC_MAXLINES + 1)
 		var/linenum = 1
 		for(var/l in lines)
-			if(length(l) > MUSIC_MAXLINECHARS)
+			if(length_char(l) > MUSIC_MAXLINECHARS)
 				to_chat(usr, "Line [linenum] too long!")
 				lines.Remove(l)
 			else
@@ -239,13 +239,13 @@
 			if(!usr.canUseTopic(instrumentObj, BE_CLOSE, FALSE, NO_TK))
 				return
 
-			if(length(t) >= MUSIC_MAXLINES * MUSIC_MAXLINECHARS)
+			if(length_char(t) >= MUSIC_MAXLINES * MUSIC_MAXLINECHARS)
 				var/cont = input(usr, "Your message is too long! Would you like to continue editing it?", "", "yes") in list("yes", "no")
 				if(!usr.canUseTopic(instrumentObj, BE_CLOSE, FALSE, NO_TK))
 					return
 				if(cont == "no")
 					break
-		while(length(t) > MUSIC_MAXLINES * MUSIC_MAXLINECHARS)
+		while(length_char(t) > MUSIC_MAXLINES * MUSIC_MAXLINECHARS)
 		ParseSong(t)
 
 	else if(href_list["help"])
@@ -276,8 +276,8 @@
 			return
 		if(lines.len > MUSIC_MAXLINES)
 			return
-		if(length(newline) > MUSIC_MAXLINECHARS)
-			newline = copytext(newline, 1, MUSIC_MAXLINECHARS)
+		if(length_char(newline) > MUSIC_MAXLINECHARS)
+			newline = copytext_char(newline, 1, MUSIC_MAXLINECHARS)
 		lines.Add(newline)
 
 	else if(href_list["deleteline"])
@@ -291,8 +291,8 @@
 		var/content = html_encode(input("Enter your line: ", instrumentObj.name, lines[num]) as text|null)
 		if(!content || !usr.canUseTopic(instrumentObj, BE_CLOSE, FALSE, NO_TK))
 			return
-		if(length(content) > MUSIC_MAXLINECHARS)
-			content = copytext(content, 1, MUSIC_MAXLINECHARS)
+		if(length_char(content) > MUSIC_MAXLINECHARS)
+			content = copytext_char(content, 1, MUSIC_MAXLINECHARS)
 		if(num > lines.len || num < 1)
 			return
 		lines[num] = content

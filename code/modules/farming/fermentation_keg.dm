@@ -64,7 +64,7 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 
 /obj/structure/fermentation_keg/update_overlays()
 	. = ..()
-	if(length(overlays))
+	if(length_char(overlays))
 		overlays.Cut()
 
 	if(!reagents.total_volume)

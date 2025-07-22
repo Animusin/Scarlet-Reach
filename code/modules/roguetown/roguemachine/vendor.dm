@@ -135,7 +135,7 @@
 			if(newprice)
 				if(newprice < 0)
 					return attack_hand(usr)
-				if(findtext(num2text(newprice), "."))
+				if(findtext_char(num2text(newprice), "."))
 					return attack_hand(usr)
 				held_items[O]["PRICE"] = newprice
 	return attack_hand(usr)

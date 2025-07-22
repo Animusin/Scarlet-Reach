@@ -104,14 +104,14 @@ SUBSYSTEM_DEF(outdoor_effects)
 	var/time = station_time()
 	var/datum/time_of_day/new_step = null
 
-	for(var/i in 1 to length(time_cycle_steps))
+	for(var/i in 1 to length_char(time_cycle_steps))
 		if(time >= time_cycle_steps[i].start)
 			new_step = time_cycle_steps[i]
-			next_step_datum = i == length(time_cycle_steps) ? time_cycle_steps[1] : time_cycle_steps[i + 1]
+			next_step_datum = i == length_char(time_cycle_steps) ? time_cycle_steps[1] : time_cycle_steps[i + 1]
 
 	//New time is the last time step in list (midnight) - next time will be the first step
 	if(!new_step)
-		new_step = time_cycle_steps[length(time_cycle_steps)]
+		new_step = time_cycle_steps[length_char(time_cycle_steps)]
 		next_step_datum = time_cycle_steps[1]
 
 	current_step_datum = new_step

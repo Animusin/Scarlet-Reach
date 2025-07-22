@@ -258,7 +258,7 @@
 
 /datum/tgs_api/v4/ChatBroadcast(datum/tgs_message_content/message, list/channels)
 	var/list/ids
-	if(length(channels))
+	if(length_char(channels))
 		ids = list()
 		for(var/I in channels)
 			var/datum/tgs_chat_channel/channel = I
@@ -266,7 +266,7 @@
 
 	message = UpgradeDeprecatedChatMessage(message)
 
-	if (!length(channels))
+	if (!length_char(channels))
 		return
 
 	message = list("message" = message.text, "channelIds" = ids)
@@ -284,7 +284,7 @@
 
 	message = UpgradeDeprecatedChatMessage(message)
 
-	if (!length(channels))
+	if (!length_char(channels))
 		return
 
 	message = list("message" = message.text, "channelIds" = channels)

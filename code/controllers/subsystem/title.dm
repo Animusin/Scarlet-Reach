@@ -24,11 +24,11 @@ SUBSYSTEM_DEF(title)
 
 	SSmapping.HACK_LoadMapConfig()
 	for(var/S in provisional_title_screens)
-		var/list/L = splittext(S,"+")
+		var/list/L = splittext_char(S,"+")
 		if((L.len == 1 && (L[1] != "exclude" && L[1] != "blank.png"))|| (L.len > 1 && ((use_rare_screens && lowertext(L[1]) == "rare") || (lowertext(L[1]) == lowertext(SSmapping.config.map_name)))))
 			title_screens += S
 
-	if(length(title_screens))
+	if(length_char(title_screens))
 		file_path = "[global.config.directory]/title_screens/images/[pick(title_screens)]"
 
 	if(!file_path)

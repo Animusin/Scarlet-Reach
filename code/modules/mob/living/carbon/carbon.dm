@@ -116,7 +116,7 @@
 				continue
 			if(surgery_step.can_do_step(user, src, user.zone_selected, I, user.used_intent))
 				possible_steps[surgery_step.name] = surgery_step
-		var/possible_len = length(possible_steps)
+		var/possible_len = length_char(possible_steps)
 		if(possible_len)
 			var/datum/surgery_step/done_step
 			if(possible_len > 1)

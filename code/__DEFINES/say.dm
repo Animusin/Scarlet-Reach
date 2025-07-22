@@ -103,7 +103,7 @@
 #define MAX_CHARTER_LEN			80
 
 // Is something in the IC chat filter? This is config dependent.
-#define CHAT_FILTER_CHECK(T) (config.ic_filter_regex && findtext(T, config.ic_filter_regex))
+#define CHAT_FILTER_CHECK(T) (config.ic_filter_regex && findtext_char(T, config.ic_filter_regex))
 
 // Audio/Visual Flags. Used to determine what sense are required to notice a message.
 #define MSG_VISUAL (1<<0)
@@ -112,4 +112,4 @@
 /// Removes characters incompatible with file names.
 #define SANITIZE_FILENAME(text) (GLOB.filename_forbidden_chars.Replace(text, ""))
 /// Simply removes the < and > characters, and limits the length of the message.
-#define STRIP_HTML_SIMPLE(text, limit) (GLOB.angular_brackets.Replace(copytext(text, 1, limit), ""))
+#define STRIP_HTML_SIMPLE(text, limit) (GLOB.angular_brackets.Replace(copytext_char(text, 1, limit), ""))

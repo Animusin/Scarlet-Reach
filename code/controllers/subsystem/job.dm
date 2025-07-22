@@ -135,16 +135,16 @@ SUBSYSTEM_DEF(job)
 		if(player.mind && (job.title in player.mind.restricted_roles))
 			JobDebug("FOC incompatible with antagonist role, Player: [player]")
 			continue
-		if(length(job.allowed_races) && !(player.client.prefs.pref_species.type in job.allowed_races))
+		if(length_char(job.allowed_races) && !(player.client.prefs.pref_species.type in job.allowed_races))
 			JobDebug("FOC incompatible with species, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
 			continue
-		if(length(job.allowed_patrons) && !(player.client.prefs.selected_patron.type in job.allowed_patrons))
+		if(length_char(job.allowed_patrons) && !(player.client.prefs.selected_patron.type in job.allowed_patrons))
 			JobDebug("FOC incompatible with patron, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
 			continue
-		if(length(job.virtue_restrictions) && ((player.client.prefs.virtue.type in job.virtue_restrictions) || (player.client.prefs.virtuetwo?.type in job.virtue_restrictions)))
+		if(length_char(job.virtue_restrictions) && ((player.client.prefs.virtue.type in job.virtue_restrictions) || (player.client.prefs.virtuetwo?.type in job.virtue_restrictions)))
 			JobDebug("FOC incompatible with virtues, Player: [player], Job: [job.title], Virtue 1: [player.client.prefs.virtue.name]")
 			continue
-		if(length(job.vice_restrictions) && (player.client.prefs.charflaw.type in job.vice_restrictions))
+		if(length_char(job.vice_restrictions) && (player.client.prefs.charflaw.type in job.vice_restrictions))
 			JobDebug("FOC incompatible with vices, Player: [player], Job: [job.title], Vice: [player.client.prefs.charflaw.name]")
 			continue
 		if(job.plevel_req > player.client.patreonlevel())
@@ -157,7 +157,7 @@ SUBSYSTEM_DEF(job)
 		if(!(player.client.prefs.gender in job.allowed_sexes))
 			JobDebug("FOC incompatible with sex, Player: [player], Job: [job.title]")
 			continue
-		if(length(job.allowed_ages) && !(player.client.prefs.age in job.allowed_ages))
+		if(length_char(job.allowed_ages) && !(player.client.prefs.age in job.allowed_ages))
 			JobDebug("FOC incompatible with age, Player: [player], Job: [job.title], Age: [player.client.prefs.age]")
 			continue
 		if(check_blacklist(player.client.ckey) && !job.bypass_jobban)
@@ -213,19 +213,19 @@ SUBSYSTEM_DEF(job)
 			JobDebug("GRJ incompatible with antagonist role, Player: [player], Job: [job.title]")
 			continue
 
-		if(length(job.allowed_races) && !(player.client.prefs.pref_species.type in job.allowed_races))
+		if(length_char(job.allowed_races) && !(player.client.prefs.pref_species.type in job.allowed_races))
 			JobDebug("GRJ incompatible with species, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
 			continue
 
-		if(length(job.allowed_patrons) && !(player.client.prefs.selected_patron.type in job.allowed_patrons))
+		if(length_char(job.allowed_patrons) && !(player.client.prefs.selected_patron.type in job.allowed_patrons))
 			JobDebug("GRJ incompatible with patron, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
 			continue
 
-		if(length(job.virtue_restrictions) && ((player.client.prefs.virtue.type in job.virtue_restrictions) || (player.client.prefs.virtuetwo?.type in job.virtue_restrictions)))
+		if(length_char(job.virtue_restrictions) && ((player.client.prefs.virtue.type in job.virtue_restrictions) || (player.client.prefs.virtuetwo?.type in job.virtue_restrictions)))
 			JobDebug("GRJ incompatible with virtues, Player: [player], Job: [job.title], Virtue 1: [player.client.prefs.virtue.name]")
 			continue
 
-		if(length(job.vice_restrictions) && (player.client.prefs.charflaw.type in job.vice_restrictions))
+		if(length_char(job.vice_restrictions) && (player.client.prefs.charflaw.type in job.vice_restrictions))
 			JobDebug("GRJ incompatible with vices, Player: [player], Job: [job.title], Vice: [player.client.prefs.charflaw.name]")
 			continue
 
@@ -233,11 +233,11 @@ SUBSYSTEM_DEF(job)
 			JobDebug("GRJ incompatible with PATREON LEVEL, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
 			continue
 
-		if(length(job.allowed_ages) && !(player.client.prefs.age in job.allowed_ages))
+		if(length_char(job.allowed_ages) && !(player.client.prefs.age in job.allowed_ages))
 			JobDebug("GRJ incompatible with age, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
 			continue
 
-		if(length(job.allowed_sexes) && !(player.client.prefs.gender in job.allowed_sexes))
+		if(length_char(job.allowed_sexes) && !(player.client.prefs.gender in job.allowed_sexes))
 			JobDebug("GRJ incompatible with sex, Player: [player], Job: [job.title]")
 			continue
 
@@ -455,19 +455,19 @@ SUBSYSTEM_DEF(job)
 					JobDebug("DO incompatible with antagonist role, Player: [player], Job:[job.title]")
 					continue
 
-				if(length(job.allowed_races) && !(player.client.prefs.pref_species.type in job.allowed_races))
+				if(length_char(job.allowed_races) && !(player.client.prefs.pref_species.type in job.allowed_races))
 					JobDebug("DO incompatible with species, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
 					continue
 
-				if(length(job.allowed_patrons) && !(player.client.prefs.selected_patron.type in job.allowed_patrons))
+				if(length_char(job.allowed_patrons) && !(player.client.prefs.selected_patron.type in job.allowed_patrons))
 					JobDebug("DO incompatible with patron, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
 					continue
 
-				if(length(job.virtue_restrictions) && ((player.client.prefs.virtue.type in job.virtue_restrictions) || (player.client.prefs.virtuetwo?.type in job.virtue_restrictions)))
+				if(length_char(job.virtue_restrictions) && ((player.client.prefs.virtue.type in job.virtue_restrictions) || (player.client.prefs.virtuetwo?.type in job.virtue_restrictions)))
 					JobDebug("DO incompatible with virtues, Player: [player], Job: [job.title], Virtue 1: [player.client.prefs.virtue.name]")
 					continue
 
-				if(length(job.vice_restrictions) && (player.client.prefs.charflaw.type in job.vice_restrictions))
+				if(length_char(job.vice_restrictions) && (player.client.prefs.charflaw.type in job.vice_restrictions))
 					JobDebug("DO incompatible with vices, Player: [player], Job: [job.title], Vice: [player.client.prefs.charflaw.name]")
 					continue
 
@@ -492,11 +492,11 @@ SUBSYSTEM_DEF(job)
 					if(job.whitelist_req && (!player.client.whitelisted()))
 						continue
 
-				if(length(job.allowed_ages) && !(player.client.prefs.age in job.allowed_ages))
+				if(length_char(job.allowed_ages) && !(player.client.prefs.age in job.allowed_ages))
 					JobDebug("DO incompatible with age, Player: [player], Job: [job.title]")
 					continue
 
-				if(length(job.allowed_sexes) && !(player.client.prefs.gender in job.allowed_sexes))
+				if(length_char(job.allowed_sexes) && !(player.client.prefs.gender in job.allowed_sexes))
 					JobDebug("DO incompatible with gender preference, Player: [player], Job: [job.title]")
 					continue
 
@@ -558,16 +558,16 @@ SUBSYSTEM_DEF(job)
 				if(player.mind && (job.title in player.mind.restricted_roles))
 					continue
 
-				if(length(job.allowed_races) && !(player.client.prefs.pref_species.type in job.allowed_races))
+				if(length_char(job.allowed_races) && !(player.client.prefs.pref_species.type in job.allowed_races))
 					continue
 				
-				if(length(job.allowed_patrons) && !(player.client.prefs.selected_patron.type in job.allowed_patrons))
+				if(length_char(job.allowed_patrons) && !(player.client.prefs.selected_patron.type in job.allowed_patrons))
 					continue
 
-				if(length(job.virtue_restrictions) && ((player.client.prefs.virtue.type in job.virtue_restrictions) || (player.client.prefs.virtuetwo?.type in job.virtue_restrictions)))
+				if(length_char(job.virtue_restrictions) && ((player.client.prefs.virtue.type in job.virtue_restrictions) || (player.client.prefs.virtuetwo?.type in job.virtue_restrictions)))
 					continue
 					
-				if(length(job.vice_restrictions) && (player.client.prefs.charflaw.type in job.vice_restrictions))
+				if(length_char(job.vice_restrictions) && (player.client.prefs.charflaw.type in job.vice_restrictions))
 					continue
 
 				if(job.plevel_req > player.client.patreonlevel())
@@ -586,10 +586,10 @@ SUBSYSTEM_DEF(job)
 					if(job.whitelist_req && (!player.client.whitelisted()))
 						continue
 
-				if(length(job.allowed_ages) && !(player.client.prefs.age in job.allowed_ages))
+				if(length_char(job.allowed_ages) && !(player.client.prefs.age in job.allowed_ages))
 					continue
 
-				if(length(job.allowed_sexes) && !(player.client.prefs.gender in job.allowed_sexes))
+				if(length_char(job.allowed_sexes) && !(player.client.prefs.gender in job.allowed_sexes))
 					continue
 
 				if(!job.special_job_check(player))
@@ -683,7 +683,7 @@ SUBSYSTEM_DEF(job)
 				S = sloc
 				sloc.used = TRUE
 				break
-		if(length(GLOB.jobspawn_overrides[rank]))
+		if(length_char(GLOB.jobspawn_overrides[rank]))
 			S = pick(GLOB.jobspawn_overrides[rank])
 		if(S)
 			S.JoinPlayerHere(H, FALSE)
@@ -851,7 +851,7 @@ SUBSYSTEM_DEF(job)
 
 /datum/controller/subsystem/job/proc/SendToLateJoin(mob/M, buckle = TRUE)
 	var/atom/destination
-	if(M.mind && M.mind.assigned_role && length(GLOB.jobspawn_overrides[M.mind.assigned_role])) //We're doing something special today.
+	if(M.mind && M.mind.assigned_role && length_char(GLOB.jobspawn_overrides[M.mind.assigned_role])) //We're doing something special today.
 		destination = pick(GLOB.jobspawn_overrides[M.mind.assigned_role])
 		destination.JoinPlayerHere(M, FALSE)
 		return

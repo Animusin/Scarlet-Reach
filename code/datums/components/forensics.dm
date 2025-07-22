@@ -60,7 +60,7 @@
 		wipe_fibers()
 
 /datum/component/forensics/proc/add_fingerprint_list(list/_fingerprints)	//list(text)
-	if(!length(_fingerprints))
+	if(!length_char(_fingerprints))
 		return
 	LAZYINITLIST(fingerprints)
 	for(var/i in _fingerprints)	//We use an associative list, make sure we don't just merge a non-associative list into ours.
@@ -89,7 +89,7 @@
 	return TRUE
 
 /datum/component/forensics/proc/add_fiber_list(list/_fibertext)		//list(text)
-	if(!length(_fibertext))
+	if(!length_char(_fibertext))
 		return
 	LAZYINITLIST(fibers)
 	for(var/i in _fibertext)	//We use an associative list, make sure we don't just merge a non-associative list into ours.
@@ -129,7 +129,7 @@
 	return TRUE
 
 /datum/component/forensics/proc/add_hiddenprint_list(list/_hiddenprints)	//list(ckey = text)
-	if(!length(_hiddenprints))
+	if(!length_char(_hiddenprints))
 		return
 	LAZYINITLIST(hiddenprints)
 	for(var/i in _hiddenprints)	//We use an associative list, make sure we don't just merge a non-associative list into ours.
@@ -151,16 +151,16 @@
 	if(!LAZYACCESS(hiddenprints, M.key))
 		LAZYSET(hiddenprints, M.key, "First: [M.real_name]\[[current_time]\][hasgloves]. Ckey: [M.ckey]")
 	else
-		var/laststamppos = findtext(LAZYACCESS(hiddenprints, M.key), " Last: ")
+		var/laststamppos = findtext_char(LAZYACCESS(hiddenprints, M.key), " Last: ")
 		if(laststamppos)
-			LAZYSET(hiddenprints, M.key, copytext(hiddenprints[M.key], 1, laststamppos))
+			LAZYSET(hiddenprints, M.key, copytext_char(hiddenprints[M.key], 1, laststamppos))
 		hiddenprints[M.key] += " Last: [M.real_name]\[[current_time]\][hasgloves]. Ckey: [M.ckey]"	//made sure to be existing by if(!LAZYACCESS);else
 	var/atom/A = parent
 	A.fingerprintslast = M.ckey
 	return TRUE
 
 /datum/component/forensics/proc/add_blood_DNA(list/dna)		//list(dna_enzymes = type)
-	if(!length(dna))
+	if(!length_char(dna))
 		return
 	LAZYINITLIST(blood_DNA)
 	for(var/i in dna)
@@ -171,6 +171,6 @@
 /datum/component/forensics/proc/check_blood()
 	if(!isitem(parent))
 		return
-	if(!length(blood_DNA))
+	if(!length_char(blood_DNA))
 		return
 	parent.LoadComponent(/datum/component/decal/blood)

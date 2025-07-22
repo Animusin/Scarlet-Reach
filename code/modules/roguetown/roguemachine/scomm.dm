@@ -49,13 +49,13 @@
 		. += "Its designation is #[scom_number]."
 	if(user.loc == loc)
 		. += "<b>THE LAWS OF THE LAND:</b>"
-		if(!length(GLOB.laws_of_the_land))
+		if(!length_char(GLOB.laws_of_the_land))
 			. += span_danger("The land has no laws! <b>We are doomed!</b>")
 			return
 		if(!user.is_literate())
 			. += span_warning("Uhhh... I can't read them...")
 			return
-		for(var/i in 1 to length(GLOB.laws_of_the_land))
+		for(var/i in 1 to length_char(GLOB.laws_of_the_land))
 			. += span_small("[i]. [GLOB.laws_of_the_land[i]]")
 
 /obj/structure/roguemachine/scomm/process()
@@ -260,8 +260,8 @@
 			if(calling.calling == src)
 				calling.repeat_message(raw_message, src, usedcolor, message_language)
 			return
-		if(length(raw_message) > 100) //When these people talk too much, put that shit in slow motion, yeah
-			/*if(length(raw_message) > 200)
+		if(length_char(raw_message) > 100) //When these people talk too much, put that shit in slow motion, yeah
+			/*if(length_char(raw_message) > 200)
 				if(!spawned_rat)
 					visible_message(span_warning("An angered rous emerges from the SCOMlines!"))
 					new /mob/living/simple_animal/hostile/retaliate/rogue/bigrat(get_turf(src))
@@ -296,12 +296,12 @@
 	INVOKE_ASYNC(src, PROC_REF(dictation))
 
 /obj/structure/roguemachine/scomm/proc/dictation()
-	if(!length(GLOB.laws_of_the_land))
+	if(!length_char(GLOB.laws_of_the_land))
 		sleep(2)
 		repeat_message("THE LAND HAS NO LAWS!", tcolor = COLOR_RED)
 		dictating = FALSE
 		return
-	for(var/i in 1 to length(GLOB.laws_of_the_land))
+	for(var/i in 1 to length_char(GLOB.laws_of_the_land))
 		sleep(2)
 		repeat_message("[i]. [GLOB.laws_of_the_land[i]]", tcolor = COLOR_RED)
 	dictating = FALSE
@@ -349,7 +349,7 @@
 	if(user.voicecolor_override)
 		usedcolor = user.voicecolor_override
 	user.whisper(input_text)
-	if(length(input_text) > 100) //When these people talk too much, put that shit in slow motion, yeah
+	if(length_char(input_text) > 100) //When these people talk too much, put that shit in slow motion, yeah
 		input_text = "<small>[input_text]</small>"
 	for(var/obj/structure/roguemachine/scomm/S in SSroguemachine.scomm_machines)
 		S.repeat_message(input_text, src, usedcolor)
@@ -535,7 +535,7 @@
 		if(user.voicecolor_override)
 			usedcolor = user.voicecolor_override
 		user.whisper(input_text)
-		if(length(input_text) > 100)
+		if(length_char(input_text) > 100)
 			input_text = "<small>[input_text]</small>"
 		for(var/obj/item/mattcoin/S in SSroguemachine.scomm_machines)
 			S.repeat_message(input_text, src, usedcolor)
@@ -710,7 +710,7 @@
 		usedcolor = H.voicecolor_override
 	if(!raw_message)
 		return
-	if(length(raw_message) > 100)
+	if(length_char(raw_message) > 100)
 		raw_message = "<small>[raw_message]</small>"
 	for(var/obj/item/speakerinq/S in SSroguemachine.scomm_machines)
 		S.repeat_message(raw_message, src, usedcolor, message_language)
@@ -735,7 +735,7 @@
 	if(user.voicecolor_override)
 		usedcolor = user.voicecolor_override
 	user.whisper(input_text)
-	if(length(input_text) > 100) //When these people talk too much, put that shit in slow motion, yeah
+	if(length_char(input_text) > 100) //When these people talk too much, put that shit in slow motion, yeah
 		input_text = "<small>[input_text]</small>"
 	if(garrisonline)
 		input_text = "<big><span style='color: [GARRISON_SCOM_COLOR]'>[input_text]</span></big>" //Prettying up for Garrison line

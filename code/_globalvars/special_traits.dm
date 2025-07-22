@@ -25,7 +25,7 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 		// Apply the stuff if we dont have a job for some reason
 		apply_character_post_equipment(character, player)
 		return
-	if(length(job.advclass_cat_rolls))
+	if(length_char(job.advclass_cat_rolls))
 		// Dont apply the stuff, let adv class handler do it later
 		return
 	// Apply the stuff if we have a job that has no adv classes
@@ -165,7 +165,7 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 			continue
 		eligible_weight[trait_type] = special.weight
 
-	if(!length(eligible_weight))
+	if(!length_char(eligible_weight))
 		return null
 
 	return pickweight(eligible_weight)

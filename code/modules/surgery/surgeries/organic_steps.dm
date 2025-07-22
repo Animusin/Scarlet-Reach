@@ -106,7 +106,7 @@
 	. = ..()
 	if(!.)
 		return
-	return length(bodypart.wounds)
+	return length_char(bodypart.wounds)
 
 /datum/surgery_step/cauterize/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	display_results(user, target, span_notice("I begin to cauterize the wounds on [target]'s [parse_zone(target_zone)]..."),

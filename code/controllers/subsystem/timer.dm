@@ -34,7 +34,7 @@ SUBSYSTEM_DEF(timer)
 	bucket_resolution = world.tick_lag
 
 /datum/controller/subsystem/timer/stat_entry(msg)
-	..("B:[bucket_count] P:[length(second_queue)] H:[length(hashes)] C:[length(clienttime_timers)] S:[length(timer_id_dict)]")
+	..("B:[bucket_count] P:[length_char(second_queue)] H:[length_char(hashes)] C:[length_char(clienttime_timers)] S:[length_char(timer_id_dict)]")
 
 /datum/controller/subsystem/timer/fire(resumed = FALSE)
 	var/lit = last_invoke_tick
@@ -53,7 +53,7 @@ SUBSYSTEM_DEF(timer)
 			bucket_resolution = 0
 
 		log_world("Timer bucket reset. world.time: [world.time], head_offset: [head_offset], practical_offset: [practical_offset]")
-		for (var/i in 1 to length(bucket_list))
+		for (var/i in 1 to length_char(bucket_list))
 			var/datum/timedevent/bucket_head = bucket_list[i]
 			if (!bucket_head)
 				continue
@@ -72,7 +72,7 @@ SUBSYSTEM_DEF(timer)
 			log_world(get_timer_debug_string(I))
 
 	var/next_clienttime_timer_index = 0
-	var/len = length(clienttime_timers)
+	var/len = length_char(clienttime_timers)
 
 	for (next_clienttime_timer_index in 1 to len)
 		if (MC_TICK_CHECK)
@@ -112,7 +112,7 @@ SUBSYSTEM_DEF(timer)
 		practical_offset = 1
 		resumed = FALSE
 
-	if ((length(bucket_list) != BUCKET_LEN) || (world.tick_lag != bucket_resolution))
+	if ((length_char(bucket_list) != BUCKET_LEN) || (world.tick_lag != bucket_resolution))
 		reset_buckets()
 		bucket_list = src.bucket_list
 		resumed = FALSE
@@ -150,7 +150,7 @@ SUBSYSTEM_DEF(timer)
 
 		//we freed up a bucket, lets see if anything in second_queue needs to be shifted to that bucket.
 		var/i = 0
-		var/L = length(second_queue)
+		var/L = length_char(second_queue)
 		for (i in 1 to L)
 			timer = second_queue[i]
 			if (timer.timeToRun >= TIMER_MAX)
@@ -201,7 +201,7 @@ SUBSYSTEM_DEF(timer)
 
 		timer = null
 
-	bucket_count -= length(spent)
+	bucket_count -= length_char(spent)
 
 	for (var/i in spent)
 		var/datum/timedevent/qtimer = i
@@ -255,7 +255,7 @@ SUBSYSTEM_DEF(timer)
 	bucket_resolution = world.tick_lag
 
 	alltimers += second_queue
-	if (!length(alltimers))
+	if (!length_char(alltimers))
 		return
 
 	sortTim(alltimers, PROC_REF(cmp_timer))
@@ -267,7 +267,7 @@ SUBSYSTEM_DEF(timer)
 
 	var/new_bucket_count
 	var/i = 1
-	for (i in 1 to length(alltimers))
+	for (i in 1 to length_char(alltimers))
 		var/datum/timedevent/timer = alltimers[i]
 		if (!timer)
 			continue
@@ -402,9 +402,9 @@ SUBSYSTEM_DEF(timer)
 	else if(timeToRun < TIMER_MAX || next || prev)
 		SStimer.bucket_count--
 	else
-		var/l = length(second_queue)
+		var/l = length_char(second_queue)
 		second_queue -= src
-		if(l == length(second_queue))
+		if(l == length_char(second_queue))
 			SStimer.bucket_count--
 	if(prev != next)
 		prev.next = next

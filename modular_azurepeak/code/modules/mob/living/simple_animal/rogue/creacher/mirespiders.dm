@@ -214,7 +214,7 @@
 		followers += mirespider
 
 /mob/living/simple_animal/hostile/rogue/mirespider_lurker/proc/clear_followers_if_any()
-	if (!followers || !length(followers))
+	if (!followers || !length_char(followers))
 		return
 
 	for (var/mob/living/simple_animal/hostile/retaliate/rogue/mirespider/follower in followers)

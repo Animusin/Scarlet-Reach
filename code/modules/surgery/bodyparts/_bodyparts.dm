@@ -219,7 +219,7 @@
 	return ..()
 
 /obj/item/bodypart/head/attackby(obj/item/I, mob/user, params)
-	if(length(contents) && I.get_sharpness() && !user.cmode)
+	if(length_char(contents) && I.get_sharpness() && !user.cmode)
 		add_fingerprint(user)
 		playsound(loc, 'sound/combat/hits/bladed/genstab (1).ogg', 60, vary = FALSE)
 		user.visible_message(span_warning("[user] begins to cut open [src]."),\

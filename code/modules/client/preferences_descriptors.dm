@@ -19,7 +19,7 @@
 			else
 				entry.descriptor_type = pick(choice.descriptors)
 	for(var/i in 1 to CUSTOM_DESCRIPTOR_AMOUNT)
-		if(length(custom_descriptors) >= i)
+		if(length_char(custom_descriptors) >= i)
 			continue
 		var/datum/custom_descriptor_entry/custom_entry = new /datum/custom_descriptor_entry()
 		custom_descriptors += custom_entry
@@ -123,7 +123,7 @@
 	popup.open(FALSE)
 
 /datum/preferences/proc/has_descriptor_type_in_entries(descriptor_type)
-	if(length(descriptor_entries))
+	if(length_char(descriptor_entries))
 		for(var/datum/descriptor_entry/entry as anything in descriptor_entries)
 			if(entry.descriptor_type != descriptor_type)
 				continue
@@ -131,7 +131,7 @@
 	return FALSE
 
 /datum/preferences/proc/get_descriptor_entry_for_choice(choice_type)
-	if(length(descriptor_entries))
+	if(length_char(descriptor_entries))
 		for(var/datum/descriptor_entry/entry as anything in descriptor_entries)
 			if(entry.descriptor_choice_type != choice_type)
 				continue

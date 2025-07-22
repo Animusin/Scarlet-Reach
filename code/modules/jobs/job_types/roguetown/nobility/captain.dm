@@ -45,9 +45,9 @@
 		var/mob/living/carbon/human/H = L
 		if(istype(H.cloak, /obj/item/clothing/cloak/stabard))
 			var/obj/item/clothing/S = H.cloak
-			var/index = findtext(H.real_name, " ")
+			var/index = findtext_char(H.real_name, " ")
 			if(index)
-				index = copytext(H.real_name, 1,index)
+				index = copytext_char(H.real_name, 1,index)
 			if(!index)
 				index = H.real_name
 			S.name = "Captain Tabard ([index])"
@@ -293,7 +293,7 @@
 		if(!can_convert(recruit))
 			continue
 		recruitment[recruit.name] = recruit
-	if(!length(recruitment))
+	if(!length_char(recruitment))
 		to_chat(user, span_warning("There are no potential recruits in range."))
 		return
 	var/inputty = input(user, "Select a potential recruit!", "[name]") as anything in recruitment
@@ -327,7 +327,7 @@
 /obj/effect/proc_holder/spell/self/convertrole/proc/convert(mob/living/carbon/human/recruit, mob/living/carbon/human/recruiter)
 	if(QDELETED(recruit) || QDELETED(recruiter))
 		return FALSE
-	recruiter.say(replacetext(recruitment_message, "%RECRUIT", "[recruit]"), forced = "[name]")
+	recruiter.say(replacetext_char(recruitment_message, "%RECRUIT", "[recruit]"), forced = "[name]")
 	var/prompt = alert(recruit, "Do you wish to become a [new_role]?", "[recruitment_faction] Recruitment", "Yes", "No")
 	if(QDELETED(recruit) || QDELETED(recruiter) || !(recruiter in get_hearers_in_view(recruitment_range, recruit)))
 		return FALSE

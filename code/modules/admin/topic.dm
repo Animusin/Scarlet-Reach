@@ -926,11 +926,11 @@
 		if(!paths)
 			alert("The path list you sent is empty.")
 			return
-		if(length(paths) > 5)
+		if(length_char(paths) > 5)
 			alert("Select fewer object types, (max 5).")
 			return
 
-		var/list/offset = splittext(href_list["offset"],",")
+		var/list/offset = splittext_char(href_list["offset"],",")
 		var/number = CLAMP(text2num(href_list["object_count"]), 1, ADMIN_SPAWN_CAP)
 		var/X = offset.len > 0 ? text2num(offset[1]) : 0
 		var/Y = offset.len > 1 ? text2num(offset[2]) : 0
@@ -1042,8 +1042,8 @@
 			var/strkicked = ""
 			for(var/name in listkicked)
 				strkicked += "[name], "
-			message_admins("[key_name_admin(usr)] has kicked [afkonly ? "all AFK" : "all"] clients from the lobby. [length(listkicked)] clients kicked: [strkicked ? strkicked : "--"]")
-			log_admin("[key_name(usr)] has kicked [afkonly ? "all AFK" : "all"] clients from the lobby. [length(listkicked)] clients kicked: [strkicked ? strkicked : "--"]")
+			message_admins("[key_name_admin(usr)] has kicked [afkonly ? "all AFK" : "all"] clients from the lobby. [length_char(listkicked)] clients kicked: [strkicked ? strkicked : "--"]")
+			log_admin("[key_name(usr)] has kicked [afkonly ? "all AFK" : "all"] clients from the lobby. [length_char(listkicked)] clients kicked: [strkicked ? strkicked : "--"]")
 		else
 			to_chat(usr, "You may only use this when the game is running.")
 
@@ -1090,7 +1090,7 @@
 			thing_to_check = C.related_accounts_cid
 		else
 			thing_to_check = C.related_accounts_ip
-		thing_to_check = splittext(thing_to_check, ", ")
+		thing_to_check = splittext_char(thing_to_check, ", ")
 
 
 		var/list/dat = list("Related accounts by [uppertext(href_list["showrelatedacc"])]:")
@@ -1341,7 +1341,7 @@
 		var/the_key = href_list["readcommends"]
 		var/popup_window_data = "<center>[the_key]</center>"
 
-		var/json_file = file("data/player_saves/[copytext(the_key,1,2)]/[the_key]/commends.json")
+		var/json_file = file("data/player_saves/[copytext_char(the_key,1,2)]/[the_key]/commends.json")
 		if(!fexists(json_file))
 			WRITE_FILE(json_file, "{}")
 		var/list/json = json_decode(file2text(json_file))
@@ -1356,7 +1356,7 @@
 		var/the_key = href_list["cursemenu"]
 		var/popup_window_data = "<center>[the_key]</center>"
 
-		var/json_file = file("data/player_saves/[copytext(the_key,1,2)]/[the_key]/curses.json")
+		var/json_file = file("data/player_saves/[copytext_char(the_key,1,2)]/[the_key]/curses.json")
 		if(!fexists(json_file))
 			WRITE_FILE(json_file, "{}")
 		var/list/json = json_decode(file2text(json_file))

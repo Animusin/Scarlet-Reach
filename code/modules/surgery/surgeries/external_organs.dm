@@ -20,7 +20,7 @@
 		if(cur_organ.visible_organ || cur_organ.slot == ORGAN_SLOT_TONGUE)
 			organs += cur_organ
 
-	if(!length(organs))
+	if(!length_char(organs))
 		to_chat(user, span_warning("There are no severable parts on [target]'s [parse_zone(target_zone)]!"))
 		return FALSE
 	for(var/obj/item/organ/found_organ as anything in organs)

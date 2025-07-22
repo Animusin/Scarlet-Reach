@@ -313,11 +313,11 @@ world
 
 	// interpret the HSV or HSVA value
 	var/i=1,start=1
-	if(text2ascii(rgb) == 35) ++start // skip opening #
+	if(text2ascii_char(rgb) == 35) ++start // skip opening #
 	var/ch,which=0,r=0,g=0,b=0,alpha=0,usealpha
 	var/digits=0
-	for(i=start, i<=length(rgb), ++i)
-		ch = text2ascii(rgb, i)
+	for(i=start, i<=length_char(rgb), ++i)
+		ch = text2ascii_char(rgb, i)
 		if(ch < 48 || (ch > 57 && ch < 65) || (ch > 70 && ch < 97) || ch > 102)
 			break
 		++digits
@@ -330,7 +330,7 @@ world
 	if(digits == 4 || digits == 8)
 		usealpha = 1
 	for(i=start, digits>0, ++i)
-		ch = text2ascii(rgb, i)
+		ch = text2ascii_char(rgb, i)
 		if(ch >= 48 && ch <= 57)
 			ch -= 48
 		else if(ch >= 65 && ch <= 70)
@@ -377,12 +377,12 @@ world
 
 	// interpret the HSV or HSVA value
 	var/i=1,start=1
-	if(text2ascii(hsv) == 35)
+	if(text2ascii_char(hsv) == 35)
 		++start // skip opening #
 	var/ch,which=0,hue=0,sat=0,val=0,alpha=0,usealpha
 	var/digits=0
-	for(i=start, i<=length(hsv), ++i)
-		ch = text2ascii(hsv, i)
+	for(i=start, i<=length_char(hsv), ++i)
+		ch = text2ascii_char(hsv, i)
 		if(ch < 48 || (ch > 57 && ch < 65) || (ch > 70 && ch < 97) || ch > 102)
 			break
 		++digits
@@ -395,7 +395,7 @@ world
 	if(digits <= 2)
 		++which
 	for(i=start, digits>0, ++i)
-		ch = text2ascii(hsv, i)
+		ch = text2ascii_char(hsv, i)
 		if(ch >= 48 && ch <= 57)
 			ch -= 48
 		else if(ch >= 65 && ch <= 70)
@@ -691,16 +691,16 @@ world
 /proc/GetColors(hex)
 	hex = uppertext(hex)
 	// No alpha set? Default to full alpha.
-	if(length(hex) == 7)
+	if(length_char(hex) == 7)
 		hex += "FF"
-	var/hi1 = text2ascii(hex, 2) // R
-	var/lo1 = text2ascii(hex, 3) // R
-	var/hi2 = text2ascii(hex, 4) // G
-	var/lo2 = text2ascii(hex, 5) // G
-	var/hi3 = text2ascii(hex, 6) // B
-	var/lo3 = text2ascii(hex, 7) // B
-	var/hi4 = text2ascii(hex, 8) // A
-	var/lo4 = text2ascii(hex, 9) // A
+	var/hi1 = text2ascii_char(hex, 2) // R
+	var/lo1 = text2ascii_char(hex, 3) // R
+	var/hi2 = text2ascii_char(hex, 4) // G
+	var/lo2 = text2ascii_char(hex, 5) // G
+	var/hi3 = text2ascii_char(hex, 6) // B
+	var/lo3 = text2ascii_char(hex, 7) // B
+	var/hi4 = text2ascii_char(hex, 8) // A
+	var/lo4 = text2ascii_char(hex, 9) // A
 	return list(((hi1>= 65 ? hi1-55 : hi1-48)<<4) | (lo1 >= 65 ? lo1-55 : lo1-48),
 		((hi2 >= 65 ? hi2-55 : hi2-48)<<4) | (lo2 >= 65 ? lo2-55 : lo2-48),
 		((hi3 >= 65 ? hi3-55 : hi3-48)<<4) | (lo3 >= 65 ? lo3-55 : lo3-48),
@@ -782,7 +782,7 @@ world
 		if (curdir != SOUTH)
 			// icon states either have 1, 4 or 8 dirs. We only have to check
 			// one of NORTH, EAST or WEST to know that this isn't a 1-dir icon_state since they just have SOUTH.
-			if(!length(icon_states(icon(curicon, curstate, NORTH))))
+			if(!length_char(icon_states(icon(curicon, curstate, NORTH))))
 				base_icon_dir = SOUTH
 
 		var/list/icon_dimensions = get_icon_dimensions(curicon)
@@ -963,7 +963,7 @@ world
 	var/icon/atom_icon = new(A.icon, A.icon_state)
 
 	if(!letter)
-		letter = copytext(A.name, 1, 2)
+		letter = copytext_char(A.name, 1, 2)
 		if(uppercase == 1)
 			letter = uppertext(letter)
 		else if(uppercase == -1)
@@ -1124,7 +1124,7 @@ GLOBAL_LIST_INIT(freon_color_matrix, list("#2E5E69", "#60A2A8", "#A1AFB1", rgb(0
 //Assumes already frozed
 /obj/proc/make_unfrozen()
 	if(obj_flags & FROZEN)
-		name = replacetext(name, "frozen ", "")
+		name = replacetext_char(name, "frozen ", "")
 		remove_atom_colour(TEMPORARY_COLOUR_PRIORITY, GLOB.freon_color_matrix)
 		alpha += 25
 		obj_flags &= ~FROZEN
@@ -1138,8 +1138,8 @@ GLOBAL_LIST_INIT(freon_color_matrix, list("#2E5E69", "#60A2A8", "#A1AFB1", rgb(0
 		return FALSE
 	WRITE_FILE(GLOB.iconCache[iconKey], icon)
 	var/iconData = GLOB.iconCache.ExportText(iconKey)
-	var/list/partial = splittext(iconData, "{")
-	return replacetext(copytext(partial[2], 3, -5), "\n", "")
+	var/list/partial = splittext_char(iconData, "{")
+	return replacetext_char(copytext_char(partial[2], 3, -5), "\n", "")
 
 /proc/icon2html(thing, target, icon_state, dir, frame = 1, moving = FALSE)
 	if (!thing)
@@ -1253,7 +1253,7 @@ GLOBAL_LIST_INIT(freon_color_matrix, list("#2E5E69", "#60A2A8", "#A1AFB1", rgb(0
 	// Icons can be a real file(), a rsc backed file(), a dynamic rsc (dyn.rsc) reference (known as a cache reference in byond docs), or an /icon which is pointing to one of those.
 	// Runtime generated dynamic icons are an unbounded concept cache identity wise, the same icon can exist millions of ways and holding them in a list as a key can lead to unbounded memory usage if called often by consumers.
 	// Check distinctly that this is something that has this unspecified concept, and thus that we should not cache.
-	if (!isfile(icon_path) || !length("[icon_path]"))
+	if (!isfile(icon_path) || !length_char("[icon_path]"))
 		var/icon/my_icon = icon(icon_path)
 		return list("width" = my_icon.Width(), "height" = my_icon.Height())
 	if (isnull(GLOB.icon_dimensions[icon_path]))

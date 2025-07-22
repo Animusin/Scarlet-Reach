@@ -4,7 +4,7 @@
 
 	var/announcement
 
-	if (title && length(title) > 0)
+	if (title && length_char(title) > 0)
 		announcement += "<h1 class='alert'>[title]</h1>"
 	announcement += "<br><span class='alert'>[STRIP_HTML_SIMPLE(text, MAX_MESSAGE_LEN)]</span>"
 

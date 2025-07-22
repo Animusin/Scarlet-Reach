@@ -32,7 +32,7 @@
 	var/areatype = text2path(target_path)
 	if(ispath(areatype,/area))
 		var/areaname = input(c, "Enter area name:", "Area name", "Area")
-		if(!areaname || !length(areaname))
+		if(!areaname || !length_char(areaname))
 			return
 		storedarea = new areatype
 		storedarea.power_equip = 0

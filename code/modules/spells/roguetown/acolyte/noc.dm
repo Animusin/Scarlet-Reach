@@ -156,7 +156,7 @@
 		for(var/spell_type in spells)
 			var/obj/effect/proc_holder/spell/new_spell = new spell_type
 			user?.mind.AddSpell(new_spell)
-	if(!length(spells))
+	if(!length_char(spells))
 		user.mind?.RemoveSpell(src.type)
 
 //15 PER peer-ahead.

@@ -77,7 +77,7 @@
 		var/list/prices = price_change_manifest[list_type]
 		sell_data[list_type] = prices.Copy()
 
-	if(length(sell_data))
+	if(length_char(sell_data))
 		SSmerchant.sending_stuff |= new /obj/item/paper/scroll/sell_price_changes(null, sell_data, faction_name)
 
 

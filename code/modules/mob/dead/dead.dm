@@ -17,7 +17,7 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 
 	prepare_huds()
 
-	if(length(CONFIG_GET(keyed_list/cross_server)))
+	if(length_char(CONFIG_GET(keyed_list/cross_server)))
 		verbs += /mob/dead/proc/server_hop
 	set_focus(src)
 	return INITIALIZE_HINT_NORMAL

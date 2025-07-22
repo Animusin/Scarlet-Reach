@@ -11,7 +11,7 @@
 			var/action = alert(usr, "Are you sure you want to use a preset (This will clear your existing markings)?", "Markings Preset", "Yes", "No")
 			if(action && action == "Yes")
 				var/list/candidates = marking_sets_for_species(pref_species)
-				if(length(candidates) == 0)
+				if(length_char(candidates) == 0)
 					return
 				var/desired_set = input(user, "Choose your new body markings:", "Character Preference") as null|anything in candidates
 				if(desired_set)
@@ -51,7 +51,7 @@
 			var/name = href_list["name"]
 			var/list/marking_list = LAZYACCESS(body_markings, zone)
 			var/current_index = LAZYFIND(marking_list, name)
-			if(!current_index || ++current_index > length(marking_list))
+			if(!current_index || ++current_index > length_char(marking_list))
 				return
 			var/marking_content = marking_list[name]
 			marking_list -= name
@@ -160,7 +160,7 @@
 				var/color = body_markings[zone][key]
 				color_line = "<a href='?_src_=prefs;name=[key];key=[zone];preference=reset_color;task=change_marking'>R</a>"
 				color_line += "<a href='?_src_=prefs;name=[key];key=[zone];preference=change_color;task=change_marking'><span class='color_holder_box' style='background-color:["#[color]"]'></span></a>"
-				if(current_index < length(body_markings[zone]))
+				if(current_index < length_char(body_markings[zone]))
 					can_move_down = "<a href='?_src_=prefs;name=[key];key=[zone];preference=marking_move_down;task=change_marking'>Down</a>"
 				if(current_index > 1)
 					can_move_up = "<a href='?_src_=prefs;name=[key];key=[zone];preference=marking_move_up;task=change_marking'>Up</a>"

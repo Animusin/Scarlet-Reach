@@ -1126,17 +1126,17 @@
 						if(!excomm_found)
 							// Prompt priest for surname
 							var/surname = input(user, "Enter a surname for the couple:", "Marriage Ceremony") as text|null
-							if(!surname || !length(trim(surname)))
+							if(!surname || !length_char(trim(surname)))
 								surname = thegroom.dna.species.random_surname()
 							// Ensure leading space for surname
-							if(!findtext(surname, " "))
+							if(!findtext_char(surname, " "))
 								surname = " [surname]"
 							// Assign surname to groom
-							var/list/groom_name_parts = splittext(thegroom.real_name, " ")
+							var/list/groom_name_parts = splittext_char(thegroom.real_name, " ")
 							var/groom_first_name = groom_name_parts[1]
 							thegroom.real_name = "[groom_first_name] [surname]"
 							// Assign surname to bride
-							var/list/bride_name_parts = splittext(thebride.real_name, " ")
+							var/list/bride_name_parts = splittext_char(thebride.real_name, " ")
 							var/bride_first_name = bride_name_parts[1]
 							thebride.real_name = "[bride_first_name] [surname]"
 							// Private notification to both
@@ -1149,7 +1149,7 @@
 							thebride.adjust_triumphs(1)
 							// After surname is set, have the priest say the wedding line
 							if(user && surname)
-								var/surname_trimmed = copytext(surname, 2) // Remove leading space if present
+								var/surname_trimmed = copytext_char(surname, 2) // Remove leading space if present
 								user.say("I hereby wed you [surname_trimmed]s.")
 							priority_announce("[thegroom.real_name] has married [thebride.real_name]!", title = "Holy Union!", sound = 'sound/misc/bell.ogg')
 							qdel(A)

@@ -32,7 +32,7 @@
 			no_icon = TRUE
 
 	title = "[D] ([REF(D)]) = [type]"
-	var/formatted_type = replacetext("[type]", "/", "<wbr>/")
+	var/formatted_type = replacetext_char("[type]", "/", "<wbr>/")
 
 	var/sprite_text
 	if(sprite)
@@ -61,7 +61,7 @@
 			"Show VV To Player" = VV_HREF_TARGETREF_INTERNAL(refid, VV_HK_EXPOSE),
 			"---"
 			)
-		for(var/i in 1 to length(dropdownoptions))
+		for(var/i in 1 to length_char(dropdownoptions))
 			var/name = dropdownoptions[i]
 			var/link = dropdownoptions[name]
 			dropdownoptions[i] = "<option value[link? "='[link]'":""]>[name]</option>"
@@ -91,7 +91,7 @@
 
 	var/html = {"
 <html>
-	<head>
+	<head><meta charset='UTF-8'>
 		<title>[title]</title>
 		<style>
 			body {

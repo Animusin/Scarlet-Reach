@@ -16,7 +16,7 @@
 	return ..()
 
 /obj/structure/target_stake/proc/handle_density()
-	if(length(buckled_mobs) || pinned_target)
+	if(length_char(buckled_mobs) || pinned_target)
 		density = TRUE
 	else
 		density = FALSE

@@ -32,7 +32,7 @@
 		return
 	var/antag_amt = get_antag_amount()
 	var/list/candidates = get_candidates()
-	if(length(candidates) < antag_amt)
+	if(length_char(candidates) < antag_amt)
 		return FALSE
 
 /datum/round_event_control/antagonist/solo/proc/get_antag_amount()
@@ -57,7 +57,7 @@
 
 	var/antag_amt = get_antag_amount()
 	var/list/candidates = get_candidates() //we should optimize this
-	if(length(candidates) < antag_amt)
+	if(length_char(candidates) < antag_amt)
 		if(.)
 			. += ", "
 		. += "Not Enough Candidates!"
@@ -104,7 +104,7 @@
 	prompted_picking = cast_control.prompted_picking
 	var/list/possible_candidates = cast_control.get_candidates()
 	var/list/candidates = list()
-	if(cast_control == SSgamemode.current_roundstart_event && length(SSgamemode.roundstart_antag_minds))
+	if(cast_control == SSgamemode.current_roundstart_event && length_char(SSgamemode.roundstart_antag_minds))
 		log_storyteller("Running roundstart antagonist assignment, event: [src], roundstart_antag_minds: [english_list(SSgamemode.roundstart_antag_minds)]")
 		for(var/datum/mind/antag_mind in SSgamemode.roundstart_antag_minds)
 			if(!antag_mind.current)
@@ -119,7 +119,7 @@
 	for(var/mob/living/mob as anything in possible_candidates)
 		cliented_list += mob.client
 
-	while(length(possible_candidates) && length(candidates) < antag_count) //both of these pick_n_take from weighted_candidates so this should be fine
+	while(length_char(possible_candidates) && length_char(candidates) < antag_count) //both of these pick_n_take from weighted_candidates so this should be fine
 		var/mob/picked_ckey = pick_n_take(possible_candidates)
 		var/client/picked_client = picked_ckey.client
 		if(QDELETED(picked_client))
@@ -131,7 +131,7 @@
 
 	var/list/picked_mobs = list()
 	for(var/i in 1 to antag_count)
-		if(!length(candidates))
+		if(!length_char(candidates))
 			message_admins("A roleset event got fewer antags then its antag_count and may not function correctly.")
 			break
 
@@ -216,7 +216,7 @@
 	*/
 
 	var/selected_count = 0
-	while(length(candidates) && selected_count < antag_count)
+	while(length_char(candidates) && selected_count < antag_count)
 		var/mob/candidate_ckey = pick_n_take(candidates)
 		var/client/candidate_client = candidate_ckey.client
 		if(QDELETED(candidate_client) || QDELETED(candidate_client.mob))

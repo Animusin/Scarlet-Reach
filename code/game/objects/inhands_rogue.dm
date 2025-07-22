@@ -742,7 +742,7 @@ GLOBAL_LIST_EMPTY(icon_state_cache)
 		if(!used_cat)
 			used_cat = "gen"
 
-		if(length(I.onprop?[used_cat]))
+		if(length_char(I.onprop?[used_cat]))
 			var/list/L = I.onprop[used_cat]
 			L[needtofind] += 0.1
 			to_chat(LI, "[needtofind] = [L[needtofind]]")
@@ -780,7 +780,7 @@ GLOBAL_LIST_EMPTY(icon_state_cache)
 		if(!used_cat)
 			used_cat = "gen"
 
-		if(length(I.onprop?[used_cat]))
+		if(length_char(I.onprop?[used_cat]))
 			var/list/L = I.onprop[used_cat]
 			L[needtofind] -= 0.1
 			to_chat(LI, "[needtofind] = [L[needtofind]]")

@@ -57,7 +57,7 @@ it will be sent to all connected chats.
 	var/list/channels_to_use = list()
 	for(var/I in world.TgsChatChannelInfo())
 		var/datum/tgs_chat_channel/channel = I
-		var/list/applicable_tags = splittext(channel.custom_tag, ",")
+		var/list/applicable_tags = splittext_char(channel.custom_tag, ",")
 		if((!admin_only || channel.is_admin_channel) && (channel_tag in applicable_tags))
 			channels_to_use += channel
 
@@ -73,10 +73,10 @@ it will be sent to all connected chats.
 /proc/send2adminchat(category, message, embed_links = FALSE)
 	set waitfor = FALSE
 
-	category = replacetext(replacetext(category, "\proper", ""), "\improper", "")
-	message = replacetext(replacetext(message, "\proper", ""), "\improper", "")
+	category = replacetext_char(replacetext_char(category, "\proper", ""), "\improper", "")
+	message = replacetext_char(replacetext_char(message, "\proper", ""), "\improper", "")
 	if(!embed_links)
-		message = GLOB.has_discord_embeddable_links.Replace(replacetext(message, "`", ""), " ```$1``` ")
+		message = GLOB.has_discord_embeddable_links.Replace(replacetext_char(message, "`", ""), " ```$1``` ")
 	world.TgsTargetedChatBroadcast(new /datum/tgs_message_content("[category] | [message]"), TRUE)
 
 /// Handles text formatting for item use hints in examine text

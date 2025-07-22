@@ -1096,7 +1096,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 				to_chat(target, span_danger("[user] stole my [I.name]!"))*/
 		var/def_zone = check_zone(user.zone_selected)
 		var/obj/item/bodypart/affecting = target.get_bodypart(def_zone)
-		if(length(affecting?.embedded_objects))
+		if(length_char(affecting?.embedded_objects))
 			for(var/obj/item/embedded in affecting.embedded_objects)
 				target.grabbedby(user, 1, item_override = embedded)
 				return TRUE
@@ -1568,7 +1568,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	if(istype(user.used_intent, /datum/intent/effect) && selzone)
 		var/datum/intent/effect/int = user.used_intent
 		var/do_effect = FALSE
-		if(length(int.target_parts))
+		if(length_char(int.target_parts))
 			if(selzone in int.target_parts)
 				do_effect = TRUE
 		else

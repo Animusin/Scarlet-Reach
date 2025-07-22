@@ -423,10 +423,10 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 	var/list/butcher = list()
 	var/butchery_skill_level = user.get_skill_level(/datum/skill/labor/butchering)
 	var/botch_chance = 0
-	if(length(botched_butcher_results) && butchery_skill_level < SKILL_LEVEL_JOURNEYMAN)
+	if(length_char(botched_butcher_results) && butchery_skill_level < SKILL_LEVEL_JOURNEYMAN)
 		botch_chance = 70 - (20 * butchery_skill_level) // 70% at unskilled, 20% lower for each level above it, 0% at journeyman or higher
 	var/perfect_chance = 0
-	if(length(perfect_butcher_results))
+	if(length_char(perfect_butcher_results))
 		switch(butchery_skill_level)
 			if(SKILL_LEVEL_NONE to SKILL_LEVEL_APPRENTICE)
 				perfect_chance = 0

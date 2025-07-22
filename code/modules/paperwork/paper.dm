@@ -164,7 +164,7 @@
 	if(in_range(user, src) || isobserver(user))
 //		var/obj/screen/read/R = user.hud_used.reads
 		var/dat = {"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">
-			<html><head><style type=\"text/css\">
+			<html><head><meta charset='UTF-8'><style type=\"text/css\">
 			body { background-image:url('book.png');background-repeat: repeat; }</style></head><body scroll=yes>"}
 		dat += info
 		dat += "<br>"
@@ -178,10 +178,10 @@
 /*
 	if(in_range(user, src) || isobserver(user))
 		if(user.is_literate())
-			user << browse("<HTML><HEAD><TITLE>[name]</TITLE>[extra_headers]</HEAD><BODY>[info]<HR></BODY></HTML>", "window=paper[md5(name)]")
+			user << browse("<HTML><head><meta charset='UTF-8'><TITLE>[name]</TITLE>[extra_headers]</HEAD><BODY>[info]<HR></BODY></HTML>", "window=paper[md5(name)]")
 			onclose(user, "paper[md5(name)]")
 		else
-			user << browse("<HTML><HEAD><TITLE>[name]</TITLE>[extra_headers]</HEAD><BODY>[stars(info)]<HR></BODY></HTML>", "window=paper[md5(name)]")
+			user << browse("<HTML><head><meta charset='UTF-8'><TITLE>[name]</TITLE>[extra_headers]</HEAD><BODY>[stars(info)]<HR></BODY></HTML>", "window=paper[md5(name)]")
 			onclose(user, "paper[md5(name)]")
 	else
 		return "<span class='warning'>You're too far away to read it.</span>"
@@ -190,7 +190,7 @@
 /obj/item/paper/proc/format_browse(t, mob/user)
 	user << browse_rsc('html/book.png')
 	var/dat = {"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">
-			<html><head><style type=\"text/css\">
+			<html><head><meta charset='UTF-8'><style type=\"text/css\">
 			body { background-image:url('book.png');background-repeat: repeat; }</style></head><body scroll=yes>"}
 	dat += "[t]<br>"
 	dat += "<a href='?src=[REF(src)];close=1' style='position:absolute;right:50px'>Close</a>"
@@ -240,9 +240,9 @@
 	while(locid < 15)	//hey whoever decided a while(1) was a good idea here, i hate you
 		var/istart = 0
 		if(links)
-			istart = findtext(info_links, "<span class=\"paper_field\">", laststart)
+			istart = findtext_char(info_links, "<span class=\"paper_field\">", laststart)
 		else
-			istart = findtext(info, "<span class=\"paper_field\">", laststart)
+			istart = findtext_char(info, "<span class=\"paper_field\">", laststart)
 
 		if(istart == 0)
 			return	//No field found with matching id
@@ -252,21 +252,21 @@
 		if(locid == id)
 			var/iend = 1
 			if(links)
-				iend = findtext(info_links, "</span>", istart)
+				iend = findtext_char(info_links, "</span>", istart)
 			else
-				iend = findtext(info, "</span>", istart)
+				iend = findtext_char(info, "</span>", istart)
 
 			//textindex = istart+26
 			textindex = iend
 			break
 
 	if(links)
-		var/before = copytext(info_links, 1, textindex)
-		var/after = copytext(info_links, textindex)
+		var/before = copytext_char(info_links, 1, textindex)
+		var/after = copytext_char(info_links, textindex)
 		info_links = before + text + after
 	else
-		var/before = copytext(info, 1, textindex)
-		var/after = copytext(info, textindex)
+		var/before = copytext_char(info, 1, textindex)
+		var/after = copytext_char(info, textindex)
 		info = before + text + after
 		updateinfolinks()
 
@@ -288,7 +288,7 @@
 
 
 /obj/item/paper/proc/parsepencode(t, obj/item/P, mob/user, iscrayon = 0)
-	if(length(t) < 1)		//No input means nothing needs to be parsed
+	if(length_char(t) < 1)		//No input means nothing needs to be parsed
 		return
 
 	t = parsemarkdown(t, user, iscrayon)
@@ -301,7 +301,7 @@
 	// Count the fields
 	var/laststart = 1
 	while(fields < 15)
-		var/i = findtext(t, "<span class=\"paper_field\">", laststart)
+		var/i = findtext_char(t, "<span class=\"paper_field\">", laststart)
 		if(i == 0)
 			break
 		laststart = i+1
@@ -313,7 +313,7 @@
 	fields = 0
 	var/laststart = 1
 	while(fields < 15)
-		var/i = findtext(info, "<span class=\"paper_field\">", laststart)
+		var/i = findtext_char(info, "<span class=\"paper_field\">", laststart)
 		if(i == 0)
 			break
 		laststart = i+1
@@ -322,7 +322,7 @@
 
 
 /obj/item/paper/proc/openhelp(mob/user)
-	user << browse({"<HTML><HEAD><TITLE>Paper Help</TITLE></HEAD>
+	user << browse({"<HTML><head><meta charset='UTF-8'><TITLE>Paper Help</TITLE></HEAD>
 	<BODY>
 		You can use backslash (\\) to escape special characters.<br>
 		<br>
@@ -382,15 +382,15 @@
 		t = parsepencode(t, i, usr, FALSE) // Encode everything from pencode to html
 
 		if(t != null)	//No input from the user means nothing needs to be added
-			if((length(info) + length(t)) > maxlen)
+			if((length_char(info) + length_char(t)) > maxlen)
 				to_chat(usr, "<span class='warning'>Too long. Try again.</span>")
 				return
 			if(id!="end")
 				addtofield(text2num(id), t) // He wants to edit a field, let him.
 			else
 				info += t // Oh, he wants to edit to the end of the file, let him.
-				testing("[length(info)]")
-				testing("[findtext(info, "\n")]")
+				testing("[length_char(info)]")
+				testing("[findtext_char(info, "\n")]")
 				updateinfolinks()
 			playsound(src, 'sound/items/write.ogg', 100, FALSE)
 			format_browse(info_links, usr)
@@ -407,7 +407,7 @@
 		return ..()
 
 	if(istype(P, /obj/item/natural/thorn)|| istype(P, /obj/item/natural/feather))
-		if(length(info) > maxlen)
+		if(length_char(info) > maxlen)
 			to_chat(user, "<span class='warning'>[src] is full of verba.</span>")
 			return
 		if(user.can_read(src))

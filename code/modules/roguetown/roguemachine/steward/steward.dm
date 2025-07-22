@@ -102,7 +102,7 @@
 			if(newtax)
 				if(!usr.canUseTopic(src, BE_CLOSE) || locked)
 					return
-				if(findtext(num2text(newtax), "."))
+				if(findtext_char(num2text(newtax), "."))
 					return
 				newtax = CLAMP(newtax, 0, 999)
 				if(newtax > D.payout_price)
@@ -113,7 +113,7 @@
 			if(newtax)
 				if(!usr.canUseTopic(src, BE_CLOSE) || locked)
 					return
-				if(findtext(num2text(newtax), "."))
+				if(findtext_char(num2text(newtax), "."))
 					return
 				newtax = CLAMP(newtax, 1, 99)
 				if(newtax > D.payout_price)
@@ -128,7 +128,7 @@
 			if(newtax)
 				if(!usr.canUseTopic(src, BE_CLOSE) || locked)
 					return
-				if(findtext(num2text(newtax), "."))
+				if(findtext_char(num2text(newtax), "."))
 					return
 				newtax = CLAMP(newtax, 0, 999)
 				if(newtax < D.withdraw_price)
@@ -142,7 +142,7 @@
 		if(newlimit)
 			if(!usr.canUseTopic(src, BE_CLOSE) || locked)
 				return
-			if(findtext(num2text(newlimit), "."))
+			if(findtext_char(num2text(newlimit), "."))
 				return
 			newlimit = CLAMP(newlimit, 0, 999)
 			scom_announce("The stockpile limit for [D.name] was changed to [newlimit].")
@@ -156,7 +156,7 @@
 				var/newtax = input(usr, "How much to give [X]", src) as null|num
 				if(!usr.canUseTopic(src, BE_CLOSE) || locked)
 					return
-				if(findtext(num2text(newtax), "."))
+				if(findtext_char(num2text(newtax), "."))
 					return
 				if(!newtax)
 					return
@@ -173,7 +173,7 @@
 				var/newtax = input(usr, "How much to fine [X]", src) as null|num
 				if(!usr.canUseTopic(src, BE_CLOSE) || locked)
 					return
-				if(findtext(num2text(newtax), "."))
+				if(findtext_char(num2text(newtax), "."))
 					return
 				if(!newtax)
 					return
@@ -199,7 +199,7 @@
 			return
 		if(!usr.canUseTopic(src, BE_CLOSE) || locked)
 			return
-		if(findtext(num2text(amount_to_pay), "."))
+		if(findtext_char(num2text(amount_to_pay), "."))
 			return
 		for(var/mob/living/carbon/human/H in GLOB.human_list)
 			if(H.job == job_to_pay)
@@ -214,7 +214,7 @@
 		var/new_autoexport = input(usr, "Set a new autoexport percentage between 0 and 100", src, SStreasury.autoexport_percentage * 100) as null|num
 		if(!new_autoexport && new_autoexport != 0)
 			return
-		if(findtext(num2text(new_autoexport), "."))
+		if(findtext_char(num2text(new_autoexport), "."))
 			return
 		if(new_autoexport < 0 || new_autoexport > 100)
 			to_chat(usr, span_warning("Invalid autoexport percentage. Must be between 0 and 100."))
