@@ -7,16 +7,26 @@ GLOBAL_LIST_INIT(agevetted_list, load_agevets_from_file())
 GLOBAL_PROTECT(agevetted_list)
 
 /client/proc/check_agevet()
-	if(LAZYACCESS(GLOB.agevetted_list, ckey) || holder)
+	if(LAZYACCESS(GLOB.agevetted_list, ckey))
+		return TRUE
+	if(check_whitelist(ckey))
+		if(!LAZYACCESS(GLOB.agevetted_list, ckey))
+			add_agevet(ckey, "SYSTEM", src)
+		return TRUE
+	if(holder)
 		return TRUE
 	return FALSE
 
 /mob/proc/check_agevet()
-	if(client)
-		return client.check_agevet()
-	if(LAZYACCESS(GLOB.agevetted_list, ckey) || copytext(key,1,2)=="@") //aghosted people stay verified
-		return TRUE
-	return FALSE
+       if(client)
+               return client.check_agevet()
+       if(LAZYACCESS(GLOB.agevetted_list, ckey) || copytext(key,1,2)=="@") //aghosted people stay verified
+               return TRUE
+       if(check_whitelist(ckey))
+               if(!LAZYACCESS(GLOB.agevetted_list, ckey))
+                       add_agevet(ckey, "SYSTEM")
+               return TRUE
+       return FALSE
 
 /client/proc/agevet_player()
 	set category = "-GameMaster-"
@@ -43,6 +53,7 @@ GLOBAL_PROTECT(agevetted_list)
 
 	target_ckey = ckey(target_ckey)
 	GLOB.agevetted_list[target_ckey] = admin_ckey
+	adjust_playerquality(10, target_ckey, admin_ckey, "Age verification bonus")
 	message_admins("ID VETTING: Added [target_ckey] to the agevetted list[admin_ckey? " by [admin_ckey]":""]")
 	log_admin("ID VETTING: Added [target_ckey] to the agevetted list[admin_ckey? " by [admin_ckey]":""]")
 	save_agevets_to_file()
