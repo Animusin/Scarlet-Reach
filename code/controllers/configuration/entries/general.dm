@@ -495,3 +495,6 @@
 
 /datum/config_entry/flag/reopen_roundstart_suicide_roles_command_report
 
+/datum/config_entry/string/webhook_roundstart
+    protection = CONFIG_ENTRY_HIDDEN
+
