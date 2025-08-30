@@ -5,9 +5,9 @@
 	sight = 0
 	see_in_dark = 8
 	hud_possible = list(ANTAG_HUD)
-	
+
 	typing_indicator_enabled = TRUE
-	
+
 	var/resize = 1 //Badminnery resize
 	var/lastattacker = null
 	var/lastattackerckey = null
@@ -98,6 +98,8 @@
 
 	var/list/status_effects //a list of all status effects the mob has
 	var/druggy = 0
+
+	var/stasis = FALSE //handles wildshape stopping bleeding from happening
 
 	//Speech
 	var/stuttering = 0

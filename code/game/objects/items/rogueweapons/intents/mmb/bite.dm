@@ -407,6 +407,7 @@
 					if("Yes")
 						user.visible_message("[user] begins to infuse dark magic into [C]")
 						if(do_after(user, 30))
+							C.grab_ghost(force = FALSE)
 							C.visible_message("[C] rises as a new spawn!")
 							var/datum/antagonist/vampirelord/lesser/new_antag = new /datum/antagonist/vampirelord/lesser()
 							new_antag.sired = TRUE

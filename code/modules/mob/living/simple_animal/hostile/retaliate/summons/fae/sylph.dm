@@ -81,7 +81,7 @@
 		return
 	for(var/turf/turf as anything in RANGE_TURFS(3,src.loc))
 		if(prob(30))
-			new /obj/structure/glowshroom(turf)
+			new /obj/structure/glowshroom/dendorite(turf)
 
 
 /mob/living/simple_animal/hostile/retaliate/rogue/fae/sylph/death(gibbed)

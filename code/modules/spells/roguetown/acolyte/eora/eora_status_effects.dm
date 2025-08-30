@@ -168,12 +168,13 @@
 
 		new /obj/effect/temp_visual/heal(get_turf(M), "#8A2BE2")
 
-		if (M.mind)
-			waiting_for_prompt = TRUE
-			if(alert(M, "Are you ready to face the world, once more?", "Revival", "I must go on", "Let me rest") != "I must go on")
-				M.visible_message(span_warning("[M]'s body shudders but falls still again."))
-				M.remove_status_effect(src)
-				return
+		var/mob/dead/observer/spirit = M.get_spirit()
+		//GET OVER HERE!
+		if(spirit)
+			var/mob/dead/observer/ghost = spirit.ghostize()
+			qdel(spirit)
+			ghost.mind.transfer_to(M, TRUE)
+		M.grab_ghost(force = FALSE)
 
 		M.adjustOxyLoss(-M.getOxyLoss()) // Full oxygen healing
 		if(!M.revive(full_heal = FALSE))

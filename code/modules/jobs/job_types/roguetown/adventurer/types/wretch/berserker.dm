@@ -63,7 +63,7 @@
 			H.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 			beltr = /obj/item/rogueweapon/sword/falx
 	H.change_stat("strength", 3) // Literally same stat spread as Atgervi Shaman
-	H.change_stat("endurance", 1)
+	H.change_stat("endurance", 2)
 	H.change_stat("constitution", 2)
 	H.change_stat("intelligence", -1)
 	H.change_stat("perception", -1)

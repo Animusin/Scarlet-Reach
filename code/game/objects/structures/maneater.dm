@@ -63,6 +63,8 @@
 			STOP_PROCESSING(SSobj, src)
 			return TRUE
 	for(var/mob/living/L in buckled_mobs)
+		if(L.stasis)//spit out our body if it's stored in a transform
+			unbuckle_mob(L)
 		if(world.time > last_eat + 50)
 			last_eat = world.time
 			L.flash_fullscreen("redflash3")
@@ -289,6 +291,8 @@
 			update_icon()
 			return TRUE
 	for(var/mob/living/L in buckled_mobs)
+		if(L.stasis)//spit out our body if it's stored in a transform
+			unbuckle_mob(L)
 		if(world.time > last_eat + 50)
 			last_eat = world.time
 			L.flash_fullscreen("redflash3")

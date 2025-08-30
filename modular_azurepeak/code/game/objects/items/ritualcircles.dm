@@ -251,12 +251,51 @@ var/forgerites = list("Ritual of Blessed Reforgance")
 	name = "Rune of Storm"
 	desc = "A Holy Rune of Abyssor. You sense your mind getting pulled into the drawn spiral."
 	icon_state = "abyssor_chalky" // mortosasye
-//	var/stormrites = list("Rite of the Crystal Spire")
+	var/stormrites = list("Rite of the Abyssal Call")
 
 /obj/structure/ritualcircle/abyssor_alt // For future use with more malicious rituals, for example.
 	name = "Rune of Stirring"
 	desc = "A Holy Rune of Abyssor. This one seems different to the rest. Something observes."
 	icon_state = "abyssoralt_active" // change to abyssoralt_chalky if adding a new ritual, and use the active state instead for it.
+
+/obj/structure/ritualcircle/abyssor/attack_hand(mob/living/user)
+	if((user.patron?.type) != /datum/patron/divine/abyssor)
+		to_chat(user,span_smallred("I don't know the proper rites for this..."))
+		return
+	if(!HAS_TRAIT(user, TRAIT_RITUALIST))
+		to_chat(user,span_smallred("I don't know the proper rites for this..."))
+		return
+	if(user.has_status_effect(/datum/status_effect/debuff/ritesexpended))
+		to_chat(user,span_smallred("I have performed enough rituals for the day... I must rest before communing more."))
+		return
+	var/riteselection = input(user, "Rituals of the Storm", src) as null|anything in stormrites
+	switch(riteselection)
+		if("Rite of the Abyssal Call")
+			if(do_after(user, 50))
+				user.say("#ABYSSOR! LORD OF THE DEEP WATERS!")
+				if(do_after(user, 50))
+					user.say("#HEED MY CALL, MASTER OF THE ABYSS!")
+				if(do_after(user, 50))
+					user.say("#BRING FORTH YOUR SACRED ANGLER!")
+				if(do_after(user, 50))
+					icon_state = "abyssoralt_active"
+					loc.visible_message(span_warning("[user] completes the ritual, and an angler fish materializes from the depths!"))
+					to_chat(user,span_cultsmall("Abyssor's power flows through the rune, summoning a sacred angler fish from the abyss!"))
+					playsound(loc, 'sound/foley/waterenter.ogg', 100, FALSE, -1)
+					abyssor_angler_summoning_ritual(src)
+					user.apply_status_effect(/datum/status_effect/debuff/ritesexpended)
+					spawn(120)
+						icon_state = "abyssor_chalky"
+
+/obj/structure/ritualcircle/abyssor/proc/abyssor_angler_summoning_ritual(src)
+	// Create an ultra rare angler fish at the ritual location
+	var/obj/item/reagent_containers/food/snacks/fish/angler/angler_fish = new(loc)
+	angler_fish.icon_state = "anglerultra"
+	angler_fish.name = "ultra-rare anglerfish"
+	angler_fish.desc = "A menacing abyssal predator summoned by Abyssor's power. Its bioluminescent lure pulses with otherworldly energy."
+	angler_fish.sellprice = 60 
+	angler_fish.dead = TRUE
+	angler_fish.rarity_rank = 2
 
 /obj/structure/ritualcircle/necra
 	name = "Rune of Death"

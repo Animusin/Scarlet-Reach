@@ -129,3 +129,15 @@
 	var/obj/effect/decal/cleanable/molten_object/I = new (get_turf(src))
 	I.desc = ""
 	qdel(src)
+
+/obj/structure/glowshroom/dendorite
+	var/timeleft = 5 MINUTES
+
+/obj/structure/glowshroom/dendorite/Initialize()
+	. = ..()
+	if(timeleft)
+		QDEL_IN(src, timeleft)
+
+/obj/structure/glowshroom/dendorite/attackby(obj/item/W, mob/user, params)
+	// Dendorite glowshrooms don't electrocute when hit
+	. = ..()

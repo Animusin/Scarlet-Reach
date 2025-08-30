@@ -113,14 +113,14 @@
 
 /datum/crafting_recipe/roguetown/arcana/bindingt4
 	name = "binding shackles (T4) - (1 T3 Binding Shackles, 1 Arcanic Meld)"
-	result = /obj/item/rope/chain/bindingshackles
+	result = /obj/item/rope/chain/bindingshackles/t4
 	reqs = list(/obj/item/rope/chain/bindingshackles/t3 = 1,
 				/obj/item/magic/melded/t4 = 1)
 	craftdiff = 2
 
 /datum/crafting_recipe/roguetown/arcana/bindingt5
 	name = "binding shackles (T5) - (1 T4 Binding Shackles, 1 Arcanic Meld)"
-	result = /obj/item/rope/chain/bindingshackles
+	result = /obj/item/rope/chain/bindingshackles/t5
 	reqs = list(/obj/item/rope/chain/bindingshackles/t4 = 1,
 				/obj/item/magic/melded/t5 = 1)
 	craftdiff = 2

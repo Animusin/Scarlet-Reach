@@ -47,8 +47,8 @@ GLOBAL_LIST_EMPTY(graggar_cullings)
 		loser.change_stat("constitution", -1)
 		loser.change_stat("endurance", -1)
 		loser.change_stat("speed", -1)
-		loser.change_stat("fortune", 1)
-		//loser.gib()	- Removed to avoid RRing them fully. Instead, we punish his stats.
+		loser.change_stat("fortune", -1)
+		//loser.gib()	- Removed to avoid RRing them fully. Instead, we punish their stats.
 
 	qdel(src)
 
@@ -68,8 +68,13 @@ GLOBAL_LIST_EMPTY(graggar_cullings)
 	if(loser)
 		loser.remove_stress(/datum/stressevent/graggar_culling_unfinished)
 		loser.verbs -= /mob/living/carbon/human/proc/remember_culling
-		to_chat(loser, span_boldred("You have FAILED Graggar for the LAST TIME!"))
-		loser.gib()
+		to_chat(loser, span_boldred("You have FAILED Graggar, weakling!"))
+		loser.change_stat("strength", -1)
+		loser.change_stat("constitution", -1)
+		loser.change_stat("endurance", -1)
+		loser.change_stat("speed", -1)
+		loser.change_stat("fortune", -1)
+		//loser.gib() - Removed to avoid RRing them fully. Instead, we punish their stats.
 
 	qdel(src)
 
