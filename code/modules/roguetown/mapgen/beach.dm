@@ -16,7 +16,6 @@
 	spawnableAtoms = list(/obj/structure/flora/newtree = 15,
 							/obj/structure/flora/roguegrass/bush = 8,
 							/obj/structure/flora/roguegrass = 20,
-							/obj/structure/flora/roguegrass/maneater = 16,
 							/obj/item/natural/stone = 18,
 							/obj/item/natural/rock = 2,
 							/obj/item/grown/log/tree/stick = 3,
@@ -30,7 +29,6 @@
 	allowed_turfs = list(/turf/open/floor/rogue/grass)
 	spawnableAtoms = list(/obj/structure/flora/roguegrass/bush = 5,
 							/obj/structure/flora/roguegrass = 35,
-							/obj/structure/flora/roguegrass/maneater = 4,
 							/obj/item/natural/stone = 8,
 							/obj/item/natural/rock = 2,
 							/obj/item/grown/log/tree/stick = 10)

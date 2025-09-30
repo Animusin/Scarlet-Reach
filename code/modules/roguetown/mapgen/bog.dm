@@ -18,7 +18,6 @@
 	spawnableAtoms = list(/obj/structure/flora/newtree = 30,
 							/obj/structure/flora/roguegrass/bush = 10,
 							/obj/structure/flora/roguegrass = 26,
-							/obj/structure/flora/roguegrass/maneater = 13,
 							/obj/item/natural/stone = 23,
 							/obj/item/natural/rock = 6,
 							/obj/item/magic/artifact = 4,
@@ -31,8 +30,7 @@
 							/obj/structure/flora/roguetree/stump = 4,
 							/obj/structure/closet/dirthole/closed/loot = 3,
 							/obj/structure/flora/roguegrass/swampweed = 10,
-							/obj/structure/flora/roguegrass/bush/westleach = 10,
-							/obj/structure/flora/roguegrass/maneater/real = 3)
+							/obj/structure/flora/roguegrass/bush/westleach = 10)
 	spawnableTurfs = list(/turf/open/floor/rogue/dirt/road=2,
 						/turf/open/water/swamp=1)
 	allowed_areas = list(/area/rogue/outdoors/bog)
@@ -59,8 +57,6 @@
 							/obj/structure/flora/roguetree/wise=5,
 							/obj/structure/flora/roguegrass/bush = 10,
 							/obj/structure/flora/roguegrass = 44,
-							/obj/structure/flora/roguegrass/maneater = 15,
-							/obj/structure/flora/roguegrass/maneater/real = 10,
 							/obj/item/natural/stone = 6,
 							/obj/item/natural/rock = 1,
 							/obj/item/grown/log/tree/stick = 3,
