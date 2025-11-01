@@ -16,7 +16,7 @@
 	if(!penis.functional)
 		return FALSE
 	switch(penis.penis_type)
-		if(PENIS_TYPE_TAPERED_DOUBLE,PENIS_TYPE_TAPERED_DOUBLE_KNOTTED,PENIS_TYPE_TAPER_DOUBLE_KNOTTED_MAMMAL)
+		if(PENIS_TYPE_TAPERED_DOUBLE,PENIS_TYPE_TAPERED_DOUBLE_KNOTTED)
 			return TRUE
 	return FALSE
 
@@ -60,7 +60,7 @@
 		var/top_still_topping = user.sexcon.knotted_status == KNOTTED_AS_TOP // top just reknotted a different character, don't retrigger the same status (this fixes a weird perma stat debuff if we try to remove/apply the same effect in the same tick)
 		user.sexcon.knot_remove(keep_top_status = top_still_topping)
 	var/we_got_baothad = user.patron && istype(user.patron, /datum/patron/inhumen/baotha)
-	if((target.compliance || we_got_baothad) && !target.has_status_effect(/datum/status_effect/knot_fucked_stupid)) // as requested, if the top is of the baotha faith, or the target has compliance mode on
+	if(we_got_baothad && !target.has_status_effect(/datum/status_effect/knot_fucked_stupid)) // as requested, if the top is of the baotha faith
 		target.apply_status_effect(/datum/status_effect/knot_fucked_stupid)
 
 	user.sexcon.knotted_owner = user
@@ -380,28 +380,28 @@
 	return ..()
 
 /mob/living/carbon/human/werewolf_untransform(dead,gibbed) // needed to ensure that we safely remove the tie after transitioning
-	if(src.sexcon.knotted_status)
-		src.sexcon.knot_remove()
+	if(src.sexcon.knotted_status) 
+		src.sexcon.knot_remove() 
 	return ..()
 
-/mob/living/carbon/can_speak_vocal() // do not allow bottom to speak while knotted orally (at least until they're double knotted or it has been removed)
+/mob/living/carbon/can_speak_vocal()  // do not allow bottom to speak while knotted orally (at least until they're double knotted or it has been removed)
 	. = ..()
 	if(. && iscarbon(src))
 		var/mob/living/carbon/H = src
-		return !(H.sexcon.knotted_status == KNOTTED_AS_BTM && H.sexcon.knotted_part_partner&SEX_PART_JAWS)
+		return !(H?.sexcon?.knotted_status == KNOTTED_AS_BTM && (H?.sexcon?.knotted_part_partner & SEX_PART_JAWS))
 	return .
 
-/datum/emote/is_emote_muffled(mob/living/carbon/H) // do not allow bottom to emote while knotted orally (at least until they're double knotted or it has been removed)
+/datum/emote/is_emote_muffled(mob/living/carbon/H)  // do not allow bottom to emote while knotted orally (at least until they're double knotted or it has been removed)
 	. = ..()
 	if(!.)
 		return FALSE
-	return !(H.sexcon.knotted_status == KNOTTED_AS_BTM && H.sexcon.knotted_part_partner&SEX_PART_JAWS)
+	return !(H?.sexcon?.knotted_status == KNOTTED_AS_BTM && (H?.sexcon?.knotted_part_partner & SEX_PART_JAWS))
 
 /datum/emote/select_message_type(mob/user, intentional) // always use the muffled message while bottom is knotted orally (at least until they're double knotted or it has been removed)
 	. = ..()
 	if(message_muffled && iscarbon(user))
 		var/mob/living/carbon/H = user
-		if(H.sexcon.knotted_status == KNOTTED_AS_BTM && H.sexcon.knotted_part_partner&SEX_PART_JAWS)
+		if(H?.sexcon?.knotted_status == KNOTTED_AS_BTM && (H?.sexcon?.knotted_part_partner & SEX_PART_JAWS))
 			. = message_muffled
 
 /datum/status_effect/knot_tied
@@ -464,6 +464,16 @@
 	name = "Knotted"
 	desc = "I have to be careful where I step..."
 	icon_state = "knotted"
+
+/atom/movable/screen/alert/status_effect/knotted/Click()
+	..()
+	var/mob/living/L = usr
+	if(!istype(L) || !L.sexcon)
+		return FALSE
+	if(L.sexcon.knotted_status == KNOTTED_AS_TOP)
+		var/do_forceful_removal = L.sexcon.arousal > MAX_AROUSAL / 3 // considered still hard, let it rip like a beyblade
+		L.sexcon.knot_remove(forceful_removal = do_forceful_removal)
+	return FALSE
 
 /datum/status_effect/jaw_gaped
 	id = "jaw_gaped"

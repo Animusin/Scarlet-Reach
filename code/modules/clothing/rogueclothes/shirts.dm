@@ -112,6 +112,16 @@
 	desc = "A tunic exposing much of the neck and... shoulders?! How scandalous..."
 	icon_state = "lowcut"
 
+/obj/item/clothing/suit/roguetown/shirt/undershirt/corset
+	name = "corset"
+	desc = "A leather binding to constrict one's figure... and lungs."
+	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT
+	icon = 'icons/roguetown/clothing/armor.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/armor.dmi'
+	icon_state = "corset"
+	grid_height = 64
+	grid_width = 32
+
 /obj/item/clothing/suit/roguetown/shirt/shadowshirt
 	name = "silk shirt"
 	desc = "A sleeveless shirt woven from glossy material."
@@ -704,3 +714,16 @@
 		src.last_repair = world.time
 		obj_integrity = min(obj_integrity + src.repair_amount, src.max_integrity)
 	..()
+
+/obj/item/clothing/suit/roguetown/shirt/undershirt/kimono
+	name = "traditional kimono"
+	desc = "A front-wrapped garment with long sleeves made from a long, narrow bolt of cloth used as a formal garment"
+	body_parts_covered = CHEST|GROIN|ARMS|VITALS
+	icon_state = "kimono"
+	icon = 'icons/roguetown/clothing/shirts.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/shirts.dmi'
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_shirts.dmi'
+	boobed = TRUE
+	r_sleeve_status = SLEEVE_NORMAL
+	l_sleeve_status = SLEEVE_NORMAL
+	flags_inv = HIDECROTCH|HIDEBOOB

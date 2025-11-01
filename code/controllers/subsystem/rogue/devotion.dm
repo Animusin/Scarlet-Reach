@@ -223,6 +223,19 @@
 		to_chat(src, span_info("I've returned to my natural voice."))
 	return TRUE
 
+/mob/living/carbon/human/proc/changeaccent()
+	set name = "Change Accent"
+	set category = "Virtue"
+
+	var/choice = input(src, "Choose an accent:", "Voice & Accent") as null|anything in GLOB.character_accents
+	if(!choice)
+		return FALSE
+
+	// Apply new accent
+	char_accent = choice
+	to_chat(src, span_info("I now speak with a [choice]."))
+	return TRUE
+
 /mob/living/carbon/human/proc/toggleblindness()
 	set name = "Toggle Colorblindness"
 	set category = "Virtue"

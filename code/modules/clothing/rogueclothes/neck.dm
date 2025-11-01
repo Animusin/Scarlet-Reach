@@ -230,8 +230,13 @@
 	slot_flags = ITEM_SLOT_NECK
 	body_parts_covered = NECK|MOUTH|NOSE
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
+	adjustable = CAN_CADJUST
+	toggle_icon_state = TRUE
 	blocksound = PLATEHIT
 	cansnout = TRUE
+
+/obj/item/clothing/neck/roguetown/bevor/ComponentInitialize()
+	AddComponent(/datum/component/adjustable_clothing, NECK, null, null, 'sound/items/visor.ogg', null, (UPD_HEAD|UPD_MASK|UPD_NECK))	//adjustable falling buffe for the bevor
 
 /obj/item/clothing/neck/roguetown/gorget
 	name = "iron gorget"
@@ -390,6 +395,10 @@
 	anvilrepair = /datum/skill/craft/armorsmithing
 	grid_width = 32
 	grid_height = 32
+
+/obj/item/clothing/neck/roguetown/zcross/iron/New(loc, ...)
+	. = ..()
+	name = pick("inverted psycross", "psycross")
 
 /obj/item/clothing/neck/roguetown/psicross/astrata
 	name = "amulet of Astrata"

@@ -13,7 +13,6 @@
 	light_power = 0.75
 	light_color = LIGHT_COLOR_LAVA
 	bullet_bounce_sound = 'sound/blank.ogg'
-
 	footstep = FOOTSTEP_LAVA
 	barefootstep = FOOTSTEP_LAVA
 	clawfootstep = FOOTSTEP_LAVA
@@ -219,7 +218,7 @@
 				continue
 			O.obj_integrity -= O.max_integrity * 0.1
 			if(O.obj_integrity <= 0)
-				qdel(O)	
+				qdel(O)
 			. = 1
 
 		else if (isliving(thing))
@@ -244,7 +243,7 @@
 				C.obj_integrity -= C.max_integrity * 0.1
 				if(C.obj_integrity <= 0)
 					to_chat(L, span_danger("Your [C.name] is destroyed by the acid!"))
-					qdel(C)	
+					qdel(C)
 
 			L.adjustFireLoss(100)
 			to_chat(L, span_userdanger("THE ACID BURNS!"))

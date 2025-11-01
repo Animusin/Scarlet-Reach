@@ -192,6 +192,12 @@
 	reqs = list(/obj/item/natural/fibers = 3)
 	craftdiff = 1
 
+/datum/crafting_recipe/roguetown/sewing/gasa
+	name = "gasa (4 fibers)"
+	result = list(/obj/item/clothing/head/roguetown/gasa)
+	reqs = list(/obj/item/natural/fibers = 4)
+	craftdiff = 1
+
 /datum/crafting_recipe/roguetown/sewing/sack
 	name = "sack hood (3 cloth)"
 	result = list(/obj/item/clothing/head/roguetown/menacing)
@@ -317,12 +323,51 @@
 	name = "surcoat, bog (1 fibers, 3 cloth)"
 	result = list(/obj/item/clothing/cloak/stabard/bog)
 
+/datum/crafting_recipe/roguetown/sewing/stabard/guardhood
+	name = "guard hood"
+	result = list(/obj/item/clothing/cloak/stabard/guardhood)
+
+/datum/crafting_recipe/roguetown/sewing/poncho
+	name = "cloth poncho (1 fiber, 2 cloth)"
+	result = /obj/item/clothing/cloak/poncho
+	reqs = list(/obj/item/natural/cloth = 2,
+				/obj/item/natural/fibers = 1,)
+	craftdiff = 2
+
+/datum/crafting_recipe/roguetown/sewing/geta
+	name = "geta (4 fibers, 1 cloth)"
+	result = /obj/item/clothing/shoes/roguetown/armor/geta
+	reqs = list(/obj/item/natural/cloth = 1,
+				/obj/item/natural/fibers = 4,)
+	craftdiff = 2
+
+/datum/crafting_recipe/roguetown/sewing/rumaclan
+	name = "raised sandals (1 log, 1 fiber)"
+	result = /obj/item/clothing/shoes/roguetown/armor/rumaclan
+	reqs = list(/obj/item/grown/log/tree/small = 1,
+				/obj/item/natural/fibers = 1,)
+	craftdiff = 2
+
 /datum/crafting_recipe/roguetown/sewing/robe
 	name = "robe (1 fibers, 3 cloth)"
 	result = list(/obj/item/clothing/suit/roguetown/shirt/robe)
 	reqs = list(/obj/item/natural/cloth = 3,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 3
+
+/datum/crafting_recipe/roguetown/sewing/haori
+	name = "haori (1 fibers, 3 silk)"
+	result = list(/obj/item/clothing/suit/roguetown/shirt/robe)
+	reqs = list(/obj/item/natural/silk = 3,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 4
+
+/datum/crafting_recipe/roguetown/sewing/kimono
+	name = "kimono (2 fibers, 4 silk)"
+	result = list(/obj/item/clothing/suit/roguetown/shirt/robe)
+	reqs = list(/obj/item/natural/silk = 4,
+				/obj/item/natural/fibers = 2)
+	craftdiff = 4
 
 /datum/crafting_recipe/roguetown/sewing/jesterchest
 	name = "jester's tunick (1 fibers, 3 cloth)"
@@ -610,6 +655,22 @@ datum/crafting_recipe/roguetown/sewing/Purdress
 	result = list(/obj/item/clothing/head/roguetown/roguehood/shalal/heavyhood)
 	reqs = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
+	craftdiff = 3
+
+/datum/crafting_recipe/roguetown/sewing/hijabkazengunese
+	name = "kazengunese headwrap (2 silk, 2 fibers, 3 cloth)"
+	result = list(/obj/item/clothing/head/roguetown/roguehood/shalal/hijab/kazengunese)
+	reqs = list(/obj/item/natural/cloth = 3,
+				/obj/item/natural/fibers = 2,
+				/obj/item/natural/silk = 2)
+	craftdiff = 3
+
+/datum/crafting_recipe/roguetown/sewing/hijabyoroku
+	name = "shadowed hood (2 silk, 1 fiber, 2 cloth)"
+	result = list(/obj/item/clothing/head/roguetown/roguehood/shalal/hijab/yoruku)
+	reqs = list(/obj/item/natural/cloth = 2,
+				/obj/item/natural/fibers = 1,
+				/obj/item/natural/silk = 2)
 	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/sewing/royalgown
@@ -1264,3 +1325,17 @@ datum/crafting_recipe/roguetown/sewing/Purdress
 	reqs = list(/obj/item/natural/cloth = 1, /obj/item/natural/fibers = 1)
 	tools = list(/obj/item/needle)
 	craftdiff = 2
+
+/datum/crafting_recipe/roguetown/sewing/sackmask
+	name = "sackmask (3 leather, 2 cloth)"
+	result = list(/obj/item/clothing/mask/rogue/sack)
+	reqs = list(/obj/item/natural/cloth = 2, /obj/item/natural/hide/cured = 3)
+	tools = list(/obj/item/needle)
+	craftdiff = 3
+
+/datum/crafting_recipe/roguetown/sewing/sackmask/psy
+	name = "psydonian sack mask (chalk)"
+	result = list(/obj/item/clothing/mask/rogue/sack/psy)
+	reqs = list(/obj/item/clothing/mask/rogue/sack = 1)
+	tools = list(/obj/item/ritechalk)
+	craftdiff = 0

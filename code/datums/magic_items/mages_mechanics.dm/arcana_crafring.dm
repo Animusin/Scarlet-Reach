@@ -20,9 +20,9 @@
 				/datum/reagent/medicine/manapot = 15)
 	craftdiff = 2
 
-/datum/crafting_recipe/roguetown/arcana/chalk
-	name = "chalk (1 Cinnabar, 5oz Mana Potion)"
-	result = /obj/item/chalk
+/datum/crafting_recipe/roguetown/arcana/ritechalk
+	name = "rite chalk (1 Cinnabar, 5oz Mana Potion)"
+	result = /obj/item/ritechalk
 	reqs = list(/obj/item/rogueore/cinnabar = 1,
 				/datum/reagent/medicine/manapot = 15)
 	craftdiff = 2

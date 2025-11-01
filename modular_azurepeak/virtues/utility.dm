@@ -10,6 +10,20 @@
 	var/obj/item/pouch = new /obj/item/storage/belt/rogue/pouch/coins/virtuepouch(get_turf(recipient))
 	recipient.put_in_hands(pouch, forced = TRUE)
 
+/datum/virtue/utility/blueblooded
+    name = "Blueblooded"
+    desc = "I have been raised since birth in the throes of a noble lineage, and bear exceptional beauty and the social standing to show for it - though none of the material benefits."
+    added_traits = list(TRAIT_NOBLE, TRAIT_BEAUTIFUL, TRAIT_GOODLOVER)
+    added_skills = list(list(/datum/skill/misc/reading, 1, 6))
+    added_stashed_items = list("Heirloom Amulet" = /obj/item/clothing/neck/roguetown/ornateamulet/noble, "Hand Mirror" = /obj/item/handmirror)
+
+/datum/virtue/utility/blueblooded/handle_traits(mob/living/carbon/human/recipient)
+	..()
+	if(HAS_TRAIT(recipient, TRAIT_UNSEEMLY))
+		to_chat(recipient, "Your social grace is cancelled out! You become normal.")
+		REMOVE_TRAIT(recipient, TRAIT_BEAUTIFUL, TRAIT_VIRTUE)
+		REMOVE_TRAIT(recipient, TRAIT_UNSEEMLY, TRAIT_VIRTUE)
+
 /datum/virtue/utility/socialite
 	name = "Socialite"
 	desc = "I thrive in social settings, easily reading the emotions of others and charming those around me. My presence is always felt at any gathering."
@@ -117,7 +131,7 @@
 	added_stashed_items = list(
 		"Quill" = /obj/item/natural/feather,
 		"Scroll" = /obj/item/paper/scroll,
-		"Book" = /obj/item/book/rogue/playerbook
+		"Unfinished Skillbook" = /obj/item/skillbook/unfinished
 	)
 
 /datum/virtue/utility/linguist/apply_to_human(mob/living/carbon/human/recipient)
@@ -262,6 +276,11 @@
 	added_stashed_items = list("Lockpick Ring" = /obj/item/lockpickring/mundane)
 	added_skills = list(list(/datum/skill/misc/lockpicking, 3, 6))
 
+/datum/virtue/utility/swiftfingers
+	name = "Swift Fingers"
+	desc = "You have a natural talent for weaving your hands into the pockets of others unnoticed, or weightlessly untying a belt. You know how to take away goods from their owners far easier than most travelers."
+	added_skills = list(list(/datum/skill/misc/stealing, 3, 4))
+
 /datum/virtue/utility/granary
 	name = "Cunning Provisioner"
 	desc = "You've worked in or around the docks enough to steal away a sack of supplies that no one would surely miss, just in case. You've picked up on some cooking and fishing tips in your spare time, as well."
@@ -309,6 +328,7 @@
 /datum/virtue/utility/secondvoice/apply_to_human(mob/living/carbon/human/recipient)
 	recipient.verbs += /mob/living/carbon/human/proc/changevoice
 	recipient.verbs += /mob/living/carbon/human/proc/swapvoice
+	recipient.verbs += /mob/living/carbon/human/proc/changeaccent
 
 /datum/virtue/utility/keenears
 	name = "Keen Ears"

@@ -31,14 +31,6 @@
 		/datum/advclass/nightmaiden/courtesan
 	)
 
-/datum/job/roguetown/nightmaiden/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
-	. = ..()
-	if(ishuman(L))
-		var/mob/living/carbon/human/H = L
-		H.advsetup = 1
-		H.invisibility = INVISIBILITY_MAXIMUM
-		H.become_blind("advsetup") // Classes are for aesthetic clothing only, mechanically they're identical.
-
 /datum/outfit/job/roguetown/nightmaiden
 	name = "Nightmaiden"
 	// This is just a base outfit, the actual outfits are defined in the advclasses
@@ -72,6 +64,9 @@
 		/datum/skill/craft/cooking = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/craft/crafting = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/lockpicking = SKILL_LEVEL_NOVICE,
+	)
+	subclass_languages = list(
+		/datum/language/thievescant,
 	)
 
 /datum/outfit/job/roguetown/nightmaiden/attendant/pre_equip(mob/living/carbon/human/H)
@@ -120,6 +115,9 @@
 		/datum/skill/misc/riding = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/medicine = SKILL_LEVEL_NOVICE,
 		/datum/skill/misc/sewing = SKILL_LEVEL_JOURNEYMAN,
+	)
+	subclass_languages = list(
+		/datum/language/thievescant,
 	)
 
 /datum/outfit/job/roguetown/nightmaiden/concubine/pre_equip(mob/living/carbon/human/H)
@@ -196,6 +194,9 @@
 		/datum/skill/misc/medicine = SKILL_LEVEL_NOVICE,
 		/datum/skill/craft/cooking = SKILL_LEVEL_NOVICE,
 	)
+	subclass_languages = list(
+		/datum/language/thievescant,
+	)
 
 /datum/outfit/job/roguetown/nightmaiden/courtesan/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -227,7 +228,7 @@
 	)
 	if(should_wear_femme_clothes(H))
 		armor = /obj/item/clothing/suit/roguetown/shirt/dress/silkydress/random
-		shirt = /obj/item/clothing/suit/roguetown/armor/corset
+		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/corset
 		belt = /obj/item/storage/belt/rogue/leather/cloth/lady
 		shoes = /obj/item/clothing/shoes/roguetown/anklets
 	else

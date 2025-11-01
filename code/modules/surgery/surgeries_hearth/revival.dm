@@ -98,7 +98,7 @@
 		"[user] works the lux into [target]'s innards.")
 	target.emote("breathgasp")
 	target.Jitter(100)
-	GLOB.scarlet_round_stats[STATS_LUX_REVIVALS]++
+	record_round_statistic(STATS_LUX_REVIVALS)
 	target.update_body()
 	target.visible_message(span_notice("[target] is dragged back from Necra's hold!"), span_green("I awake from the void."))
 	qdel(tool)

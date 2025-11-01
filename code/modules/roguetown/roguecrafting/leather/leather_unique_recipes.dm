@@ -130,6 +130,50 @@
 				/obj/item/natural/fibers = 2)
 	tools = list(/obj/item/needle)
 	craftdiff = 6	//Can be a bit strong, reduce to 5 if too high.
+
+/datum/crafting_recipe/roguetown/leather/unique/basiceast/light
+	name = "fragile dobo robe (1 silk, 1 leather, 2 fiber)"
+	result = list(/obj/item/clothing/suit/roguetown/armor/basiceast/light)
+	reqs = list(
+		/obj/item/natural/hide/cured = 1,
+		/obj/item/natural/fibers = 2,
+		/obj/item/natural/silk = 1
+		)
+	tools = list(/obj/item/needle)
+	craftdiff = 2
+
+/datum/crafting_recipe/roguetown/leather/unique/basiceast/mentorsuit/light
+	name = "worn dobo robe (1 silk, 1 leather, 2 fiber)"
+	result = list(/obj/item/clothing/suit/roguetown/armor/basiceast/mentorsuit/light)
+	reqs = list(
+		/obj/item/natural/hide/cured = 1,
+		/obj/item/natural/fibers = 2,
+		/obj/item/natural/silk = 1
+		)
+	tools = list(/obj/item/needle)
+	craftdiff = 2
+
+/datum/crafting_recipe/roguetown/leather/unique/basiceast/crafteast/light
+	name = "formal dobo robe (1 silk, 1 leather, 2 fiber)"
+	result = list(/obj/item/clothing/suit/roguetown/armor/basiceast/crafteast/light)
+	reqs = list(
+		/obj/item/natural/hide/cured = 1,
+		/obj/item/natural/fibers = 2,
+		/obj/item/natural/silk = 1
+		)
+	tools = list(/obj/item/needle)
+	craftdiff = 2
+
+/datum/crafting_recipe/roguetown/leather/unique/captainrobe/light
+	name = "floral robes (1 silk, 1 leather, 2 fiber)"
+	result = list(/obj/item/clothing/suit/roguetown/armor/basiceast/captainrobe/light)
+	reqs = list(
+		/obj/item/natural/hide/cured = 1,
+		/obj/item/natural/fibers = 2,
+		/obj/item/natural/silk = 1
+		)
+	tools = list(/obj/item/needle)
+	craftdiff = 2
 	
 /datum/crafting_recipe/roguetown/leather/unique/crafteast
 	name = "decorated dobo robe (2 fibers, 2 leather, 1 tallow, 1 simple dobo robe)"
@@ -142,4 +186,108 @@
 		)
 	tools = list(/obj/item/needle)
 	craftdiff = 5
+
+/datum/crafting_recipe/roguetown/leather/unique/basiceast
+	name = "simple dobo robe (2 silk, 2 leather, 2 fiber, 1 tallow)"
+	result = list(/obj/item/clothing/suit/roguetown/armor/basiceast)
+	reqs = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/reagent_containers/food/snacks/tallow = 1,
+		/obj/item/natural/fibers = 2,
+		/obj/item/natural/silk = 2
+		)
+	tools = list(/obj/item/needle)
+	craftdiff = 4
+
+/datum/crafting_recipe/roguetown/leather/unique/mentorsuit
+	name = "old dobo robe (4 silk, 4 leather, 2 fiber, 2 tallow)"
+	result = list(/obj/item/clothing/suit/roguetown/armor/basiceast/mentorsuit)
+	reqs = list(
+		/obj/item/natural/hide/cured = 4,
+		/obj/item/reagent_containers/food/snacks/tallow = 2,
+		/obj/item/natural/fibers = 2,
+		/obj/item/natural/silk = 4
+		)
+	tools = list(/obj/item/needle)
+	craftdiff = 5
+
+/datum/crafting_recipe/roguetown/leather/unique/shrinekeeper
+	name = "eastern ceremonial robe (6 silk, 4 leather, 2 fiber, 2 tallow)"
+	result = list(/obj/item/clothing/suit/roguetown/armor/basiceast/crafteast/shrinekeeper)
+	reqs = list(
+		/obj/item/natural/hide/cured = 4,
+		/obj/item/reagent_containers/food/snacks/tallow = 2,
+		/obj/item/natural/fibers = 2,
+		/obj/item/natural/silk = 6
+		)
+	tools = list(/obj/item/needle)
+	craftdiff = 6
+
+/datum/crafting_recipe/roguetown/leather/unique/captainrobe
+	name = "foreign robe (6 silk, 4 leather, 2 fiber, 2 tallow)"
+	result = list(/obj/item/clothing/suit/roguetown/armor/basiceast/captainrobe)
+	reqs = list(
+		/obj/item/natural/hide/cured = 4,
+		/obj/item/reagent_containers/food/snacks/tallow = 2,
+		/obj/item/natural/fibers = 2,
+		/obj/item/natural/silk = 6
+		)
+	tools = list(/obj/item/needle)
+	craftdiff = 6
+
+/datum/crafting_recipe/roguetown/leather/unique/eastpants1
+	name = "cut-throat's pants (2 silk, 2 fibers, 2 leather, 1 tallow)"
+	result = list(/obj/item/clothing/under/roguetown/heavy_leather_pants/eastpants1)
+	reqs = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/reagent_containers/food/snacks/tallow = 1,
+		/obj/item/natural/fibers = 2,
+		/obj/item/natural/silk = 2
+		)
+	tools = list(/obj/item/needle)
+	craftdiff = 4
+
+/datum/crafting_recipe/roguetown/leather/unique/eastpants2
+	name = "strange ripped pants (2 silk, 2 fibers, 2 leather, 1 tallow)"
+	result = list(/obj/item/clothing/under/roguetown/heavy_leather_pants/eastpants2)
+	reqs = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/reagent_containers/food/snacks/tallow = 1,
+		/obj/item/natural/fibers = 2,
+		/obj/item/natural/silk = 2
+		)
+	tools = list(/obj/item/needle)
+	craftdiff = 4
+
+/datum/crafting_recipe/roguetown/leather/unique/eastgloves1
+	name = "black gloves (2 silk, 2 fibers, 1 leather)"
+	result = list(/obj/item/clothing/gloves/roguetown/eastgloves1)
+	reqs = list(
+		/obj/item/natural/hide/cured = 1,
+		/obj/item/natural/fibers = 2,
+		/obj/item/natural/silk = 2
+		)
+	tools = list(/obj/item/needle)
+	craftdiff = 3
+
+/datum/crafting_recipe/roguetown/leather/unique/eastgloves2
+	name = "stylish gloves (2 silk, 2 fibers, 1 leather)"
+	result = list(/obj/item/clothing/gloves/roguetown/eastgloves2)
+	reqs = list(
+		/obj/item/natural/hide/cured = 1,
+		/obj/item/natural/fibers = 2,
+		/obj/item/natural/silk = 2
+		)
+	tools = list(/obj/item/needle)
+	craftdiff = 3
+
+/datum/crafting_recipe/roguetown/leather/unique/daisho
+	name = "daisho (1 fiber, 1 leather)"
+	result = list(/obj/item/storage/belt/rogue/leather/daisho)
+	reqs = list(
+		/obj/item/natural/hide/cured = 1,
+		/obj/item/natural/fibers = 1
+		)
+	tools = list(/obj/item/needle)
+	craftdiff = 1
 	

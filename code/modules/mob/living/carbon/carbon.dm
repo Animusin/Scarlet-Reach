@@ -109,7 +109,7 @@
 	if(istype(I, /obj/item/leash))
 		return I.attack(src, user)
 	if(!user.cmode)
-		var/try_to_fail = !istype(user.rmb_intent, /datum/rmb_intent/weak)
+		var/try_to_fail = istype(user.rmb_intent, /datum/rmb_intent/strong)
 		var/list/possible_steps = list()
 		for(var/datum/surgery_step/surgery_step as anything in GLOB.surgery_steps)
 			if(!surgery_step.name)
@@ -253,7 +253,7 @@
 				var/coin_text = coin.quantity > 1 ? "[coin.quantity] [coin.name]" : coin.name
 				message_admins("[ADMIN_LOOKUPFLW(src)] has thrown [coin_text] at [target] ([AREACOORD(target)])")
 				log_admin("[key_name(src)] has thrown [coin_text] at [target] ([AREACOORD(target)])")
-		
+
 		if(!thrown_speed)
 			thrown_speed = thrown_thing.throw_speed
 		if(!thrown_range)
@@ -575,6 +575,7 @@
 
 /mob/living/carbon
 	var/nausea = 0
+	var/bleeding_tier = 0 
 
 /mob/living/carbon/proc/add_nausea(amt)
 	nausea = clamp(nausea + amt, 0, 300)
@@ -687,7 +688,7 @@
 					var/mob/living/carbon/human/parent = vomitrelay.loc
 					var/amt = 5 * parent.physiology.bleed_mod
 					blood_volume = max(blood_volume - amt, 0)
-					GLOB.scarlet_round_stats[STATS_BLOOD_SPILT] += amt
+					record_round_statistic(STATS_BLOOD_SPILT, amt)
 					if(isturf(vomit_source.loc))
 						add_drip_floor(vomit_source.loc, amt)
 					var/vol2use
@@ -702,9 +703,6 @@
 					updatehealth()
 				else
 					bleed(5)
-		else if(src.reagents.has_reagent(/datum/reagent/consumable/ethanol/blazaam, needs_metabolizing = TRUE))
-			if(T)
-				T.add_vomit_floor(src, VOMIT_PURPLE)
 		else
 			if(T)
 				T.add_vomit_floor(src, VOMIT_TOXIC)//toxic barf looks different
@@ -824,7 +822,7 @@
 
 	if(HAS_TRAIT(src, TRAIT_NOCSHADES))
 		lighting_alpha = min(lighting_alpha, LIGHTING_PLANE_ALPHA_NOCSHADES)
-		see_in_dark = max(see_in_dark, 12)	
+		see_in_dark = max(see_in_dark, 12)
 		add_client_colour(/datum/client_colour/nocshaded)
 		overlay_fullscreen("inqvision", /atom/movable/screen/fullscreen/inqvision)
 	else
