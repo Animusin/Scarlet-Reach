@@ -100,7 +100,12 @@ THESE SPAWNERS SPAWN MOBS BY CHOOSING RANDOM TILES AROUND IT AND SCATTERING THE 
 		mymobs += new spawnmob(spawning_turf)
 		mobs ++
 		for(var/mob/living/c in mymobs)
-			c.del_on_deaggro = (restart_time - 1 MINUTES)
+			if(istype(c, /mob/living/simple_animal/hostile))
+				var/mob/living/simple_animal/hostile/M = c
+				M.del_on_deaggro = (restart_time - 1 MINUTES)
+			else if(istype(c, /mob/living/carbon/human))
+				var/mob/living/carbon/human/H = c
+				H.del_on_deaggro = (restart_time - 1 MINUTES)
 			c.faction = objfaction.Copy()
 			if(QDELETED(c) || c.stat == DEAD)
 				mymobs.Remove(c)
@@ -226,7 +231,13 @@ THESE SPAWNERS SPAWN MOBS BY CHOOSING RANDOM TILES AROUND IT AND SCATTERING THE 
 		mymobs += new spawnmob(spawning_turf)
 		mobs ++
 		for(var/mob/living/c in mymobs)
-			c.del_on_deaggro = (restart_time - 1 MINUTES)
+			if(istype(c, /mob/living/simple_animal/hostile))
+				var/mob/living/simple_animal/hostile/M = c
+				M.del_on_deaggro = (restart_time - 1 MINUTES)
+			else if(istype(c, /mob/living/carbon/human))
+				var/mob/living/carbon/human/H = c
+				H.del_on_deaggro = (restart_time - 1 MINUTES)
+
 			c.faction = objfaction.Copy()
 			if(QDELETED(c) || c.stat == DEAD)
 				mymobs.Remove(c)
@@ -330,7 +341,13 @@ THESE SPAWNERS SPAWN MOBS BY CHOOSING RANDOM TILES AROUND IT AND SCATTERING THE 
 	mymobs += new spawnmob(get_turf(src))
 	mobs ++
 	for(var/mob/living/c in mymobs)
-		c.del_on_deaggro = (restart_time - 1 MINUTES)
+		if(istype(c, /mob/living/simple_animal/hostile))
+			var/mob/living/simple_animal/hostile/M = c
+			M.del_on_deaggro = (restart_time - 1 MINUTES)
+		else if(istype(c, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = c
+			H.del_on_deaggro = (restart_time - 1 MINUTES)
+
 		c.faction = objfaction.Copy()
 		if(QDELETED(c) || c.stat == DEAD)
 			mymobs.Remove(c)
@@ -353,7 +370,7 @@ THESE SPAWNERS SPAWN MOBS BY CHOOSING RANDOM TILES AROUND IT AND SCATTERING THE 
 			src.visible_message("<span class='danger'>[user] shoveled some dirt clods into [src]!</span>")
 			fill ++
 			if(fill >= filltoseal)
-				playsound(loc,'sound/foley/break_stone.ogg', 100, TRUE)
+				playsound(loc,'sound/foley/breaksound.ogg', 100, TRUE)
 				src.visible_message("<span class='danger'>[user] seals [src] with dirts!</span>")
 				Destroy()
 
@@ -367,7 +384,7 @@ THESE SPAWNERS SPAWN MOBS BY CHOOSING RANDOM TILES AROUND IT AND SCATTERING THE 
 			playsound(loc,'sound/foley/hit_rock.ogg', 100, TRUE)
 			fill++
 			if(fill >= filltoseal)
-				playsound(loc,'sound/foley/break_stone.ogg', 100, TRUE)
+				playsound(loc,'sound/foley/breaksound.ogg', 100, TRUE)
 				src.visible_message("<span class='danger'>[user] collapsed [src] with [attacking_pick]!</span>")
 				Destroy()
 	..()

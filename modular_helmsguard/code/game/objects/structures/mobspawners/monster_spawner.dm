@@ -13,13 +13,13 @@
 	/mob/living/simple_animal/hostile/retaliate/rogue/minotaur/axe = 3,
 	/mob/living/simple_animal/hostile/retaliate/rogue/minotaur/female = 4,
 	/mob/living/simple_animal/hostile/retaliate/rogue/minotaur/axe/female = 3,
-	/mob/living/simple_animal/hostile/retaliate/rogue/wolf/poison = 5,
+	/mob/living/simple_animal/hostile/retaliate/rogue/wolf_undead = 5,
 	/mob/living/simple_animal/hostile/retaliate/rogue/wolf = 8,
 	/mob/living/simple_animal/hostile/retaliate/rogue/spider = 3,
 	/mob/living/simple_animal/hostile/retaliate/rogue/spider/mutated = 1,
 	/mob/living/simple_animal/hostile/retaliate/rogue/mossback = 6,
-	/mob/living/simple_animal/hostile/retaliate/rogue/halftroll = 4,
-	/mob/living/simple_animal/hostile/retaliate/rogue/halftroll_cave = 4,
+	/mob/living/simple_animal/hostile/retaliate/rogue/troll = 4,
+	/mob/living/simple_animal/hostile/retaliate/rogue/troll/cave = 4,
 	/mob/living/simple_animal/hostile/retaliate/rogue/bigrat = 7,
 	/mob/living/simple_animal/hostile/retaliate/rogue/mole = 6
 
@@ -51,13 +51,13 @@
 	min_mobs = 2
 	max_mobs = 3
 	mob_types = list(
-	/mob/living/simple_animal/hostile/retaliate/rogue/wolf/poison = 4,
+	/mob/living/simple_animal/hostile/retaliate/rogue/wolf_undead = 4,
 	/mob/living/simple_animal/hostile/retaliate/rogue/wolf = 5,
 	/mob/living/simple_animal/hostile/retaliate/rogue/spider = 3,
 	/mob/living/simple_animal/hostile/retaliate/rogue/spider/mutated = 1,
 	/mob/living/simple_animal/hostile/retaliate/rogue/mossback = 4,
-	/mob/living/simple_animal/hostile/retaliate/rogue/halftroll = 2,
-	/mob/living/simple_animal/hostile/retaliate/rogue/halftroll_cave = 1,
+	/mob/living/simple_animal/hostile/retaliate/rogue/troll = 2,
+	/mob/living/simple_animal/hostile/retaliate/rogue/troll/cave = 1,
 	/mob/living/simple_animal/hostile/retaliate/rogue/bigrat = 6,
 	/mob/living/simple_animal/hostile/retaliate/rogue/mole = 4
 	)
@@ -72,7 +72,7 @@
 	min_mobs = 2
 	max_mobs = 3
 	mob_types = list(
-	/mob/living/simple_animal/hostile/retaliate/rogue/wolf/poison = 1,
+	/mob/living/simple_animal/hostile/retaliate/rogue/wolf_undead = 1,
 	/mob/living/simple_animal/hostile/retaliate/rogue/wolf = 3
 	)
 	text_faction = "Volfs"	//for spawning string
@@ -100,8 +100,8 @@
 	min_mobs = 2
 	max_mobs = 3
 	mob_types = list(
-	/mob/living/simple_animal/hostile/retaliate/rogue/halftroll = 1,
-	/mob/living/simple_animal/hostile/retaliate/rogue/halftroll_cave = 1
+	/mob/living/simple_animal/hostile/retaliate/rogue/troll = 1,
+	/mob/living/simple_animal/hostile/retaliate/rogue/troll/cave = 1
 	)
 	text_faction = "Trolls"	//for spawning string
 	objfaction = list("caves")
@@ -182,7 +182,7 @@
 	max_mobs = 2
 	mobs_to_spawn = 3
 	mob_types = list(
-	/mob/living/simple_animal/hostile/retaliate/rogue/wolf/poison = 1,
+	/mob/living/simple_animal/hostile/retaliate/rogue/wolf_undead = 1,
 	/mob/living/simple_animal/hostile/retaliate/rogue/wolf = 3
 	)
 	text_faction = null

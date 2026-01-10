@@ -11,9 +11,7 @@
 	restart_time = 10 MINUTES
 	mob_types = list(
 	/mob/living/carbon/human/species/goblin/npc = 6,
-	/mob/living/simple_animal/hostile/retaliate/rogue/goblin/cave = 3,		//archer
-	/mob/living/simple_animal/hostile/retaliate/rogue/goblin = 3,		//archer
-	/mob/living/carbon/human/species/goblin/npc/cave = 4,)
+	/mob/living/carbon/human/species/goblin/npc/cave = 4)
 	text_faction = "Goblins"
 	objfaction = list("orcs")
 
@@ -26,8 +24,7 @@
 	max_mobs = 3
 	restart_time = 10 MINUTES
 	mob_types = list(
-	/mob/living/carbon/human/species/halforc/orc_raider/savage_orc = 6,
-	/mob/living/carbon/human/species/halforc/orc_raider = 5,		//archer
+	/mob/living/simple_animal/hostile/retaliate/rogue/orc = 6,
 	/mob/living/simple_animal/hostile/retaliate/rogue/orc/ranged = 5		//archer
 	)
 	text_faction = "Orcs"
@@ -43,10 +40,8 @@
 	restart_time = 10 MINUTES
 	mob_types = list(
 	/mob/living/carbon/human/species/goblin/npc = 5,
-	/mob/living/simple_animal/hostile/retaliate/rogue/goblin/cave = 4,		//archer
-	/mob/living/simple_animal/hostile/retaliate/rogue/goblin = 4,	//archer
-	/mob/living/carbon/human/species/halforc/orc_raider/savage_orc = 6,
-	/mob/living/carbon/human/species/halforc/orc_raider = 4,
+	/mob/living/carbon/human/species/goblin/npc/cave = 4,
+	/mob/living/simple_animal/hostile/retaliate/rogue/orc = 6,
 	/mob/living/simple_animal/hostile/retaliate/rogue/orc/ranged = 3		//archer
 	)
 	text_faction = "Greenskins"
@@ -63,10 +58,8 @@
 	max_mobs = 10
 	mob_types = list(
 	/mob/living/carbon/human/species/goblin/npc = 5,
-	/mob/living/simple_animal/hostile/retaliate/rogue/goblin/cave = 4,		//archer
-	/mob/living/simple_animal/hostile/retaliate/rogue/goblin = 4,	//archer
-	/mob/living/carbon/human/species/halforc/orc_raider/savage_orc = 6,
-	/mob/living/carbon/human/species/halforc/orc_raider = 4,
+	/mob/living/carbon/human/species/goblin/npc/cave = 4,
+	/mob/living/simple_animal/hostile/retaliate/rogue/orc = 6,
 	/mob/living/simple_animal/hostile/retaliate/rogue/orc/ranged = 3		//archer
 	)
 	text_faction = "Greenskins"
@@ -92,13 +85,11 @@
 	mobs_to_spawn = 3
 	mob_types = list(
 	/mob/living/carbon/human/species/goblin/npc = 5,
-	/mob/living/simple_animal/hostile/retaliate/rogue/goblin/cave = 4,		//archer
-	/mob/living/simple_animal/hostile/retaliate/rogue/goblin = 4,	//archer
-	/mob/living/carbon/human/species/halforc/orc_raider/savage_orc = 6,
-	/mob/living/carbon/human/species/halforc/orc_raider = 4,
+	/mob/living/carbon/human/species/goblin/npc/cave = 4,
+	/mob/living/simple_animal/hostile/retaliate/rogue/orc = 6,
 	/mob/living/simple_animal/hostile/retaliate/rogue/orc/ranged = 3		//archer
 	)
-	text_faction = "Greenskins"	
+	text_faction = "Greenskins"
 	spawn_text = "rallied around"
 	spawn_sound = list(
 		'modular_helmsguard/sound/items/horns2/orc 1.ogg',
@@ -129,8 +120,6 @@
 	mobs_to_spawn = 3
 	mob_types = list(
 	/mob/living/carbon/human/species/goblin/npc = 6,
-	/mob/living/simple_animal/hostile/retaliate/rogue/goblin/cave = 3,		//archer
-	/mob/living/simple_animal/hostile/retaliate/rogue/goblin = 3,		//archer
 	/mob/living/carbon/human/species/goblin/npc/hell = 1,
 	/mob/living/carbon/human/species/goblin/npc/cave = 4,
 	/mob/living/carbon/human/species/goblin/npc/sea= 1,
