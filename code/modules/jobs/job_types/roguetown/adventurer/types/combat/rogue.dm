@@ -50,8 +50,8 @@
 	beltl = /obj/item/flashlight/flare/torch/lantern
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
 	backpack_contents = list(
-		/obj/item/lockpick = 1, 
-		/obj/item/rogueweapon/huntingknife = 1, 
+		/obj/item/lockpick = 1,
+		/obj/item/rogueweapon/huntingknife = 1,
 		/obj/item/recipe_book/survival = 1,
 		/obj/item/rogueweapon/scabbard/sheath = 1
 		)
@@ -126,6 +126,36 @@
 		/obj/item/recipe_book/survival = 1,
 		/obj/item/rogueweapon/scabbard/sheath = 1
 		)
+
+	var/loadouts = list("Local Scoundrel","Eastern Agent")
+	var/loadout_choice = input("Choose your provenance.", "WHO AM I") as anything in loadouts
+	H.set_blindness(0)
+	switch(loadout_choice)
+		if("Local Scoundrel")
+			backpack_contents = list(
+				/obj/item/flashlight/flare/torch = 1,
+				/obj/item/rogueweapon/huntingknife/idagger/steel = 1,
+				/obj/item/lockpickring/mundane = 1,
+				/obj/item/recipe_book/survival = 1,
+			)
+			belt = /obj/item/storage/belt/rogue/leather/knifebelt/iron
+			gloves = /obj/item/clothing/gloves/roguetown/fingerless
+			pants = /obj/item/clothing/under/roguetown/trou/leather
+			shirt = /obj/item/clothing/suit/roguetown/armor/gambeson
+			cloak = /obj/item/clothing/cloak/raincloak/mortus
+		if("Eastern Agent")
+			backpack_contents = list(
+				/obj/item/flashlight/flare/torch = 1,
+				/obj/item/rogueweapon/huntingknife/idagger/steel/kazengun = 1,
+				/obj/item/lockpickring/mundane = 1,
+				/obj/item/recipe_book/survival = 1,
+			)
+			belt = /obj/item/storage/belt/rogue/leather/knifebelt/black/kazengun
+			gloves = /obj/item/clothing/gloves/roguetown/eastgloves1
+			pants = /obj/item/clothing/under/roguetown/trou/leather/eastern
+			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/eastshirt1
+			cloak = /obj/item/clothing/cloak/thief_cloak
+			head = /obj/item/clothing/head/roguetown/mentorhat //other armor pieces are nerfed to justify this
 
 /datum/advclass/rogue/bard
 	name = "Bard"
